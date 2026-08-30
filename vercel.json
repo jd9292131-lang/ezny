@@ -2,10 +2,6 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/index.js"
-    },
-    {
       "source": "/mensagens",
       "destination": "/frontend/mensagens.html"
     },
