@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Notificações | EZNY">
+<meta name="theme-color" content="#0a0e17">
+<title>Notificações | EZNY</title>
+
+<!-- Phosphor Icons -->
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/notificacoes.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+
+<body>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Header -->
+<div class="notif-header">
+  <button class="notif-header-btn" onclick="history.back()">
+    <i class="ph ph-arrow-left"></i>
+  </button>
+  <div class="notif-header-titulo">Notificações</div>
+  <div class="notif-header-acoes">
+    <button class="notif-header-acao" onclick="marcarTodasLidas()">
+      <i class="ph ph-checks"></i> Tudo lido
+    </button>
+    <button class="notif-header-acao" onclick="limparLidas()">
+      <i class="ph ph-trash"></i> Limpar
+    </button>
+  </div>
+</div>
+
+<!-- Loading -->
+<div id="notifLoading" class="notif-loading">
+  <i class="ph ph-spinner animate-spin"></i>
+  <p>A carregar notificações...</p>
+</div>
+
+<!-- Lista -->
+<div id="notifLista" class="notif-lista" style="display:none;"></div>
+
+<!-- Vazio -->
+<div id="notifVazio" class="notif-vazio" style="display:none;">
+  <i class="ph ph-bell-slash"></i>
+  <h3>Sem notificações</h3>
+  <p>Quando os teus anúncios forem aprovados, rejeitados, ou receberes mensagens, verás aqui.</p>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="ph ph-house-line"></i>
+    Início
+  </a>
+  <a href="favoritos.html" class="nav-item">
+    <i class="ph ph-heart"></i>
+    Favoritos
+  </a>
+  <a href="criar-anuncio.html" class="nav-pub-btn">
+    <i class="ph ph-plus"></i>
+  </a>
+  <a href="notificacoes.html" class="nav-item ativo">
+    <i class="ph ph-bell"></i> Notificações
+  </a>
+  <a href="perfil.html" class="nav-item">
+    <i class="ph ph-user"></i>
+    Perfil
+  </a>
+</nav>
+
+<script src="js/media.js"></script>
+<script src="js/notificacoes.js"></script>
+
+</body>
+</html>

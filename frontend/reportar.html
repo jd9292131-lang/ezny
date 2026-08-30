@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Comunicar um Problema - EZNY">
+<title>Comunicar Problema | EZNY</title>
+
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/reportar.css">
+</head>
+<body>
+
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite">
+  <i class="ph-fill ph-check-circle"></i>
+  <span id="toastText"></span>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HEADER / VOLTAR
+     ═══════════════════════════════════════ -->
+<div class="topbar">
+  <a href="settings.html" class="btn-voltar">
+<i class="ph ph-arrow-left"></i>
+    Voltar
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════ -->
+<header class="header">
+  <h1 class="header__title">Comunicar um Problema</h1>
+  <p class="header__subtitle">Ajude-nos a melhorar a plataforma. Descreva o problema com o máximo de detalhe possível.</p>
+</header>
+
+<!-- ═══════════════════════════════════════
+     CONTEÚDO PRINCIPAL
+     ═══════════════════════════════════════ -->
+<main class="container">
+
+  <!-- Tipo de Problema -->
+  <div class="issue-types" id="issueTypes">
+    <div class="issue-type" data-type="bug" onclick="selecionarTipo(this)">
+      <i class="ph-fill ph-bug"></i>
+      <h4>Bug / Erro</h4>
+      <p>Algo não funciona como esperado</p>
+    </div>
+    <div class="issue-type" data-type="feature" onclick="selecionarTipo(this)">
+<i class="ph-fill ph-lightbulb"></i>
+      <h4>Sugestão</h4>
+      <p>Uma ideia para melhorar</p>
+    </div>
+    <div class="issue-type" data-type="security" onclick="selecionarTipo(this)">
+<i class="ph-fill ph-shield-check"></i>
+      <h4>Segurança</h4>
+      <p>Vulnerabilidade ou risco</p>
+    </div>
+    <div class="issue-type" data-type="other" onclick="selecionarTipo(this)">
+<i class="ph-fill ph-dots-three-outline"></i>
+      <h4>Outro</h4>
+      <p>Não se encaixa acima</p>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <form class="form-card" id="reportForm" onsubmit="enviarReport(event)">
+    <div class="form-card__header">
+      <i class="ph-fill ph-pencil-simple" aria-hidden="true"></i>
+      <h3>Detalhes do Problema</h3>
+    </div>
+
+    <!-- Status Message -->
+    <div class="status-message" id="statusMessage">
+<i class="ph-fill ph-info"></i>
+      <span id="statusText"></span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="tipoProblema">
+        Tipo de Problema <span class="required">*</span>
+      </label>
+      <select class="form-select" id="tipoProblema" name="tipo" required>
+        <option value="" disabled selected>Selecione o tipo de problema</option>
+        <option value="bug">Bug / Erro na plataforma</option>
+        <option value="feature">Sugestão de funcionalidade</option>
+        <option value="security">Problema de segurança</option>
+        <option value="account">Problema com a conta</option>
+        <option value="anuncio">Problema com anúncio</option>
+        <option value="payment">Problema com pagamento</option>
+        <option value="other">Outro</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="tituloProblema">
+        Título Resumido <span class="required">*</span>
+      </label>
+      <input 
+        type="text" 
+        class="form-input" 
+        id="tituloProblema" 
+        name="titulo"
+        placeholder="Ex: Erro ao publicar anúncio de carro"
+        required
+        maxlength="120"
+      >
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="descricaoProblema">
+        Descrição Detalhada <span class="required">*</span>
+      </label>
+      <textarea 
+        class="form-textarea" 
+        id="descricaoProblema" 
+        name="descricao"
+        placeholder="Descreva o problema com detalhe:
+
+• O que estava a fazer quando ocorreu?
+• Qual era o resultado esperado?
+• Qual foi o resultado obtido?
+• Já tentou resolver? Como?"
+        required
+        minlength="20"
+        maxlength="2000"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="emailContacto">
+        Email para Contacto
+      </label>
+      <input 
+        type="email" 
+        class="form-input" 
+        id="emailContacto" 
+        name="email"
+        placeholder="seu@email.com (opcional)"
+      >
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">
+        Anexar Screenshot ou Ficheiro
+      </label>
+      <div class="file-upload" id="fileUpload" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" accept="image/*,.pdf,.txt,.zip" onchange="handleFileSelect(this)">
+<i class="ph-fill ph-cloud-arrow-up"></i>
+        <p>Clique para selecionar um ficheiro</p>
+        <span>Imagens, PDF, TXT ou ZIP (max. 5MB)</span>
+        <div class="file-name" id="fileName"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn--primary" id="btnEnviar">
+      <span class="spinner"></span>
+      <span class="btn-text">
+<i class="ph-fill ph-paper-plane-tilt"></i>        Enviar Reporte
+      </span>
+    </button>
+  </form>
+
+</main>
+
+<script src="js/media.js"></script>
+<script src="js/reportar.js"></script>
+
+</body>
+</html>

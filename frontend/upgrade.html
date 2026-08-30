@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="EZNY Premium - Destaque os seus anúncios">
+<meta name="theme-color" content="#0a0e17">
+<title>Premium | EZNY</title>
+
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/upgrade.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+
+<body>
+<div class="ezny-brandbar"><a class="ezny-brand" href="index.html"><img src="assets/logo.jpg" alt="EZNY"><div class="ezny-brand-copy"><strong>PREMIUM</strong><span>MAIS VISIBILIDADE. MAIS CONFIANÇA.</span></div></a><span class="premium-top-pill"><i class="ph-fill ph-crown"></i> EZNY Premium</span></div>
+
+<div id="toast" class="toast"></div>
+
+<!-- Header -->
+<div class="header">
+  <button class="header-btn" onclick="history.back()">
+    <i class="ph ph-arrow-left"></i>
+  </button>
+  <div class="header-titulo">EZNY Premium</div>
+  <div style="width:40px;"></div>
+</div>
+
+<!-- Estado: já é premium -->
+<div id="jaPremium" class="ja-premium" style="display:none;">
+<i class="ph ph-sketch-logo"></i>
+    <h2>Você já é Premium</h2>
+  <p>A sua conta já tem acesso a todas as vantagens Premium.</p>
+  <a href="perfil-profissional.html">
+    <i class="ph ph-user-gear"></i> Ver o meu perfil
+  </a>
+</div>
+
+<!-- Conteudo normal -->
+<div id="conteudo">
+
+  <!-- Hero -->
+  <section class="premium-hero">
+    <div class="premium-hero-copy">
+      <span class="ezny-kicker"><i class="ph-fill ph-crown"></i> EZNY Premium</span>
+      <h1 class="ezny-gradient-text">Transforme o seu perfil num negócio profissional.</h1>
+      <p>Mais confiança, presença profissional, ferramentas de reputação e maior visibilidade — sem comissão sobre as vendas.</p>
+      <div class="premium-hero-points"><span><i class="ph-fill ph-check-circle"></i> Sem taxas por venda</span><span><i class="ph-fill ph-check-circle"></i> Contacto direto</span><span><i class="ph-fill ph-check-circle"></i> Ativação após confirmação</span></div>
+    </div>
+    <div class="premium-hero-logo"><img src="assets/logo.jpg" alt="EZNY Premium"><div><strong>PREMIUM</strong><span>PRO</span></div></div>
+  </section>
+
+  <!-- Plano -->
+  <div class="plano-wrap">
+    <div class="plano">
+      <div class="plano-tag"><i class="ph ph-crown"></i> Premium</div>
+      <div class="premium-plan-picker" role="group" aria-label="Escolher duração do Premium">
+        <button type="button" class="premium-plan-option" data-plan="premium_15d" onclick="selecionarPlano('premium_15d', this)"><strong>2.500 Kz</strong><span>15 dias</span></button>
+        <button type="button" class="premium-plan-option selecionado" data-plan="premium_30d" onclick="selecionarPlano('premium_30d', this)"><strong>5.000 Kz</strong><span>30 dias</span></button>
+      </div>
+      <div class="plano-preco" id="planoPreco">5.000 <span>Kz / 30 dias</span></div>
+      <div class="plano-periodo">Plano renovável por novo pedido. Não cobramos comissão pelas transações entre utilizadores.</div>
+      <div class="premium-status" id="premiumStatus"><i class="ph ph-spinner"></i> A verificar o estado da conta...</div>
+      <button class="plano-btn" id="btnAtivar" onclick="abrirPagamento()">
+      <i class="ph ph-sketch-logo"></i> Ativar Premium
+      </button>
+      <div class="plano-garantia"><i class="ph ph-shield-check"></i> O Premium é ativado apenas após confirmação do pagamento.</div>
+    </div>
+  </div>
+
+  <!-- Beneficios -->
+  <div class="secao">
+    <div class="secao-titulo"><i class="ph ph-sparkle"></i>O que muda</div>
+
+    <div class="beneficio">
+      <div class="beneficio-ico"><i class="ph ph-user-gear"></i></div>
+      <div>
+        <h3>Perfil profissional</h3>
+        <p>Página pública com todos os seus anúncios, avaliações e estatísticas.</p>
+      </div>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio-ico"><i class="ph ph-star"></i></div>
+      <div>
+        <h3>Avaliações de compradores</h3>
+        <p>Quem compra deixa estrelas e comentário. Quanto melhor, mais destaque.</p>
+      </div>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio-ico"><i class="ph ph-chat-circle-text"></i></div>
+      <div>
+        <h3>Contacto com interessados</h3>
+        <p>Receba e responda a contactos através do sistema de mensagens, sujeito às regras de acesso da plataforma.</p>
+      </div>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio-ico"><i class="ph ph-users"></i></div>
+      <div>
+        <h3>Seguidores</h3>
+        <p>Crie uma audiência em torno do seu perfil profissional e mantenha os seus seguidores próximos das novas publicações.</p>
+      </div>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio-ico"><i class="ph ph-trend-up"></i></div>
+      <div>
+        <h3>Maior visibilidade</h3>
+        <p>O Premium pode dar maior visibilidade através das ferramentas de destaque previstas pela plataforma.</p>
+      </div>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio-ico"><i class="ph ph-shield-check"></i></div>
+      <div>
+        <h3>Possibilidade de verificação</h3>
+        <p>A equipa EZNY pode atribuir o selo de verificação após análise da conta.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparacao -->
+  <div class="secao">
+    <div class="secao-titulo"><i class="ph ph-scales"></i>Normal vs Premium</div>
+    <div class="comp-tabela">
+      <div class="comp-header">
+        <div></div>
+        <div>Normal</div>
+        <div>Premium</div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Publicar anúncios</div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Perfil público</div>
+        <div class="chk no"><i class="ph ph-x"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Avaliações</div>
+        <div class="chk no"><i class="ph ph-x"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Contacto com perfis Premium</div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Seguidores</div>
+        <div class="chk no"><i class="ph ph-x"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Destaque</div>
+        <div class="chk no"><i class="ph ph-x"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+      <div class="comp-row">
+        <div class="feat">Possibilidade de selo verificado</div>
+        <div class="chk no"><i class="ph ph-x"></i></div>
+        <div class="chk yes"><i class="ph ph-check"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="secao">
+    <div class="secao-titulo"><i class="ph ph-question"></i>Dúvidas</div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        Como pago?
+        <i class="ph ph-caret-down"></i>
+      </button>
+      <div class="faq-resposta">
+        Escolha um método disponível e crie o pedido. O Premium só é ativado depois de a equipa EZNY confirmar o pagamento.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        Posso cancelar?
+        <i class="ph ph-caret-down"></i>
+      </button>
+      <div class="faq-resposta">
+        Não existe fidelização. O período pago mantém-se válido até à data de término.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        E se não gostar?
+        <i class="ph ph-caret-down"></i>
+      </button>
+      <div class="faq-resposta">
+        Pedidos de reembolso são analisados pela equipa EZNY de acordo com as condições aplicáveis ao serviço.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        O que acontece se cancelar?
+        <i class="ph ph-caret-down"></i>
+      </button>
+      <div class="faq-resposta">
+        Quando o período termina, as funcionalidades Premium deixam de estar disponíveis até uma nova ativação.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal pagamento -->
+<div id="modalPagamento" class="modal-overlay" onclick="fecharModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-body">
+      <h3><i class="ph ph-sketch-logo" style="color:var(--premium);"></i> Ativar Premium</h3>
+      <p class="modal-sub" id="modalPlanoSub">Escolha como quer pagar os 5.000 Kz</p>
+
+      <div class="pagamento-wrap" style="margin:0 0 16px;padding:0;border:none;background:transparent;">
+        <div class="pagamento-titulo">Método de pagamento</div>
+
+        <button class="pag-opcao selecionado" onclick="selecionarPagamento(this, 'multicaixa')">
+          <div class="pag-opcao-ico"><i class="ph ph-credit-card"></i></div>
+          <div class="pag-opcao-info">
+            <h4>Multicaixa Express</h4>
+            <p>Pagamento instantâneo</p>
+          </div>
+          <div class="pag-opcao-check"><i class="ph ph-check"></i></div>
+        </button>
+
+        <button class="pag-opcao" onclick="selecionarPagamento(this, 'transferencia')">
+          <div class="pag-opcao-ico"><i class="ph ph-bank"></i></div>
+          <div class="pag-opcao-info">
+            <h4>Transferência bancária</h4>
+            <p>Pode levar até 24h</p>
+          </div>
+          <div class="pag-opcao-check"></div>
+        </button>
+
+        <button class="pag-opcao" onclick="selecionarPagamento(this, 'deposito')">
+          <div class="pag-opcao-ico"><i class="ph ph-money"></i></div>
+          <div class="pag-opcao-info">
+            <h4>Depósito bancário</h4>
+            <p>Guarde o comprovativo</p>
+          </div>
+          <div class="pag-opcao-check"></div>
+        </button>
+      </div>
+
+      <div class="ref-pagamento" id="refPagamento">
+        <h4><i class="ph ph-copy"></i> Referência de pagamento</h4>
+        <div class="ref-num" id="refNumero">Será apresentada após criar o pedido</div>
+        <p>EZNY, Lda<br>Valor: <strong id="refValor">5.000,00 Kz</strong><br>No descritivo coloque: <strong id="refDescritivo">PREMIUM-123</strong></p>
+        <button class="ref-copiar" onclick="copiarReferencia()">
+          <i class="ph ph-copy"></i> Copiar dados
+        </button>
+      </div>
+
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;text-align:center;">
+        <i class="ph ph-lock-key"></i> Pedido seguro. A conta só é ativada após confirmação do pagamento.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">Voltar</button>
+      <button class="modal-btn modal-btn-ok" id="btnConfirmarPagamento" onclick="confirmarPagamento()">
+        <i class="ph ph-check"></i> Criar pedido de pagamento
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="ph ph-house-line"></i>
+    <span>Início</span>
+  </a>
+  <a href="favoritos.html" class="nav-item">
+    <i class="ph ph-heart"></i>
+    <span>Favoritos</span>
+  </a>
+  <a href="criar-anuncio.html" class="nav-pub-btn">
+    <i class="ph ph-plus"></i>
+  </a>
+  <a href="notificacoes.html" class="nav-item" style="position:relative;">
+    <span class="nav-badge" id="navBadgeNotif">0</span>
+    <i class="ph ph-bell"></i>
+    <span>Notifs</span>
+  </a>
+  <a href="perfil.html" class="nav-item ativo">
+    <i class="ph ph-user"></i>
+    <span>Perfil</span>
+  </a>
+</nav>
+
+<script src="js/media.js"></script>
+<script src="js/upgrade.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Definições da conta - EZNY">
+<title>Definições da Conta | EZNY</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/phosphor.css"><link rel="stylesheet" href="css/definicoes-conta.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     MODAL LOGOUT
+     ═══════════════════════════════════════ -->
+<div id="modalLogout" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleLogout">
+  <div class="modal__content">
+    <div class="modal__icon danger">
+      <span class="material-icons">logout</span>
+    </div>
+    <h3 id="modalTitleLogout" class="modal__title">Terminar Sessão</h3>
+    <p class="modal__text">
+      Tem a certeza que deseja terminar a sua sessão? Terá de iniciar sessão novamente para aceder à sua conta.
+    </p>
+    <div class="modal__actions">
+      <button class="btn btn--cancel" onclick="fecharModalLogout()" type="button">
+        Cancelar
+      </button>
+      <button class="btn btn--danger" onclick="confirmarLogout()" type="button">
+        Sim, terminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MODAL EDITAR PERFIL
+     ═══════════════════════════════════════ -->
+<div id="modalEditar" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleEditar">
+  <div class="modal__content modal__content--wide">
+    <div class="modal__icon primary">
+      <span class="material-icons">edit</span>
+    </div>
+    <h3 id="modalTitleEditar" class="modal__title">Editar Perfil</h3>
+    <p class="modal__text">Atualize as suas informações pessoais.</p>
+
+    <form class="modal-form" id="formEditar" onsubmit="salvarPerfil(event)">
+      <div class="form-group">
+        <label class="form-label" for="editNome">Nome Completo</label>
+        <input type="text" class="form-input" id="editNome" name="nome" required maxlength="100">
+        <span class="form-hint">Este nome será visível para outros utilizadores.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="editEmail">Email</label>
+        <input type="email" class="form-input" id="editEmail" name="email" placeholder="opcional@email.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="editTelefone">Telefone</label>
+        <input type="tel" class="form-input" id="editTelefone" name="telefone" required pattern="\+?[0-9\s]{9,15}">
+        <span class="form-hint">Formato: +244 9XX XXX XXX</span>
+      </div>
+
+      <div class="modal__actions" style="margin-top: var(--space-lg);">
+        <button type="button" class="btn btn--cancel" onclick="fecharModalEditar()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn--primary" id="btnSalvarPerfil">
+          <span class="spinner"></span>
+          <span class="btn-text">Guardar Alterações</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MODAL ALTERAR PASSWORD
+     ═══════════════════════════════════════ -->
+<div id="modalPassword" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitlePassword">
+  <div class="modal__content modal__content--wide">
+    <div class="modal__icon success">
+      <span class="material-icons">lock</span>
+    </div>
+    <h3 id="modalTitlePassword" class="modal__title">Alterar Palavra-passe</h3>
+    <p class="modal__text">Escolha uma palavra-passe segura.</p>
+
+    <form class="modal-form" id="formPassword" onsubmit="salvarPassword(event)">
+      <div class="form-group">
+        <label class="form-label" for="currentPassword">Palavra-passe Atual</label>
+        <input type="password" class="form-input" id="currentPassword" name="currentPassword" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="newPassword">Nova Palavra-passe</label>
+        <input type="password" class="form-input" id="newPassword" name="newPassword" required minlength="6">
+        <span class="form-hint">Mínimo 6 caracteres. Use letras e números.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="confirmPassword">Confirmar Nova Palavra-passe</label>
+        <input type="password" class="form-input" id="confirmPassword" name="confirmPassword" required minlength="6">
+      </div>
+
+      <div class="modal__actions" style="margin-top: var(--space-lg);">
+        <button type="button" class="btn btn--cancel" onclick="fecharModalPassword()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn--primary" id="btnSalvarPassword">
+          <span class="spinner"></span>
+          <span class="btn-text">Alterar Palavra-passe</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite">
+  <span class="material-icons">check_circle</span>
+  <span id="toastText"></span>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HEADER / VOLTAR
+     ═══════════════════════════════════════ -->
+<div class="topbar">
+  <a href="settings.html" class="btn-voltar">
+<i class="ph ph-arrow-left"></i>    Voltar
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════ -->
+<header class="header">
+  <p class="header__subtitle">Gerir conta e segurança</p>
+</header>
+
+<!-- ═══════════════════════════════════════
+     CONTEÚDO PRINCIPAL
+     ═══════════════════════════════════════ -->
+<main class="container">
+  <!-- PERFIL -->
+  <section class="profile" aria-label="Perfil do utilizador">
+    <div class="profile__avatar" id="avatar" aria-hidden="true" onclick="editarAvatar()">
+      <span class="material-icons" style="font-size:2rem">person</span>
+      <div class="avatar-edit">
+        <span class="material-icons">photo_camera</span>
+      </div>
+    </div>
+    <div class="profile__info">
+      <h2 class="profile__name" id="nomeUser">Utilizador</h2>
+      <p class="profile__email" id="emailUser">Sem email</p>
+      <span class="profile__badge" id="verificadoBadge" style="display:none;">
+        <span class="material-icons">verified</span>
+        Conta Verificada
+      </span>
+    </div>
+  </section>
+
+  <!-- GRID DE CARDS -->
+  <div class="grid">
+
+    <!-- INFORMAÇÕES PESSOAIS -->
+    <section class="card">
+      <div class="card__header">
+        <span class="material-icons card__icon" aria-hidden="true">person_outline</span>
+        <h3 class="card__title">Informações Pessoais</h3>
+      </div>
+
+      <div class="info-row editable" onclick="abrirModalEditar()">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">badge</span>
+          Nome
+        </span>
+        <span class="info-row__value info-row__value--empty" id="nome">-</span>
+        <span class="material-icons edit-icon">edit</span>
+      </div>
+
+      <div class="info-row editable" onclick="abrirModalEditar()">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">phone</span>
+          Telefone
+        </span>
+        <span class="info-row__value info-row__value--empty" id="telefone">-</span>
+        <span class="material-icons edit-icon">edit</span>
+      </div>
+
+      <div class="info-row editable" onclick="abrirModalEditar()">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">email</span>
+          Email
+        </span>
+        <span class="info-row__value info-row__value--empty" id="email">-</span>
+        <span class="material-icons edit-icon">edit</span>
+      </div>
+
+      <button class="btn btn--primary" onclick="abrirModalEditar()" type="button">
+        <span class="material-icons">edit</span>
+        Editar Perfil
+      </button>
+    </section>
+
+    <!-- SEGURANÇA -->
+    <section class="card">
+      <div class="card__header">
+        <span class="material-icons card__icon" aria-hidden="true">shield</span>
+        <h3 class="card__title">Segurança</h3>
+      </div>
+
+      <div class="info-row">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">lock</span>
+          Palavra-passe
+        </span>
+        <span class="info-row__value">••••••••</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">verified_user</span>
+          Verificação
+        </span>
+        <span class="info-row__value" id="statusVerificacao" style="color:var(--success)">Verificado</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">event</span>
+          Conta criada
+        </span>
+        <span class="info-row__value" id="dataCriacao">-</span>
+      </div>
+
+      <button class="btn btn--dark" onclick="abrirModalPassword()" type="button">
+        <span class="material-icons">lock_reset</span>
+        Alterar Palavra-passe
+      </button>
+
+      <button class="btn btn--dark" onclick="logout()" type="button">
+        <span class="material-icons">logout</span>
+        Terminar Sessão
+      </button>
+
+      <button class="btn btn--danger" onclick="eliminarConta()" type="button">
+        <span class="material-icons">delete_forever</span>
+        Eliminar Conta
+      </button>
+    </section>
+
+    <!-- PREFERÊNCIAS -->
+    <section class="card">
+      <div class="card__header">
+        <span class="material-icons card__icon" aria-hidden="true">tune</span>
+        <h3 class="card__title">Preferências</h3>
+      </div>
+
+      <div class="info-row">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">notifications</span>
+          Notificações
+        </span>
+        <span class="info-row__value" style="color:var(--success)">Ativas</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-row__label">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">language</span>
+          Idioma
+        </span>
+        <span class="info-row__value">Português</span>
+      </div>
+
+      <button class="btn btn--dark" onclick="mostrarToast('Funcionalidade em desenvolvimento')" type="button">
+        <span class="material-icons">notifications_active</span>
+        Gerir Notificações
+      </button>
+    </section>
+
+  </div>
+</main>
+
+<script src="js/media.js"></script>
+<script src="js/definicoes-conta.js"></script>
+
+</body>
+</html>

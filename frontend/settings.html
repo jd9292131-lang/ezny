@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Definições da conta | EZNY">
+<meta name="theme-color" content="#0a0e17">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="EZNY">
+<title>Definições | EZNY</title>
+
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/settings.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+
+<body>
+<div class="ezny-brandbar ezny-brandbar-settings"><a class="ezny-brand" href="index.html"><img src="assets/logo.jpg" alt="EZNY"><div class="ezny-brand-copy"><strong>MARKETPLACE</strong><span>COMPRE. VENDA. CONECTE-SE.</span></div></a></div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Modal Logout -->
+<div id="modalLogout" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Terminar Sessão</h3>
+    <p>Tem a certeza que deseja terminar a sua sessão?</p>
+    <div class="modal-acoes">
+      <button class="modal-btn modal-btn-cancel" onclick="fecharModalLogout()">
+        <i class="ph ph-x"></i> Cancelar
+      </button>
+      <button class="modal-btn modal-btn-ok" onclick="confirmarLogout()">
+        <i class="ph ph-sign-out"></i> Sim, terminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-head">
+    <i class="ph-fill ph-user-circle"></i>
+    <span id="userSidebar">Menu</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html" onclick="event.stopPropagation()">
+      <i class="ph ph-house"></i> Início
+    </a>
+    <a href="notificacoes.html" onclick="event.stopPropagation()">
+      <i class="ph ph-bell"></i> Notificações
+      <span id="sidebarNotifBadge" style="margin-left:auto;background:#ef4444;color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;display:none;">0</span>
+    </a>
+    <a href="criar-anuncio.html" onclick="event.stopPropagation()"><i class="ph ph-plus-square"></i> Vender</a>
+    <a href="meus-anuncios.html" onclick="event.stopPropagation()"><i class="ph ph-package"></i> Meus anúncios</a>
+    <a href="favoritos.html" onclick="event.stopPropagation()"><i class="ph ph-heart"></i> Favoritos</a>
+    <a href="settings.html" onclick="event.stopPropagation()" style="background:rgba(0,190,200,0.06);">
+      <i class="ph ph-gear"></i> Definições
+      <i class="ph ph-caret-right" style="margin-left:auto;font-size:16px;color:var(--primary-light);"></i>
+    </a>
+    <div class="sidebar-div"></div>
+    <a href="politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
+    <a href="sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
+  </nav>
+  <div class="sidebar-foot">
+    <button onclick="event.stopPropagation(); logout()">
+      <i class="ph ph-sign-out"></i> Terminar sessão
+    </button>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <button class="back-btn" onclick="history.back()">
+    <i class="ph ph-caret-left"></i>
+  </button>
+  <div class="top-title">Definições</div>
+</div>
+
+<!-- PROFILE HEADER -->
+<div class="profile-header">
+  <div class="profile-avatar-wrap">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111827'/%3E%3Ccircle cx='100' cy='80' r='40' fill='%2300bec8' opacity='0.2'/%3E%3Cpath d='M100 120c-33 0-60 20-60 45v15h120v-15c0-25-27-45-60-45z' fill='%2300bec8' opacity='0.2'/%3E%3Ccircle cx='100' cy='75' r='28' fill='%2300bec8'/%3E%3Cpath d='M100 115c-30 0-55 18-55 40v10h110v-10c0-22-25-40-55-40z' fill='%2300bec8'/%3E%3C/svg%3E" 
+         class="profile-avatar" alt="Avatar" id="profileAvatar" 
+         onclick="document.getElementById('avatarInput').click()">
+    <div class="avatar-edit-badge"><i class="ph ph-camera"></i></div>
+    <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
+  </div>
+  <div class="profile-info">
+    <div class="profile-name" id="profileName">
+      Joel de Oliveira
+      <i class="ph-fill ph-seal-check verified-badge"></i>
+    </div>
+    <div class="profile-status" id="profileStatus">Conta verificada</div>
+    <a href="perfil.html" class="edit-profile-btn">
+      <i class="ph ph-pencil-simple"></i> Editar perfil
+    </a>
+  </div>
+</div>
+
+<!-- SECÇÃO: CONTA -->
+<div class="section">
+  <div class="section-label">Conta</div>
+  <div class="settings-card">
+    <a href="perfil.html" class="settings-item">
+      <div class="settings-item-icon icon-blue">
+        <i class="ph ph-user"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Perfil</h4>
+        <p>Ver e editar informações</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="definicoes-conta.html" class="settings-item">
+      <div class="settings-item-icon icon-cyan">
+        <i class="ph ph-sliders-horizontal"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Definições da Conta</h4>
+        <p>E-mail, telefone e dados pessoais</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+  </div>
+</div>
+
+<!-- SECÇÃO: SEGURANÇA -->
+<div class="section">
+  <div class="section-label">Segurança</div>
+  <div class="settings-card">
+    <a href="suporte.html" class="settings-item">
+      <div class="settings-item-icon icon-purple">
+        <i class="ph ph-lock-key"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Palavra-passe</h4>
+        <p>Alterar a sua palavra-passe</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="definicoes-conta.html" class="settings-item">
+      <div class="settings-item-icon icon-green">
+        <i class="ph ph-devices"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Sessões ativas</h4>
+        <p>Gerir dispositivos conectados</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="definicoes-conta.html" class="settings-item">
+      <div class="settings-item-icon icon-teal">
+        <i class="ph ph-shield-check"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Autenticação em duas etapas</h4>
+        <p>Mais segurança para a sua conta</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="definicoes-conta.html" class="settings-item">
+      <div class="settings-item-icon icon-orange">
+        <i class="ph ph-envelope"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>E-mail</h4>
+        <p id="emailDisplay">Não definido</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="definicoes-conta.html" class="settings-item">
+      <div class="settings-item-icon icon-indigo">
+        <i class="ph ph-phone"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Telefone</h4>
+        <p id="phoneDisplay">Não definido</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+  </div>
+</div>
+
+<!-- SECÇÃO: PREFERÊNCIAS -->
+<div class="section">
+  <div class="section-label">Preferências</div>
+  <div class="settings-card">
+    <div class="settings-item" id="darkModeItem">
+      <div class="settings-item-icon icon-purple">
+        <i class="ph ph-moon" id="darkModeIcon"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Tema</h4>
+        <p id="darkModeText">Modo escuro</p>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="darkModeToggle" checked onchange="alternarTema()">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <a href="notificacoes.html" class="settings-item">
+      <div class="settings-item-icon icon-cyan">
+        <i class="ph ph-bell"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Notificações</h4>
+        <p>Gerir preferências de notificações</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="settings.html" class="settings-item">
+      <div class="settings-item-icon icon-green">
+        <i class="ph ph-globe"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Idioma</h4>
+        <p>Português (Portugal)</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+  </div>
+</div>
+
+<!-- SECÇÃO: AJUDA E SUPORTE -->
+<div class="section">
+  <div class="section-label">Ajuda e Suporte</div>
+  <div class="settings-card">
+    <a href="suporte.html" class="settings-item">
+      <div class="settings-item-icon icon-yellow">
+        <i class="ph ph-question"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Centro de Ajuda</h4>
+        <p>Perguntas frequentes e guias</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="contacto.html" class="settings-item">
+      <div class="settings-item-icon icon-cyan">
+        <i class="ph ph-envelope-simple"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Contacto EZNY</h4>
+        <p>Fale diretamente com a nossa equipa</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="reportar.html" class="settings-item">
+      <div class="settings-item-icon icon-red">
+        <i class="ph ph-chat-teardrop-text"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Comunicar um problema</h4>
+        <p>Reporte bugs ou problemas</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+  </div>
+</div>
+
+<!-- SECÇÃO: SOBRE -->
+<div class="section">
+  <div class="section-label">Sobre</div>
+  <div class="settings-card">
+    <a href="termos-settings.html" class="settings-item">
+      <div class="settings-item-icon icon-blue">
+        <i class="ph ph-scroll"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Termos de Uso</h4>
+        <p>Leia os termos da plataforma</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="politica.html" class="settings-item">
+      <div class="settings-item-icon icon-orange">
+        <i class="ph ph-shield"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Política de Privacidade</h4>
+        <p>Como tratamos os seus dados</p>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+    <a href="sobre.html" class="settings-item">
+      <div class="settings-item-icon icon-cyan">
+        <i class="ph ph-info"></i>
+      </div>
+      <div class="settings-item-content">
+        <h4>Sobre a EZNY</h4>
+      </div>
+      <i class="ph ph-caret-right settings-item-arrow"></i>
+    </a>
+  </div>
+</div>
+
+<!-- LOGOUT BUTTON -->
+<button class="logout-btn" onclick="logout()">
+  <i class="ph ph-sign-out"></i> Terminar Sessão
+</button>
+
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="ph ph-house-line"></i>
+    <span>Início</span>
+  </a>
+  <a href="favoritos.html" class="nav-item">
+    <i class="ph ph-heart"></i>
+    <span>Favoritos</span>
+  </a>
+  <a href="criar-anuncio.html" class="nav-pub-btn">
+    <i class="ph ph-plus"></i>
+  </a>
+  <a href="notificacoes.html" class="nav-item" style="position:relative;">
+    <span class="nav-badge" id="navBadgeNotificacoes">0</span>
+    <i class="ph ph-bell"></i>
+    <span>Notifis</span>
+  </a>
+  <a href="perfil.html" class="nav-item ">
+    <i class="ph ph-user"></i>
+    <span>Perfil</span>
+  </a>
+</nav>
+<script src="js/media.js"></script>
+<script src="js/settings.js"></script>
+
+</body>
+</html>

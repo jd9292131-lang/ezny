@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="EZNY - Anúncios em Angola">
+<meta name="theme-color" content="#0a0e17">
+<title>Anúncios | EZNY</title>
+
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/anuncios.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+<body>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Modal Logout -->
+<div id="modalLogout" class="modal-overlay">
+  <div class="modal-box" style="position:relative;">
+    <h3>Terminar Sessão</h3>
+    <p>Tem a certeza que deseja terminar a sua sessão?</p>
+    <div class="modal-acoes">
+      <button class="modal-btn modal-btn-cancel" onclick="fecharModalLogout()">
+        <i class="ph ph-x"></i> Cancelar
+      </button>
+      <button class="modal-btn modal-btn-ok" onclick="confirmarLogout()">
+        <i class="ph ph-sign-out"></i> Sim, terminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-head">
+    <i class="ph ph-user-circle"></i>
+    <span id="userSidebar">Menu</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="criar-anuncio.html" onclick="event.stopPropagation()"><i class="ph ph-plus-square"></i> Vender</a>
+    <a href="meus-anuncios.html" onclick="event.stopPropagation()"><i class="ph ph-package"></i> Meus anúncios</a>
+    <a href="favoritos.html" onclick="event.stopPropagation()"><i class="ph ph-heart"></i> Favoritos</a>
+    <a href="settings.html" onclick="event.stopPropagation()"><i class="ph ph-gear"></i> Definições</a>
+    <div class="sidebar-div"></div>
+    <a href="politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
+    <a href="sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
+    <div class="sidebar-div"></div>
+    <a href="upgrade.html" id="sidebarPremiumBtn" class="sidebar-premium-btn" onclick="event.stopPropagation()" style="display:none;">
+      <i class="ph ph-crown"></i> Tornar Premium
+    </a>
+    <a href="perfil-profissional.html?id=123" id="sidebarProfBtn" class="sidebar-prof-btn" onclick="event.stopPropagation()" style="display:none;">
+      <i class="ph ph-user-gear"></i> Perfil Profissional
+    </a>
+  </nav>
+  <div class="sidebar-foot">
+    <button onclick="event.stopPropagation(); logout()">
+      <i class="ph ph-sign-out"></i> Terminar sessão
+    </button>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <button class="menu-btn" onclick="toggleSidebar()">
+    <i class="ph ph-list"></i>
+  </button>
+  <div class="search-box">
+    <i class="ph ph-magnifying-glass"></i>
+    <input type="text" placeholder="Pesquisar anúncios..." id="searchInput" oninput="filtrarAnuncios()">
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1 id="tituloCategoria">Anúncios</h1>
+  <p>Encontre o que procura nos melhores anúncios de Angola</p>
+</div>
+
+<!-- FILTROS -->
+<div class="filtros-wrap">
+  <div class="filtros">
+    <select id="ordenar" onchange="filtrarAnuncios()">
+      <option value="recentes">Mais recentes</option>
+      <option value="preco_asc">Preço: menor para maior</option>
+      <option value="preco_desc">Preço: maior para menor</option>
+    </select>
+    <input type="number" id="precoMin" placeholder="Preço mín" oninput="filtrarAnuncios()">
+    <input type="number" id="precoMax" placeholder="Preço máx" oninput="filtrarAnuncios()">
+  </div>
+</div>
+
+<!-- ANUNCIOS -->
+<div class="anun-section">
+  <div class="anun-grid" id="anunGrid">
+    <div class="loading-wrap" style="grid-column:1/-1;">
+      <div class="spinner"></div>
+      <p style="color:var(--text-muted);font-size:0.9rem;">A carregar anúncios...</p>
+    </div>
+  </div>
+  <div id="vazio" class="vazio" style="display:none;">
+    <i class="ph ph-magnifying-glass"></i>
+    <h3>Nenhum anúncio encontrado</h3>
+    <p>Tente ajustar os filtros ou volte mais tarde.</p>
+  </div>
+</div>
+
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="ph ph-house-line"></i>
+    <span>Início</span>
+  </a>
+  <a href="favoritos.html" class="nav-item">
+    <i class="ph ph-heart"></i>
+    <span>Favoritos</span>
+  </a>
+  <a href="criar-anuncio.html" class="nav-pub-btn">
+    <i class="ph ph-plus"></i>
+  </a>
+  <a href="notificacoes.html" class="nav-item" style="position:relative;">
+    <span class="nav-badge" id="navBadgeNotificacoes">0</span>
+    <i class="ph ph-bell"></i>
+    <span>Notifis</span>
+  </a>
+  <a href="perfil.html" class="nav-item" id="navPerfilLink">
+    <i class="ph ph-user"></i>
+    <span>Perfil</span>
+  </a>
+</nav>
+
+<!-- POPUP -->
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-modal">
+    <i class="ph ph-megaphone"></i>
+    <h3 id="popupTitulo">Comunicado</h3>
+    <p id="popupConteudo">Conteúdo do comunicado...</p>
+    <button class="btn-ok" id="btnFecharPopup">Entendido</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MODAL DETALHE DO ANÚNCIO — Unificado (igual ao index.html)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<div id="modalAnuncioOverlay" class="modal-overlay-full" onclick="fecharModalAnuncio(event)">
+  <div class="modal-anuncio-sheet" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-anuncio-header">
+      <button class="modal-anuncio-btn" onclick="fecharModalAnuncio()" title="Voltar">
+        <i class="ph ph-caret-left"></i>
+      </button>
+      <div class="modal-anuncio-acoes">
+        <button class="modal-anuncio-btn" onclick="partilharAnuncioModal()" title="Partilhar">
+          <i class="ph ph-share-network"></i>
+        </button>
+        <button class="modal-anuncio-btn" id="modalAnuncioBtnFav" onclick="toggleFavModal()" title="Favorito">
+          <i class="ph ph-heart" id="modalAnuncioIconFav"></i>
+        </button>
+        <button class="modal-anuncio-btn" onclick="fecharModalAnuncio()" title="Fechar">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="modal-anuncio-loading" id="modalAnuncioLoading" style="display:none;">
+      <i class="ph ph-spinner animate-spin"></i>
+      <p>A carregar anúncio...</p>
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="modal-anuncio-body" id="modalAnuncioBody" style="display:none;">
+
+      <!-- Coluna Esquerda: Imagens -->
+      <div class="modal-anuncio-col-img">
+        <div class="modal-anuncio-galeria" id="modalImgWrap">
+          <img src="" id="modalImgPrincipal" alt="" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3QgZmlsbD0iIzFhMWQyNCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiLz48dGV4dCBmaWxsPSIjNGI1NTYzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZHk9IjEwIiB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtyBTZW0gaW1hZ2VtPC90ZXh0PjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJkMzEzOSIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNMTIwLDE4MCBMMTYwLDE0MCBMMjAwLDE4MCBMMjQwLDEyMCBMMjgwLDE4MCIvPjxjaXJjbGUgZmlsbD0iIzJkMzEzOSIgY3g9IjE2MCIgY3k9IjExMCIgcj0iMTUiLz48L3N2Zz4='">
+          <div class="modal-anuncio-galeria-badge">
+            <i class="ph ph-camera"></i>
+            <span id="modalImgCounter">1 / 1</span>
+          </div>
+        </div>
+        <div class="modal-anuncio-thumbs" id="modalThumbs"></div>
+      </div>
+
+      <!-- Coluna Direita: Info -->
+      <div class="modal-anuncio-col-info" id="modalAnuncioScroll">
+
+        <!-- Badge Destaque -->
+        <div class="modal-anuncio-destaque" id="modalBadgeDestaque" style="display:none;">
+          <i class="ph ph-star-fill"></i> Destaque
+        </div>
+
+        <!-- Título -->
+        <h1 class="modal-anuncio-titulo" id="modalTitulo"></h1>
+        <p class="modal-anuncio-subtitulo" id="modalSubtitulo"></p>
+
+        <!-- Preço -->
+        <div class="modal-anuncio-preco-wrap">
+          <span class="modal-anuncio-preco" id="modalPreco"></span>
+          <span class="modal-anuncio-negociavel" id="modalNegociavel" style="display:none;">Negociável</span>
+        </div>
+
+        <!-- Info rápida -->
+        <div class="modal-anuncio-info-rapida" id="modalInfoRapida">
+          <span><i class="ph ph-calendar-blank"></i> <span id="modalAno">-</span></span>
+          <span class="sep"></span>
+          <span><i class="ph ph-gauge"></i> <span id="modalKm">-</span></span>
+          <span class="sep"></span>
+          <span><i class="ph ph-gas-pump"></i> <span id="modalCombustivel">-</span></span>
+        </div>
+
+        <!-- Localização -->
+        <div class="modal-anuncio-loc-tempo">
+          <div class="modal-anuncio-loc">
+            <i class="ph ph-map-pin"></i>
+            <span id="modalLocalizacao">-</span>
+          </div>
+          <span id="modalTempo">-</span>
+        </div>
+
+        <!-- Vendedor -->
+        <div class="modal-vendedor-card">
+          <div class="modal-vendedor-label">Vendedor</div>
+          <div class="modal-vendedor-body">
+            <div class="modal-vendedor-left">
+              <div class="modal-vendedor-avatar" id="modalVendedorAvatar"></div>
+              <div>
+                <div class="modal-vendedor-nome" id="modalVendedorNome"></div>
+                <p class="modal-vendedor-membro" id="modalVendedorMembro"></p>
+                <div class="modal-avaliacao-wrap" id="modalAvaliacaoWrap" style="display:none;">
+                  <div class="modal-avaliacao-estrelas" id="modalAvaliacaoEstrelas"></div>
+                  <span class="modal-avaliacao-num" id="modalAvaliacaoNum">0.0</span>
+                  <span class="modal-avaliacao-count" id="modalAvaliacaoCount">(0 avaliações)</span>
+                </div>
+              </div>
+            </div>
+            <button class="modal-vendedor-seta" onclick="irPerfilVendedor()">
+              <i class="ph ph-caret-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="modal-acoes-btns">
+          <button class="modal-btn-msg" onclick="enviarMensagemModal()">
+            <i class="ph ph-chat-circle-dots"></i> Enviar mensagem
+          </button>
+          <div class="modal-acoes-row">
+            <button class="modal-btn-ligar" onclick="ligarVendedorModal()">
+              <i class="ph ph-phone"></i> Ligar
+            </button>
+            <button class="modal-btn-wa" onclick="whatsappVendedorModal()">
+              <i class="ph ph-whatsapp-logo"></i> WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- Especificações -->
+        <div class="modal-specs-titulo">Especificações</div>
+        <div class="modal-specs-card" id="modalSpecs"></div>
+
+        <!-- Descrição -->
+        <div class="modal-desc-titulo">Descrição</div>
+        <p class="modal-desc-texto" id="modalDescricao"></p>
+
+        <!-- Equipamentos -->
+        <div id="modalEquipamentosSection">
+          <div class="modal-equip-titulo">Principais equipamentos</div>
+          <div class="modal-equip-wrap" id="modalEquipamentos"></div>
+          <button class="modal-btn-ver-mais" id="modalBtnVerMaisEquip" onclick="toggleEquipamentosModal()" style="display:none;">
+            Ver mais
+          </button>
+        </div>
+
+        <!-- Dicas Segurança -->
+        <div class="modal-seguranca">
+          <div class="modal-seguranca-icon">
+            <i class="ph ph-shield-check"></i>
+          </div>
+          <div class="modal-seguranca-texto">
+            <h4>Dicas de segurança</h4>
+            <p>Encontre o vendedor em locais públicos e verifique o produto antes de pagar.</p>
+          </div>
+          <i class="ph ph-caret-right modal-seguranca-seta"></i>
+        </div>
+
+        <!-- Comentários (só para PREMIUM) -->
+        <div id="modalComentariosSection" style="display:none;">
+          <div class="modal-comentarios-section">
+            <div class="modal-comentarios-titulo">
+              <i class="ph ph-chat-circle-text"></i> 
+              Comentários <span id="modalComentariosCount">(0)</span>
+            </div>
+            <div id="modalComentariosLista"></div>
+            <div class="modal-comentario-input-wrap">
+              <input type="text" id="modalComentarioInput" class="modal-comentario-input" placeholder="Escreva um comentário...">
+              <button class="modal-comentario-btn-enviar" onclick="enviarComentarioModal()">
+                <i class="ph ph-paper-plane-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer-text">
+          <p><i class="ph ph-lock-key"></i> Não faça pagamentos antecipados. O EZNY não se responsabiliza por negociações fora da plataforma.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast do modal -->
+<div id="modalAnuncioToast" class="modal-anuncio-toast"></div>
+
+<script src="js/media.js"></script>
+<script src="js/anuncios.js"></script>
+
+</body>
+</html>

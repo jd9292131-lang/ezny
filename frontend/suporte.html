@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Centro de Ajuda - EZNY. Respostas para as perguntas mais frequentes.">
+<title>Centro de Ajuda | EZNY</title>
+
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/suporte.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+<body>
+<div class="ezny-brandbar"><a class="ezny-brand" href="index.html" aria-label="EZNY — Início"><img src="assets/logo.jpg" alt="EZNY"><div class="ezny-brand-copy"><strong>MARKETPLACE</strong><span>COMPRE. VENDA. CONECTE-SE.</span></div></a><a class="btn-voltar" href="settings.html"><i class="ph ph-arrow-left"></i> Voltar</a></div>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════ -->
+<header class="header">
+  <h1 class="header__title">Centro de Ajuda</h1>
+  <p class="header__subtitle">Encontre respostas para as perguntas mais frequentes sobre a EZNY.</p>
+
+  <div class="search-box">
+    <span class="material-icons">search</span>
+    <input type="text" id="searchInput" placeholder="Pesquisar perguntas..." oninput="filtrarFAQ(this.value)">
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     CONTEÚDO PRINCIPAL
+     ═══════════════════════════════════════ -->
+<main class="container">
+
+  <!-- Tabs de Categoria -->
+  <div class="category-tabs" id="categoryTabs">
+    <button class="category-tab active" data-category="all" onclick="filtrarCategoria('all')">
+      <span class="material-icons">apps</span>
+      Todas
+    </button>
+    <button class="category-tab" data-category="conta" onclick="filtrarCategoria('conta')">
+      <span class="material-icons">person</span>
+      Conta
+    </button>
+    <button class="category-tab" data-category="anuncios" onclick="filtrarCategoria('anuncios')">
+<i class="ph ph-package"></i>      Anúncios
+    </button>
+    <button class="category-tab" data-category="pagamentos" onclick="filtrarCategoria('pagamentos')">
+      <span class="material-icons">payments</span>
+      Pagamentos
+    </button>
+    <button class="category-tab" data-category="seguranca" onclick="filtrarCategoria('seguranca')">
+<i class="ph-fill ph-shield-check"></i>
+      Segurança
+    </button>
+  </div>
+
+  <!-- Sem resultados -->
+  <div class="no-results" id="noResults">
+    <span class="material-icons">search_off</span>
+    <h3>Nenhum resultado encontrado</h3>
+    <p>Tente pesquisar com termos diferentes ou navegue pelas categorias.</p>
+  </div>
+
+  <!-- FAQ: Conta -->
+  <div class="faq-section" data-category="conta">
+    <div class="faq-section-title">
+      <span class="material-icons">person</span>
+      <h3>Conta e Registo</h3>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Como crio uma conta na EZNY?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Para criar uma conta, siga estes passos:</p>
+            <ul>
+              <li>Aceda à página de autenticação e clique em "Criar Conta";</li>
+              <li>Introduza o seu nome completo e número de telefone;</li>
+              <li>Crie uma palavra-passe segura (mínimo 6 caracteres);</li>
+              <li>Confirme o seu número através do código SMS enviado;</li>
+              <li>Pronto! A sua conta está criada e pronta a usar.</li>
+            </ul>
+            <p>Cada número de telefone só pode ser associado a uma conta.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Esqueci a minha palavra-passe. Como recupero?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Na página de login, clique em "Esqueci a palavra-passe". Introduza o seu número de telefone registado e receberá um código de recuperação por SMS. Com esse código poderá definir uma nova palavra-passe.</p>
+            <p>Se não receber o SMS em 5 minutos, verifique se introduziu o número correto ou contacte o suporte.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Posso alterar o número de telefone da minha conta?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Sim. Aceda a Definições → Definições da Conta → Alterar Telefone. Se precisar de alterar dados de acesso que não estejam disponíveis nas Definições, contacte o suporte para receber orientação.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Como elimino a minha conta permanentemente?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Para solicitar a eliminação da sua conta:</p>
+            <ul>
+              <li>Aceda a Definições → Definições da Conta;</li>
+              <li>Desça até "Eliminar Conta";</li>
+              <li>Confirme a eliminação (serão pedidas duas confirmações);</li>
+              <li>Todos os seus anúncios e dados serão removidos permanentemente.</li>
+            </ul>
+            <p><strong>Nota:</strong> Esta ação é irreversível. Os dados serão conservados por até 2 anos apenas para fins legais, após o que serão eliminados definitivamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ: Anúncios -->
+  <div class="faq-section" data-category="anuncios">
+    <div class="faq-section-title">
+<i class="ph ph-package"></i>
+      <h3>Anúncios e Publicações</h3>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Como publico um anúncio?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Para publicar um anúncio:</p>
+            <ul>
+              <li>Inicie sessão na sua conta;</li>
+              <li>Clique em "Vender" no menu lateral;</li>
+              <li>Selecione a categoria (Electrônicos, Veículos, Imóveis, etc.);</li>
+              <li>Preencha os detalhes do produto: título, descrição, preço, fotos;</li>
+              <li>Clique em "Publicar".</li>
+            </ul>
+            <p>A publicação de anúncios no EZNY não tem comissão sobre a venda. O utilizador e o comprador tratam diretamente entre si da negociação e do pagamento.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Quantas fotos posso adicionar a um anúncio?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Pode adicionar até <strong>4 fotos</strong> por anúncio. Recomendamos usar imagens claras e bem iluminadas que mostrem o produto de diferentes ângulos. Imagens de maior qualidade aumentam as chances de venda.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Por quanto tempo fica visível o meu anúncio?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>O anúncio permanece ativo enquanto estiver aprovado e publicado. Se já não estiver disponível, recomendamos eliminar ou desativar o anúncio para manter a informação atualizada.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">O que acontece se o meu anúncio for removido?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Anúncios podem ser removidos por violação das regras da plataforma, incluindo:</p>
+            <ul>
+              <li>Conteúdo falso ou enganoso;</li>
+              <li>Produtos proibidos ou ilegais;</li>
+              <li>Spam ou publicações duplicadas;</li>
+              <li>Fotos inapropriadas ou irrelevantes;</li>
+              <li>Preços manifestamente absurdos.</li>
+            </ul>
+            <p>Se considera que a remoção foi um erro, pode contactar o suporte para reavaliação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ: Pagamentos -->
+  <div class="faq-section" data-category="pagamentos">
+    <div class="faq-section-title">
+      <span class="material-icons">payments</span>
+      <h3>Pagamentos e Taxas</h3>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">A plataforma processa pagamentos entre utilizadores?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p><strong>Não.</strong> A EZNY funciona exclusivamente como plataforma de intermediação. Não processamos, intermediamos nem garantimos pagamentos entre compradores e vendedores. As transações comerciais são acordadas e executadas diretamente entre as partes.</p>
+            <p>Recomendamos sempre encontrar-se em locais públicos e seguros para a concretização das transações.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Quais são as taxas de publicação?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>As taxas variam conforme a categoria do anúncio:</p>
+            <ul>
+              <li><strong>Electrônicos:</strong> Gratuito;</li>
+              <li><strong>Veículos:</strong> 2.500 Kz por anúncio;</li>
+              <li><strong>Imóveis:</strong> 5.000 Kz por anúncio;</li>
+              <li><strong>Arrendamento:</strong> 3.000 Kz por anúncio;</li>
+              <li><strong>Outros:</strong> Gratuito.</li>
+            </ul>
+            <p>Os valores podem ser atualizados. Consulte sempre a página de publicação para os preços atuais.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Os pagamentos são reembolsáveis?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Os pagamentos de taxas de publicação <strong>não são reembolsáveis</strong>, exceto em casos excepcionais autorizados pela moderação, como:</p>
+            <ul>
+              <li>Erro técnico da plataforma que impediu a publicação;</li>
+              <li>Anúncio removido indevidamente pela moderação;</li>
+              <li>Duplo pagamento pelo mesmo anúncio.</li>
+            </ul>
+            <p>Para solicitar reembolso, contacte o suporte com o comprovativo de pagamento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ: Segurança -->
+  <div class="faq-section" data-category="seguranca">
+    <div class="faq-section-title">
+<i class="ph-fill ph-shield-check"></i>
+      <h3>Segurança e Privacidade</h3>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Como protejo a minha conta?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Para manter a sua conta segura:</p>
+            <ul>
+              <li>Use uma palavra-passe forte (mínimo 8 caracteres, com letras e números);</li>
+              <li>Não partilhe os seus dados de acesso com ninguém;</li>
+              <li>Desconfie de mensagens suspeitas pedindo dados pessoais;</li>
+              <li>Termine a sessão quando usar dispositivos públicos;</li>
+              <li>Atualize regularmente a sua palavra-passe.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">O que fazer se detectar um golpe ou fraude?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Se suspeitar de fraude:</p>
+            <ul>
+              <li>Não realize nenhum pagamento antecipado;</li>
+              <li>Denuncie o anúncio clicando em "Denunciar";</li>
+              <li>Comunique o problema através de Definições → Comunicar um Problema;</li>
+              <li>Se já foi vítima, contacte as autoridades competentes.</li>
+            </ul>
+            <p>A plataforma não se responsabiliza por transações realizadas fora do sistema, mas coopera com as autoridades em investigações.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Quais dados a plataforma recolhe sobre mim?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Recolhemos apenas os dados estritamente necessários:</p>
+            <ul>
+              <li><strong>Nome:</strong> Para identificação e personalização;</li>
+              <li><strong>Telefone:</strong> Para registo e contacto entre partes;</li>
+              <li><strong>Email (opcional):</strong> Para notificações e comunicação.</li>
+            </ul>
+            <p><strong>Não recolhemos:</strong> dados bancários, BI, localização precisa, nem fotos de documentos. Consulte a nossa <a href="politica.html" style="color:var(--primary);text-decoration:none;">Política de Privacidade</a> para mais detalhes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span class="q-icon">Q</span>
+          <span class="q-text">Como encontro o comprador/vendedor com segurança?</span>
+          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            <p>Recomendações para encontros seguros:</p>
+            <ul>
+              <li>Prefira locais públicos e movimentados (shoppings, esplanadas);</li>
+              <li>Leve alguém consigo se possível;</li>
+              <li>Informe um familiar ou amigo sobre o encontro;</li>
+              <li>Inspecione o produto antes de qualquer pagamento;</li>
+              <li>Desconfie de preços muito abaixo do mercado;</li>
+              <li>Não faça pagamentos antecipados sem garantias.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Card -->
+  <div class="contact-card">
+    <h3>Ainda tem dúvidas?</h3>
+    <p>A nossa equipa está disponível para ajudar. Entre em contacto connosco.</p>
+    <div class="contact-buttons">
+      <a href="reportar.html" class="contact-btn contact-btn--primary">
+        <span class="material-icons">report_problem</span>
+        Comunicar Problema
+      </a>
+      <a href="mailto:suporte@ezny.ao" class="contact-btn contact-btn--secondary">
+        <span class="material-icons">email</span>
+        suporte@ezny.ao
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/media.js"></script>
+<script src="js/suporte.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+.env*
+node_modules/
+.vercel/
+database/migration_seed.sql
+backend/scripts/migrate-sqlite-to-postgres.js
+backend/auditoria-sqlite-compat.txt
+AUDITORIA*.md
+MIGRACAO_FASE_1.md
+MIGRACAO_FASE_1B.md
+PLANO_NORMAL_PREMIUM.md
+PREMIUM_PAGAMENTOS_FASE2.md
+VERCEL.md

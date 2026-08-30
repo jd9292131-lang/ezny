@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0e7490">
+<title>EZNY - Entrar</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+
+<body>
+
+<!-- Orbs de fundo -->
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+
+<div class="app-container">
+
+  <div class="tabs">
+    <button class="active" onclick="abrirAba('login')">Entrar</button>
+    <button onclick="abrirAba('cadastro')">Criar Conta</button>
+  </div>
+
+  <div class="tab-content">
+
+    <!-- ═════════════════ LOGIN ═════════════════ -->
+    <div id="login" class="active">
+      <div class="auth-header">
+<div class="login-avatar">
+<i class="ph-light ph-user-circle"></i>
+</div>        
+        <h2>Bem-vindo de volta</h2>
+        <p>Inicie sessão na sua conta</p>
+      </div>
+
+      <div id="msgErroLogin" class="msg erro">
+        <i class="ph ph-warning-circle"></i>
+        <span></span>
+      </div>
+      <div id="msgBanLogin" class="msg ban">
+        <i class="ph ph-shield-warning"></i>
+        <span><strong>Conta Suspensa</strong><span class="detalhe"></span></span>
+      </div>
+
+      <div class="input-group">
+        <label>Telefone</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-phone"></i></span>
+          <input id="telefone" placeholder="Ex: 923456789" inputmode="tel" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Senha</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-lock-key"></i></span>
+          <input id="senha" type="password" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="toggle-password" onclick="toggleSenha('senha', this)" aria-label="Mostrar senha">
+            <i class="ph ph-eye-slash"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="submit" id="btnLogin" onclick="login()">
+        <span>Entrar</span>
+      </button>
+            <p class="termos-link">
+        Contacte o <a href="reportar-auth.html">Suporte</a> para comunicar um problema
+      </p>
+
+    </div>
+
+    <!-- ═════════════════ CADASTRO ═════════════════ -->
+    <div id="cadastro">
+      <div class="auth-header">
+<div class="user-circle-plus-avatar">
+<i class="ph-light ph-user-circle-plus"></i>
+</div>
+        <h2>Criar conta</h2>
+        <p>Registe-se gratuitamente na EZNY</p>
+      </div>
+
+      <div id="msgErroCadastro" class="msg erro">
+        <i class="ph ph-warning-circle"></i>
+        <span></span>
+      </div>
+      <div id="msgBanCadastro" class="msg ban">
+        <i class="ph ph-shield-warning"></i>
+        <span><strong>Conta Suspensa</strong><span class="detalhe"></span></span>
+      </div>
+      <div id="msgSucessoCadastro" class="msg sucesso">
+        <i class="ph ph-check-circle"></i>
+        <span></span>
+      </div>
+
+      <div class="input-group">
+        <label>Nome completo</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-user"></i></span>
+          <input id="nome" placeholder="Seu nome completo" autocomplete="name">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Telefone</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-phone"></i></span>
+          <input id="telefoneCadastro" placeholder="Ex: 923456789" inputmode="tel" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Data de nascimento</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-calendar-blank"></i></span>
+          <input type="date" id="data_nascimento" required autocomplete="bday">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Senha</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-lock-key"></i></span>
+          <input id="senhaCadastro" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" oninput="verificarForcaSenha()">
+          <button type="button" class="toggle-password" onclick="toggleSenha('senhaCadastro', this)" aria-label="Mostrar senha">
+            <i class="ph ph-eye-slash"></i>
+          </button>
+        </div>
+        <div class="strength-bar" id="strengthBar">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="strength-text" id="strengthText"></div>
+      </div>
+
+      <div class="input-group">
+        <label>Confirmar senha</label>
+        <div class="input-container">
+          <span class="input-icon"><i class="ph ph-lock-key-open"></i></span>
+          <input id="senhaConfirmar" type="password" placeholder="Repita a senha" autocomplete="new-password" oninput="verificarConfirmacaoSenha()">
+          <button type="button" class="toggle-password" onclick="toggleSenha('senhaConfirmar', this)" aria-label="Mostrar senha">
+            <i class="ph ph-eye-slash"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="submit" id="btnCadastro" onclick="cadastrar()">
+        <span>Criar Conta</span>
+      </button>
+
+      <p class="termos-link">
+        Ao criar conta, aceita os <a href="termos-auth.html">Termos de Uso</a> e <a href="politica-auth.html">Política de Privacidade</a>.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/media.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>

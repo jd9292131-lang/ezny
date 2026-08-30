@@ -1,0 +1,28 @@
+
+/* EZNY Brand Layer — identidade oficial */
+:root{
+  --ezny-cyan:#12d9e7;
+  --ezny-cyan-2:#00a9c7;
+  --ezny-blue:#07111d;
+  --ezny-ink:#030811;
+  --ezny-white:#f7fbff;
+  --ezny-muted:#8ea3b8;
+  --ezny-line:rgba(18,217,231,.16);
+  --ezny-glow:0 0 42px rgba(18,217,231,.14);
+}
+.ezny-brandbar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1180px;margin:0 auto;padding:14px 20px;z-index:20}
+.ezny-brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
+.ezny-brand img{width:116px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 8px 22px rgba(0,0,0,.28))}
+.ezny-brand--compact img{width:92px}
+.ezny-brand-copy{display:flex;flex-direction:column;line-height:1.05}
+.ezny-brand-copy strong{font-size:.9rem;letter-spacing:.16em;color:var(--ezny-white)}
+.ezny-brand-copy span{font-size:.62rem;letter-spacing:.24em;color:var(--ezny-cyan);margin-top:4px}
+.ezny-brand-mark{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(18,217,231,.16),rgba(0,0,0,.12));border:1px solid var(--ezny-line);box-shadow:var(--ezny-glow);overflow:hidden}
+.ezny-brand-mark img{width:150%;max-width:none}
+.ezny-brand-watermark{position:absolute;right:4%;top:5%;width:min(420px,45vw);opacity:.055;pointer-events:none;user-select:none}
+.ezny-brand-watermark img{width:100%;display:block;filter:grayscale(1)}
+.ezny-kicker{display:inline-flex;align-items:center;gap:7px;color:var(--ezny-cyan);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.ezny-kicker i{font-size:17px}
+.ezny-gradient-text{background:linear-gradient(100deg,#fff 0%,#dffcff 38%,var(--ezny-cyan) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ezny-glass{background:linear-gradient(145deg,rgba(10,25,39,.9),rgba(3,10,18,.72));border:1px solid var(--ezny-line);box-shadow:var(--ezny-glow);backdrop-filter:blur(18px)}
+@media(max-width:640px){.ezny-brandbar{padding:12px 14px}.ezny-brand img{width:96px}.ezny-brand-copy{display:none}.ezny-brand-watermark{width:320px;right:-80px;top:70px}}

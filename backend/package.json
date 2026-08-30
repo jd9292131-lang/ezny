@@ -1,0 +1,26 @@
+{
+  "name": "ezny-backend",
+  "version": "2.0.0",
+  "private": true,
+  "description": "EZNY marketplace API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "audit": "npm audit --omit=dev",
+    "migrate": "node scripts/migrate-sqlite-to-postgres.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "pg": "^8.16.3",
+    "zod": "^4.1.12"
+  }
+}

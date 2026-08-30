@@ -1,0 +1,202 @@
+<!-- ============================================
+     MODAL DE DETALHE DO ANÚNCIO — VERSÃO REAL
+     Integrar este código no final do <body> de 
+     qualquer página que liste anúncios
+     ============================================ -->
+
+<!-- CSS do Modal (colocar no <head> ou no teu CSS global) -->
+<link rel="stylesheet" href="css/anuncio.css">
+
+<!-- ===== HTML DO MODAL ===== -->
+<div id="modalAnuncio">
+  <div class="overlay" onclick="fecharModalAnuncio()"></div>
+  
+  <div class="container">
+    <div class="painel">
+      
+      <!-- Loading -->
+      <div id="modalLoading" class="loading">
+        <div class="spinner"></div>
+        <p style="color:#9ca3af; font-size:14px;">A carregar anúncio...</p>
+      </div>
+      
+      <!-- Erro -->
+      <div id="modalErro" class="erro">
+        <i class="ph ph-warning-circle" style="font-size:48px; color:#ef4444;"></i>
+        <p id="modalErroTexto" style="color:#9ca3af; font-size:14px;">Erro ao carregar anúncio</p>
+        <button onclick="fecharModalAnuncio()" style="background:#232730; color:white; padding:10px 24px; border-radius:12px; border:none; cursor:pointer; font-size:14px;">
+          Fechar
+        </button>
+      </div>
+      
+      <!-- Header Fixo -->
+      <div style="position:absolute; top:0; left:0; right:0; z-index:20; display:flex; justify-content:space-between; align-items:center; padding:16px; background:linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);">
+        <button class="btn-header" onclick="fecharModalAnuncio()">
+          <i class="ph ph-caret-left" style="font-size:20px;"></i>
+        </button>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-header" onclick="compartilharAnuncio()" title="Partilhar">
+            <i class="ph ph-share-network" style="font-size:18px;"></i>
+          </button>
+          <button class="btn-header" onclick="toggleFavorito()" id="btnFavorito" title="Favorito">
+            <i class="ph ph-heart" style="font-size:18px;"></i>
+          </button>
+          <button class="btn-header" onclick="fecharModalAnuncio()" title="Fechar">
+            <i class="ph ph-x" style="font-size:18px;"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Conteúdo -->
+      <div class="scroll" id="modalScroll">
+        
+        <!-- Imagens -->
+        <div style="position:relative;">
+          <img id="anuncioImgPrincipal" src="" alt="" class="img-principal">
+          <div style="position:absolute; bottom:16px; right:16px; background:rgba(15,17,21,0.8); backdrop-filter:blur(8px); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500; display:flex; align-items:center; gap:6px;">
+            <i class="ph ph-camera" style="color:#14b8a6;"></i>
+            <span id="anuncioContador">1 / 1</span>
+          </div>
+        </div>
+        
+        <!-- Thumbnails -->
+        <div id="anuncioThumbnails" style="display:flex; gap:8px; padding:12px; overflow-x:auto; scrollbar-width:none; background:#1a1d24;">
+          <!-- JS -->
+        </div>
+        
+        <!-- Info Principal -->
+        <div style="padding:0 16px 16px;">
+          
+          <!-- Badge Destaque -->
+          <div id="anuncioBadgeDestaque" style="display:none; align-items:center; gap:6px; background:rgba(20,184,166,0.15); color:#5eead4; padding:4px 12px; border-radius:8px; font-size:12px; font-weight:600; width:fit-content; margin-bottom:12px;">
+            <i class="ph ph-star-fill"></i>
+            Destaque
+          </div>
+          
+          <h1 id="anuncioTitulo" style="font-size:24px; font-weight:700; color:white; line-height:1.2; margin-bottom:4px;"></h1>
+          <p id="anuncioSubtitulo" style="color:#9ca3af; font-size:14px; margin-bottom:12px;"></p>
+          
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+            <span id="anuncioPreco" style="font-size:28px; font-weight:700; color:#14b8a6;"></span>
+            <span id="anuncioNegociavel" style="display:none; background:#232730; color:#9ca3af; padding:3px 10px; border-radius:6px; font-size:12px;">Negociável</span>
+          </div>
+          
+          <!-- Info rápida -->
+          <div id="infoRapida" style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; font-size:14px; color:#9ca3af; margin-bottom:16px;">
+            <span style="display:flex; align-items:center; gap:5px;"><i class="ph ph-calendar-blank"></i> <span id="infoAno">-</span></span>
+            <span style="width:1px; height:16px; background:#2d3139;"></span>
+            <span style="display:flex; align-items:center; gap:5px;"><i class="ph ph-gauge"></i> <span id="infoKm">-</span></span>
+            <span style="width:1px; height:16px; background:#2d3139;"></span>
+            <span style="display:flex; align-items:center; gap:5px;"><i class="ph ph-gas-pump"></i> <span id="infoCombustivel">-</span></span>
+          </div>
+          
+          <!-- Localização -->
+          <div style="display:flex; align-items:center; justify-content:space-between; font-size:13px; margin-bottom:20px;">
+            <span style="display:flex; align-items:center; gap:5px; color:#9ca3af;">
+              <i class="ph ph-map-pin" style="color:#14b8a6;"></i>
+              <span id="infoLocalizacao">-</span>
+            </span>
+            <span id="infoTempo" style="color:#6b7280;"></span>
+          </div>
+          
+          <!-- Card Vendedor -->
+          <div style="background:rgba(35,39,48,0.5); border-radius:16px; padding:16px; margin-bottom:16px;">
+            <p style="font-size:11px; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px; font-weight:600; margin-bottom:12px;">Vendedor</p>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div id="vendedorAvatar" style="width:48px; height:48px; border-radius:50%; background:#14b8a6; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:16px; flex-shrink:0;">
+                  <!-- Iniciais -->
+                </div>
+                <div>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <span id="vendedorNome" style="font-weight:600; color:white; font-size:15px;"></span>
+                    <i id="vendedorVerificado" class="ph ph-seal-check" style="display:none; color:#14b8a6; font-size:16px;"></i>
+                  </div>
+                  <p id="vendedorMembro" style="font-size:12px; color:#6b7280; margin-top:2px;"></p>
+                  <div style="display:flex; align-items:center; gap:4px; margin-top:4px;">
+                    <i class="ph ph-star-fill" style="color:#fbbf24; font-size:12px;"></i>
+                    <span id="vendedorRating" style="font-size:14px; font-weight:600; color:white;"></span>
+                    <span id="vendedorAvaliacoes" style="font-size:12px; color:#6b7280;"></span>
+                  </div>
+                </div>
+              </div>
+              <button onclick="verPerfilVendedor()" style="width:32px; height:32px; border-radius:50%; background:#2d3139; display:flex; align-items:center; justify-content:center; border:none; cursor:pointer;">
+                <i class="ph ph-caret-right" style="color:#9ca3af;"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Botões -->
+          <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:24px;">
+            <button onclick="enviarMensagem()" style="background:#14b8a6; color:white; font-weight:600; padding:14px; border-radius:12px; border:none; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.2s;">
+              <i class="ph ph-chat-circle-dots" style="font-size:20px;"></i>
+              Enviar mensagem
+            </button>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <button onclick="ligarVendedor()" style="background:#232730; color:white; font-weight:500; padding:12px; border-radius:12px; border:none; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; gap:6px; transition:background 0.2s;">
+                <i class="ph ph-phone" style="font-size:18px;"></i>
+                Ligar
+              </button>
+              <button onclick="whatsappVendedor()" style="background:#232730; color:#4ade80; font-weight:500; padding:12px; border-radius:12px; border:none; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; gap:6px; transition:background 0.2s;">
+                <i class="ph ph-whatsapp-logo" style="font-size:18px;"></i>
+                WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Especificações -->
+        <div style="padding:0 16px 16px;">
+          <h2 style="font-size:17px; font-weight:600; color:white; margin-bottom:12px;">Especificações</h2>
+          <div id="especificacoesContainer" style="background:rgba(35,39,48,0.3); border-radius:16px; overflow:hidden;">
+            <!-- JS -->
+          </div>
+        </div>
+        
+        <!-- Descrição -->
+        <div style="padding:0 16px 16px;">
+          <h2 style="font-size:17px; font-weight:600; color:white; margin-bottom:12px;">Descrição</h2>
+          <p id="anuncioDescricao" style="color:#9ca3af; font-size:14px; line-height:1.7; white-space:pre-line;"></p>
+        </div>
+        
+        <!-- Equipamentos -->
+        <div id="secaoEquipamentos" style="padding:0 16px 16px;">
+          <h2 style="font-size:17px; font-weight:600; color:white; margin-bottom:12px;">Principais equipamentos</h2>
+          <div id="equipamentosContainer" style="display:flex; flex-wrap:wrap; gap:8px;">
+            <!-- JS -->
+          </div>
+          <button id="btnVerMaisEquip" onclick="toggleEquipamentos()" style="display:none; margin-top:12px; color:#14b8a6; font-size:13px; font-weight:500; background:none; border:none; cursor:pointer;">
+            Ver mais
+          </button>
+        </div>
+        
+        <!-- Dicas Segurança -->
+        <div style="padding:0 16px 24px;">
+          <div style="background:rgba(35,39,48,0.3); border-radius:16px; padding:16px; display:flex; align-items:flex-start; gap:12px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:rgba(20,184,166,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <i class="ph ph-shield-check" style="color:#14b8a6; font-size:20px;"></i>
+            </div>
+            <div style="flex:1;">
+              <h3 style="font-weight:600; font-size:14px; color:white; margin-bottom:4px;">Dicas de segurança</h3>
+              <p style="color:#6b7280; font-size:12px; line-height:1.5;">Encontre o vendedor em locais públicos e verifique o produto antes de pagar.</p>
+            </div>
+            <i class="ph ph-caret-right" style="color:#4b5563; margin-top:4px;"></i>
+          </div>
+        </div>
+        
+        <!-- Footer -->
+        <div style="padding:0 16px 32px; text-align:center;">
+          <p style="color:#4b5563; font-size:11px; display:flex; align-items:center; justify-content:center; gap:6px;">
+            <i class="ph ph-lock-key"></i>
+            Não faça pagamentos antecipados. O EZNY não se responsabiliza por negociações fora da plataforma.
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JAVASCRIPT DO MODAL ===== -->
+<script src="js/media.js"></script>
+<script src="js/anuncio.js"></script>

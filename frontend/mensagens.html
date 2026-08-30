@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mensagens — EZNY</title>
+  <link rel="stylesheet" href="assets/css/phosphor.css">
+  <link rel="stylesheet" href="css/mensagens.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+<body>
+  <main class="messages-page">
+    <header class="messages-header">
+      <a href="index.html" class="back-link" aria-label="Voltar"><i class="ph ph-arrow-left"></i></a>
+      <div>
+        <h1>Mensagens</h1>
+        <p>Contacta compradores e vendedores através do EZNY.</p>
+      </div>
+    </header>
+
+    <section class="messages-shell">
+      <aside class="conversation-list" id="conversationList">
+        <div class="list-loading">A carregar conversas…</div>
+      </aside>
+
+      <section class="chat-panel" id="chatPanel">
+        <div class="chat-empty" id="chatEmpty">
+          <i class="ph ph-chats-circle"></i>
+          <h2>Escolhe uma conversa</h2>
+          <p>As tuas mensagens aparecerão aqui.</p>
+        </div>
+
+        <div class="chat-content" id="chatContent" hidden>
+          <header class="chat-header">
+            <div class="contact-avatar" id="contactAvatar"></div>
+            <div class="contact-info">
+              <strong id="contactName">—</strong>
+              <span id="contactType"></span>
+            </div>
+          </header>
+
+          <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+
+          <form class="composer" id="composer">
+            <input id="messageInput" type="text" maxlength="4000" autocomplete="off"
+                   placeholder="Escreve uma mensagem…" aria-label="Mensagem">
+            <button type="submit" id="sendButton" aria-label="Enviar">
+              <i class="ph ph-paper-plane-tilt"></i>
+            </button>
+          </form>
+          <p class="chat-note">Não partilhes palavras-passe, códigos, IBAN ou outros dados sensíveis.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/media.js"></script>
+  <script src="js/mensagens.js"></script>
+</body>
+</html>

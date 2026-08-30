@@ -1,0 +1,24 @@
+node_modules/
+.env
+.env.*
+!/.env.example
+backend/database.db
+backend/uploads/
+.vercel/
+.DS_Store
+desktop.ini
+
+.vercel
+.env*
+
+# EZNY development/internal files
+.agents/
+.claude/
+
+# Internal audit documents
+AUDITORIA_*.md
+ESTRUTURA_NOVA.md
+MIGRACAO_FASE_1.md
+PLANO_NORMAL_PREMIUM.md
+PREMIUM_PAGAMENTOS_FASE2.md
+STAGING_CHECKLIST.md

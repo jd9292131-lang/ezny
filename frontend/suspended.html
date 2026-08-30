@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0e17">
+<meta name="description" content="Conta Suspensa - EZNY">
+<title>Conta Suspensa | EZNY</title>
+
+<!-- Phosphor Icons -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<link rel="stylesheet" href="css/suspended.css">
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- Header -->
+  <header class="header">
+    </a>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Illustration -->
+    <div class="illustration">
+      <div class="ill-ring"></div>
+      <div class="ill-ring"></div>
+      <div class="ill-bg">
+        <i class="ph ph-warning-octagon"></i>
+      </div>
+    </div>
+
+    <!-- Badge -->
+    <div class="badge">
+      <i class="ph ph-circle"></i>
+      Conta Suspensa
+    </div>
+
+    <!-- Title -->
+    <h1 class="title">Acesso Restrito</h1>
+
+    <!-- Message -->
+    <p class="msg" id="msg">
+      A sua conta foi suspensa por violação das nossas regras e condições de utilização.
+    </p>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap" id="countdownWrap">
+      <div class="countdown-label">
+        <i class="ph ph-clock-countdown"></i>
+        <span>Tempo até à reativação</span>
+      </div>
+      <div class="countdown">
+        <div class="cd-unit">
+          <span class="cd-num" id="cdDias">00</span>
+          <span class="cd-text">dias</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cdHoras">00</span>
+          <span class="cd-text">horas</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cdMin">00</span>
+          <span class="cd-text">min</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit">
+          <span class="cd-num danger" id="cdSeg">00</span>
+          <span class="cd-text">seg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info">
+      <div class="info-icon">
+        <i class="ph ph-info"></i>
+      </div>
+      <div class="info-body">
+        <h3>O que aconteceu?</h3>
+        <p>A sua conta foi suspensa pelo administrador. Durante este período, não poderá aceder à plataforma, publicar anúncios ou interagir com outros utilizadores.</p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <a href="https://wa.me/244XXXXXXXXX?text=Olá,+a+minha+conta+foi+suspensa+no+EZNY+e+gostaria+de+obter+ajuda." 
+         class="btn btn-primary" target="_blank">
+        <i class="ph ph-whatsapp-logo"></i>
+        Contactar Suporte
+      </a>
+
+      <a href="termos.html" class="btn btn-secondary">
+        <i class="ph ph-scroll"></i>
+        Termos e Condições
+      </a>
+
+      <a href="politica.html" class="btn btn-secondary">
+        <i class="ph ph-shield-check"></i>
+        Política de Privacidade
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">ou</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Logout -->
+    <div class="actions" style="margin-bottom:0;">
+      <button class="btn btn-danger" onclick="terminarSessao()">
+        <i class="ph ph-sign-out"></i>
+        Terminar Sessão
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2024 EZNY</p>
+    <div class="footer-links">
+      <a href="termos.html">Termos</a>
+      <span>|</span>
+      <a href="politica.html">Privacidade</a>
+      <span>|</span>
+      <a href="suporte.html">Ajuda</a>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/media.js"></script>
+<script src="js/suspended.js"></script>
+
+</body>
+</html>

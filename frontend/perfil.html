@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Perfil | EZNY">
+<meta name="theme-color" content="#0a0e17">
+<title>Perfil | EZNY</title>
+
+<!-- Phosphor Icons -->
+<link rel="stylesheet" href="assets/css/phosphor.css">
+<link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Header -->
+<div class="prof-header">
+  <button class="prof-header-btn" onclick="history.back()">
+    <i class="ph ph-arrow-left"></i>
+  </button>
+  <div class="prof-header-titulo">Perfil</div>
+  <button class="prof-header-btn" onclick="toggleTema()" title="Alternar tema">
+    <i class="ph ph-moon" id="iconTema"></i>
+  </button>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="loading-wrap">
+  <i class="ph ph-spinner animate-spin"></i>
+  <p>A carregar perfil...</p>
+</div>
+
+<!-- Conteúdo -->
+<div id="conteudo" style="display:none;">
+
+  <!-- Card Perfil -->
+  <div class="perfil-card">
+    <div class="perfil-avatar-wrap">
+      <div id="avatarWrap">
+        <div class="perfil-avatar-placeholder" id="avatarPlaceholder">U</div>
+      </div>
+      <button class="perfil-avatar-edit" onclick="editarAvatar()" title="Alterar foto">
+        <i class="ph-fill ph-camera"></i>
+      </button>
+    </div>
+
+    <div class="perfil-nome" id="perfilNome">
+      Utilizador
+      <span class="perfil-badge-normal" id="perfilBadge">Normal</span>
+    </div>
+    <div class="perfil-email" id="perfilEmail">email@exemplo.com</div>
+
+    <div class="perfil-stats-row">
+      <div class="perfil-stat-mini">
+        <span class="perfil-stat-mini-valor" id="statAnuncios">0</span>
+        <span class="perfil-stat-mini-label">Anúncios</span>
+      </div>
+      <div class="perfil-stat-mini">
+        <span class="perfil-stat-mini-valor" id="statAvaliacao">—</span>
+        <span class="perfil-stat-mini-label">Avaliação</span>
+      </div>
+      <div class="perfil-stat-mini">
+        <span class="perfil-stat-mini-valor" id="statMembro">—</span>
+        <span class="perfil-stat-mini-label">Membro</span>
+      </div>
+    </div>
+
+    <div class="perfil-acoes" id="perfilAcoes">
+      <button class="perfil-btn perfil-btn-premium" id="btnUpgrade" onclick="irUpgrade()">
+        <i class="ph-fill ph-crown"></i> Tornar Premium
+      </button>
+      <button class="perfil-btn perfil-btn-editar" onclick="abrirEditar()">
+        <i class="ph-fill ph-pencil-simple"></i> Editar
+      </button>
+    </div>
+  </div>
+
+  <!-- Seção Upgrade (só para normal) -->
+  <div class="secao-premium" id="secaoUpgrade" style="display:none;">
+    <i class="ph-fill ph-crown"></i>
+    <h3>Destaque-se no EZNY</h3>
+    <p>Obtenha um perfil profissional, comentários nos anúncios, avaliações de clientes e muito mais visibilidade.</p>
+    <button class="perfil-btn perfil-btn-premium" onclick="irUpgrade()" style="width:100%;">
+      <i class="ph-fill ph-crown"></i> Saber mais sobre Premium
+    </button>
+  </div>
+
+  <!-- Menu -->
+  <div class="menu-lista">
+    <a href="perfil-profissional.html" class="menu-item" id="menuProfissional" style="display:none;">
+      <i class="ph-fill ph-user-gear"></i>
+      <span class="menu-item-label">Perfil Profissional</span>
+      <i class="ph ph-caret-right menu-item-chevron"></i>
+    </a>
+    <a href="meus-anuncios.html" class="menu-item">
+      <i class="ph-fill ph-package"></i>
+      <span class="menu-item-label">Meus Anúncios</span>
+      <span class="menu-item-badge" id="badgeAnuncios" style="display:none;">0</span>
+      <i class="ph ph-caret-right menu-item-chevron"></i>
+    </a>
+    <a href="favoritos.html" class="menu-item">
+      <i class="ph-fill ph-heart"></i>
+      <span class="menu-item-label">Favoritos</span>
+      <i class="ph ph-caret-right menu-item-chevron"></i>
+    </a>
+    <a href="mensagens.html" class="menu-item">
+      <i class="ph-fill ph-chat-circle-text"></i>
+      <span class="menu-item-label">Mensagens</span>
+      <span class="menu-item-badge" id="badgeMensagens" style="display:none;">0</span>
+      <i class="ph ph-caret-right menu-item-chevron"></i>
+    </a>
+    <a href="notificacoes.html" class="menu-item">
+      <i class="ph-fill ph-bell"></i>
+      <span class="menu-item-label">Notificações</span>
+      <i class="ph ph-caret-right menu-item-chevron"></i>
+    </a>
+    <a href="settings.html" class="menu-item">
+      <i class="ph-fill ph-gear"></i>
+      <span class="menu-item-label">Definições</span>
+      <i class="ph ph-caret-right menu-item-chevron"></i>
+    </a>
+  </div>
+
+  <!-- Logout -->
+  <div style="padding:0 16px 24px;">
+    <button class="perfil-btn" onclick="abrirModalLogout()" style="width:100%; background:var(--glass); color:var(--text-muted); border:1px solid var(--glass-border);">
+      <i class="ph-fill ph-sign-out"></i> Terminar Sessão
+    </button>
+  </div>
+
+</div>
+
+<!-- Modal Editar Perfil -->
+<div id="modalEditar" class="modal-overlay" onclick="fecharEditar(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3><i class="ph-fill ph-pencil-simple" style="color:var(--primary);margin-right:8px;"></i>Editar Perfil</h3>
+      <button class="modal-header-btn" onclick="fecharEditar()">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-input" id="editNome" placeholder="Seu nome">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Telefone</label>
+        <input type="tel" class="form-input" id="editTelefone" placeholder="+244 9XX XXX XXX">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="editEmail" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Localização</label>
+        <input type="text" class="form-input" id="editLocalizacao" placeholder="Cidade, Bairro">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Bio / Descrição</label>
+        <textarea class="form-input form-textarea" id="editBio" placeholder="Fale um pouco sobre si..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-cancel" onclick="fecharEditar()">Cancelar</button>
+      <button class="modal-btn modal-btn-ok" onclick="salvarPerfil()">
+        <i class="ph-fill ph-check"></i> Guardar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Terminar Sessão -->
+<div id="modalLogout" class="modal-confirm" onclick="fecharModalLogout(event)">
+  <div class="modal-confirm-box" onclick="event.stopPropagation()">
+    <i class="ph-fill ph-sign-out" style="color:var(--text-muted);"></i>
+    <h3>Terminar Sessão</h3>
+    <p>Tem a certeza que deseja sair da sua conta?</p>
+    <div class="modal-confirm-acoes">
+      <button class="modal-confirm-btn modal-confirm-btn-cancel" onclick="fecharModalLogout()">Cancelar</button>
+      <button class="modal-confirm-btn modal-confirm-btn-ok" style="background:linear-gradient(135deg, var(--primary), var(--primary-dark));" onclick="confirmarLogout()">
+        <i class="ph-fill ph-sign-out"></i> Sair
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="ph ph-house-line"></i>
+    <span>Início</span>
+  </a>
+  <a href="favoritos.html" class="nav-item">
+    <i class="ph ph-heart"></i>
+    <span>Favoritos</span>
+  </a>
+  <a href="criar-anuncio.html" class="nav-pub-btn">
+    <i class="ph ph-plus"></i>
+  </a>
+  <a href="notificacoes.html" class="nav-item" style="position:relative;">
+    <span class="nav-badge" id="navBadgeNotificacoes">0</span>
+    <i class="ph ph-bell"></i>
+    <span>Notificações</span>
+  </a>
+  <a href="perfil.html" class="nav-item ativo">
+    <i class="ph ph-user"></i>
+    <span>Perfil</span>
+  </a>
+</nav>
+
+<script src="js/media.js"></script>
+<script src="js/perfil.js"></script>
+</body>
+</html>

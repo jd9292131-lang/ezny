@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Atualizar Token</title></head>
+<body>
+<h2>Atualizando token...</h2>
+<script>
+// Token de teste válido com tipo admin
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IkFETUlOSVNUUkFET1IiLCJ0ZWxlZm9uZSI6IjkzNTkyMDYwNiIsInRpcG8iOiJhZG1pbiIsImlhdCI6MTc4MDkyMTE1MSwiZXhwIjoxNzgxNTI1OTUxfQ.jOHHp25itU9g9Ie6dvwvB6EXsE0D6Yc7z5KiFhyTE5Y";
+localStorage.setItem('token', token);
+localStorage.setItem('userData', JSON.stringify({nome: "ADMINISTRADOR", tipo: "admin"}));
+document.body.innerHTML = "<h2>✅ Token atualizado!</h2><p><a href='painel-admin.html'>Ir para o Painel Admin</a></p><p>Se ainda não funcionar, faz logout e login de novo.</p>";
+</script>
+</body>
+</html>

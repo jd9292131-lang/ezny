@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Meus Anúncios - EZNY">
+<meta name="theme-color" content="#0a0e17">
+<title>Meus Anúncios | EZNY</title>
+
+<!-- Phosphor Icons Web - CDN Oficial (regular + fill) -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<link rel="stylesheet" href="css/meus-anuncios.css">
+<link rel="stylesheet" href="css/ezny-brand.css">
+</head>
+
+<body>
+
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+
+<!-- Toast -->
+<div id="toast" class="toast"><i class="ph-fill ph-warning-circle"></i> Precisa iniciar sessão!</div>
+
+<!-- Modal Confirmação Eliminar -->
+<div id="modalEliminar" class="modal-overlay" onclick="fecharModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <i class="ph-fill ph-trash"></i>
+    <h3>Eliminar Anúncio</h3>
+    <p>Tem a certeza que deseja eliminar este anúncio? Esta ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancelar" onclick="fecharModal()">Cancelar</button>
+      <button class="modal-btn modal-btn-confirmar" id="btnConfirmarEliminar" onclick="confirmarEliminar()">
+        <i class="ph-fill ph-trash" style="margin-right:6px;"></i> Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <a href="index.html" class="logo-link">
+      <img src="imagens/EZNY.LOGO.JPG" class="logo-img" alt="Logo">
+      <span class="logo-text">EZNY</span>
+    </a>
+    <a href="index.html" class="btn-voltar">
+      <i class="ph ph-arrow-left"></i> Voltar
+    </a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Meus Anúncios</h1>
+    <p>Gerencie os seus anúncios publicados</p>
+  </section>
+
+  <!-- DEBUG PANEL (visível quando há erro) -->
+  <div id="debugPanel" class="debug-panel" style="display:none;">
+    <h4><i class="ph ph-bug"></i> Debug - Endpoints testados</h4>
+    <pre id="debugOutput"></pre>
+    <button onclick="testarEndpointsManualmente()">Testar endpoints novamente</button>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <select id="filtroStatus" onchange="filtrarMeusAnuncios()">
+      <option value="">Todos os estados</option>
+      <option value="active">Aprovados</option>
+      <option value="pending">Pendentes</option>
+      <option value="rejected">Rejeitados</option>
+    </select>
+  </div>
+
+  <!-- GRID -->
+  <div id="anunciosContainer" class="anuncios-grid">
+    <div class="loading"><div class="spinner"></div></div>
+  </div>
+
+  <!-- VAZIO -->
+  <div id="vazio" class="vazio" style="display:none;">
+    <i class="ph ph-package"></i>
+    <h3>Nenhum anúncio encontrado</h3>
+    <p>Ainda não publicou nenhum anúncio ou não há resultados para o filtro selecionado.</p>
+    <a href="criar-anuncio.html" class="btn-voltar" style="margin-top:20px;display:inline-flex;">
+      <i class="ph ph-plus"></i> Criar Anúncio
+    </a>
+  </div>
+
+</div>
+
+<script src="js/media.js"></script>
+<script src="js/meus-anuncios.js"></script>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="ph ph-house-line"></i>
+    Início
+  </a>
+  <a href="favoritos.html" class="nav-item">
+    <i class="ph ph-heart"></i>
+    Favoritos
+  </a>
+  <a href="criar-anuncio.html" class="nav-pub-btn">
+    <i class="ph ph-plus"></i>
+  </a>
+  <a href="notificacoes.html" class="nav-item" style="position:relative;">
+    <i class="ph ph-bell"></i>
+    <span class="nav-badge hidden" id="navBadge"></span>
+    Notifis
+  </a>
+  <a href="perfil.html" class="nav-item">
+    <i class="ph ph-user"></i>
+    Perfil
+  </a>
+</nav>
+
+</body>
+</html>

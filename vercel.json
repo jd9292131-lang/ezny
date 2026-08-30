@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/mensagens",
+      "destination": "/frontend/mensagens.html"
+    },
+    {
+      "source": "/",
+      "destination": "/frontend/index.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/frontend/:path*"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/cleanup-accounts",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}

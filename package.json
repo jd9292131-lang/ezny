@@ -1,0 +1,29 @@
+{
+  "name": "ezny",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node backend/server.js",
+    "start": "node backend/server.js",
+    "build": "echo \"EZNY frontend ready\"",
+    "audit": "npm audit --omit=dev",
+    "audit:project": "node scripts/audit-project.js",
+    "smoke:production": "node scripts/production-smoke.js"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "pg": "^8.16.3",
+    "zod": "^4.1.12",
+    "@vercel/blob": "^2.6.1"
+  }
+}
