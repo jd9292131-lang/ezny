@@ -3,9 +3,13 @@
    VARIÁVEIS CSS (Design System)
    ═══════════════════════════════════════ */
 :root {
-  --primary: #0ebdca;
-  --primary-dark: #00a6b3;
-  --primary-light: rgba(14, 189, 202, 0.1);
+  --primary: #00bec8;
+  --primary-dark: #0a8f99;
+  --primary-light: rgba(0, 190, 200, 0.1);
+  --accent: #23943a;
+  --premium: #f59e0b;
+  --premium-light: #fbbf24;
+  --premium-dark: #d97706;
   --danger: #ef4444;
   --danger-dark: #dc2626;
   --danger-light: rgba(239, 68, 68, 0.1);
@@ -29,9 +33,9 @@
   --border-hover: rgba(255, 255, 255, 0.15);
   --border-focus: rgba(14, 189, 202, 0.4);
 
-  --bg-gradient-start: #020617;
-  --bg-gradient-mid: #0f172a;
-  --bg-gradient-end: #0e7490;
+  --bg-gradient-start: #0a0e17;
+  --bg-gradient-mid: #111827;
+  --bg-gradient-end: #0a8f99;
 
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.3);
@@ -117,14 +121,66 @@ body {
   transform: translateX(-4px);
 }
 
-.btn-voltar .material-icons {
+.btn-voltar i.ph {
   font-size: 20px;
+}
+
+
+/* ═══════════════════════════════════════
+   LOGO EZNY
+   ═══════════════════════════════════════ */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  text-decoration: none;
+  transition: opacity 0.25s;
+}
+
+.header-logo:hover {
+  opacity: 0.85;
+}
+
+.header-logo-img {
+  width: auto;
+  height: 32px;
+  max-width: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(0, 190, 200, 0.25));
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.header-logo:hover .header-logo-img {
+  filter: drop-shadow(0 0 14px rgba(0, 190, 200, 0.4));
+  transform: scale(1.03);
+}
+
+.header-logo-fallback {
+  display: none;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.header-logo-brand {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #00bec8, #5ce1e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ═══════════════════════════════════════
    HEADER
    ═══════════════════════════════════════ */
-.header {
+/* ═══════════════════════════════════════
+   PAGE HEADER
+   ═══════════════════════════════════════ */
+.page-header {
   text-align: center;
   padding: var(--space-xl) var(--space-lg) var(--space-xl);
   animation: fadeInDown 0.6s ease-out;
@@ -132,7 +188,7 @@ body {
   margin: 0 auto;
 }
 
-.header__title {
+.page-header__title {
   font-size: clamp(1.8rem, 5vw, 2.4rem);
   font-weight: 700;
   margin-bottom: var(--space-sm);
@@ -143,7 +199,7 @@ body {
   background-clip: text;
 }
 
-.header__subtitle {
+.page-header__subtitle {
   font-size: 1rem;
   color: var(--text-muted);
   font-weight: 400;
@@ -223,7 +279,7 @@ body {
   opacity: 1;
 }
 
-.profile__avatar .avatar-edit .material-icons {
+.profile__avatar .avatar-edit i.ph {
   font-size: 1.2rem;
   color: white;
 }
@@ -264,7 +320,7 @@ body {
   margin-top: var(--space-xs);
 }
 
-.profile__badge .material-icons {
+.profile__badge i.ph {
   font-size: 12px;
 }
 
@@ -319,6 +375,10 @@ body {
   font-size: 1.5rem;
 }
 
+.card__icon i.ph {
+  font-size: 1.5rem;
+}
+
 /* ═══════════════════════════════════════
    ROW (Linha de informação)
    ═══════════════════════════════════════ */
@@ -352,6 +412,13 @@ body {
   align-items: center;
   gap: var(--space-xs);
 }
+.info-row__label i.ph {
+  font-size: 16px;
+  vertical-align: middle;
+  margin-right: 4px;
+  color: var(--text-dim);
+}
+
 
 .info-row__value {
   font-weight: 600;
@@ -380,6 +447,11 @@ body {
   color: var(--text-dim);
   opacity: 0;
   transition: opacity var(--transition-fast);
+}
+
+.info-row.editable .edit-icon i.ph {
+  font-size: 16px;
+  color: var(--text-dim);
 }
 
 .info-row.editable:hover .edit-icon {
@@ -426,7 +498,7 @@ body {
   transform: scale(0.97);
 }
 
-.btn .material-icons {
+.btn i.ph {
   font-size: 18px;
 }
 
@@ -539,7 +611,7 @@ body {
   color: var(--success);
 }
 
-.modal__icon .material-icons {
+.modal__icon i.ph {
   font-size: 28px;
 }
 
@@ -843,8 +915,12 @@ body.light-theme .toast{
     gap: var(--space-sm);
   }
 
-  .header {
+  .page-header {
     padding: var(--space-xl) var(--space-md) var(--space-lg);
+  }
+  .header-logo-img {
+    height: 26px;
+    max-width: 100px;
   }
 
   .container {
