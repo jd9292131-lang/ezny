@@ -54,11 +54,12 @@ let lastAnunciosData = [];
 let lastDestaquesData = [];
 
 const slides = [
-  { label:'Encontre o seu próximo', title:'Veículo ideal', desc:'As melhores oportunidades estão aqui', btn:'Ver veículos', cat:'carro', img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=400&fit=crop' },
-  { label:'Descubra o seu', title:'Novo lar', desc:'Imóveis exclusivos em Luanda', btn:'Ver imóveis', cat:'imovel', img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop' },
-  { label:'Tecnologia de ponta', title:'Electrónicos', desc:'Os melhores preços do mercado', btn:'Ver electrónicos', cat:'telefone', img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop' },
-  { label:'Tudo o que precisa', title:'Lazer e Outros', desc:'Encontre o que procura', btn:'Explorar', cat:'outro', img:'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop' }
+  { label:'Encontre o seu próximo', title:'Veículo ideal', desc:'O anúncio certo pode estar mais perto do que pensa.', btn:'Ver veículos', cat:'carro', img:'assets/hero-vehicle.jpg' },
+  { label:'Descubra o seu', title:'Novo lar', desc:'Espaços para viver bem, anunciados em Angola.', btn:'Ver imóveis', cat:'imovel', img:'assets/hero-home.jpg' },
+  { label:'Tecnologia de ponta', title:'Electrónicos', desc:'Compare, pergunte e combine diretamente.', btn:'Ver eletrónicos', cat:'telefone', img:'assets/hero-tech.jpg' },
+  { label:'Tudo o que precisa', title:'Lazer e outros', desc:'Encontre o que procura sem complicar.', btn:'Explorar', cat:'outro', img:'assets/hero-lifestyle.jpg' }
 ];
+
 
 // ========================= INIT =========================
 document.addEventListener('DOMContentLoaded', () => {
