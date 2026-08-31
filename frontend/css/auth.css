@@ -662,3 +662,24 @@ button.submit .spinner {
     color: var(--primary-color);
 }
 
+
+
+
+/* ═══════════════════════════════════════════════════════════
+   LOGOTIPO — Tamanho Ideal
+   ═══════════════════════════════════════════════════════════ */
+.ezny-brand-lockup {
+  display: block;
+  max-width: 30px;        /* Tamanho ideal: pequeno mas legível */
+  width: 60%;
+  height: auto;
+  margin: 20px auto 12px; /* Centrado com espaçamento equilibrado */
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+  transition: transform var(--transition-base);
+}
+
+.ezny-brand-lockup:hover {
+  transform: scale(1.04);
+}
