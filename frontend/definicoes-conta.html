@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Definições da conta - EZNY">
-<title>Definições da Conta | EZNY</title>
+<meta name="description" content="Definições da conta">
+<title>Definições da Conta</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/phosphor.css"><link rel="stylesheet" href="css/definicoes-conta.css">
-<link rel="stylesheet" href="css/ezny-brand.css">
+<link rel="stylesheet" href="css/brand.css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
 <div id="modalLogout" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleLogout">
   <div class="modal__content">
     <div class="modal__icon danger">
-      <span class="material-icons">logout</span>
+      <i class="ph ph-sign-out"></i>
     </div>
     <h3 id="modalTitleLogout" class="modal__title">Terminar Sessão</h3>
     <p class="modal__text">
@@ -41,7 +41,7 @@
 <div id="modalEditar" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleEditar">
   <div class="modal__content modal__content--wide">
     <div class="modal__icon primary">
-      <span class="material-icons">edit</span>
+      <i class="ph ph-pencil-simple"></i>
     </div>
     <h3 id="modalTitleEditar" class="modal__title">Editar Perfil</h3>
     <p class="modal__text">Atualize as suas informações pessoais.</p>
@@ -83,7 +83,7 @@
 <div id="modalPassword" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitlePassword">
   <div class="modal__content modal__content--wide">
     <div class="modal__icon success">
-      <span class="material-icons">lock</span>
+      <i class="ph ph-lock-key"></i>
     </div>
     <h3 id="modalTitlePassword" class="modal__title">Alterar Palavra-passe</h3>
     <p class="modal__text">Escolha uma palavra-passe segura.</p>
@@ -120,7 +120,7 @@
 
 <!-- Toast -->
 <div id="toast" class="toast" role="status" aria-live="polite">
-  <span class="material-icons">check_circle</span>
+  <i class="ph ph-check-circle"></i>
   <span id="toastText"></span>
 </div>
 
@@ -129,15 +129,25 @@
      ═══════════════════════════════════════ -->
 <div class="topbar">
   <a href="settings.html" class="btn-voltar">
-<i class="ph ph-arrow-left"></i>    Voltar
+    <i class="ph ph-caret-left"></i>
+    <span>Voltar</span>
+  </a>
+
+  <!-- Logo EZNY -->
+  <a href="index.html" class="header-logo">
+    <img src="assets/images/logo-ezny.png" alt="EZNY" class="header-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="header-logo-fallback" style="display:none;">
+      <span class="header-logo-brand"></span>
+    </div>
   </a>
 </div>
 
 <!-- ═══════════════════════════════════════
      HEADER
      ═══════════════════════════════════════ -->
-<header class="header">
-  <p class="header__subtitle">Gerir conta e segurança</p>
+<header class="page-header">
+  <h1 class="page-header__title">Definições da Conta</h1>
+  <p class="page-header__subtitle">Gerir conta e segurança</p>
 </header>
 
 <!-- ═══════════════════════════════════════
@@ -147,16 +157,16 @@
   <!-- PERFIL -->
   <section class="profile" aria-label="Perfil do utilizador">
     <div class="profile__avatar" id="avatar" aria-hidden="true" onclick="editarAvatar()">
-      <span class="material-icons" style="font-size:2rem">person</span>
+      <i class="ph ph-user"></i>
       <div class="avatar-edit">
-        <span class="material-icons">photo_camera</span>
+        <i class="ph ph-camera"></i>
       </div>
     </div>
     <div class="profile__info">
       <h2 class="profile__name" id="nomeUser">Utilizador</h2>
       <p class="profile__email" id="emailUser">Sem email</p>
       <span class="profile__badge" id="verificadoBadge" style="display:none;">
-        <span class="material-icons">verified</span>
+        <i class="ph ph-seal-check"></i>
         Conta Verificada
       </span>
     </div>
@@ -168,39 +178,39 @@
     <!-- INFORMAÇÕES PESSOAIS -->
     <section class="card">
       <div class="card__header">
-        <span class="material-icons card__icon" aria-hidden="true">person_outline</span>
+        <i class="ph ph-user"></i>
         <h3 class="card__title">Informações Pessoais</h3>
       </div>
 
       <div class="info-row editable" onclick="abrirModalEditar()">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">badge</span>
+          <i class="ph ph-identification-card"></i>
           Nome
         </span>
         <span class="info-row__value info-row__value--empty" id="nome">-</span>
-        <span class="material-icons edit-icon">edit</span>
+        <i class="ph ph-pencil-simple"></i>
       </div>
 
       <div class="info-row editable" onclick="abrirModalEditar()">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">phone</span>
+          <i class="ph ph-phone"></i>
           Telefone
         </span>
         <span class="info-row__value info-row__value--empty" id="telefone">-</span>
-        <span class="material-icons edit-icon">edit</span>
+        <i class="ph ph-pencil-simple"></i>
       </div>
 
       <div class="info-row editable" onclick="abrirModalEditar()">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">email</span>
+          <i class="ph ph-envelope"></i>
           Email
         </span>
         <span class="info-row__value info-row__value--empty" id="email">-</span>
-        <span class="material-icons edit-icon">edit</span>
+        <i class="ph ph-pencil-simple"></i>
       </div>
 
       <button class="btn btn--primary" onclick="abrirModalEditar()" type="button">
-        <span class="material-icons">edit</span>
+        <i class="ph ph-pencil-simple"></i>
         Editar Perfil
       </button>
     </section>
@@ -208,13 +218,13 @@
     <!-- SEGURANÇA -->
     <section class="card">
       <div class="card__header">
-        <span class="material-icons card__icon" aria-hidden="true">shield</span>
+        <i class="ph ph-shield-check"></i>
         <h3 class="card__title">Segurança</h3>
       </div>
 
       <div class="info-row">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">lock</span>
+          <i class="ph ph-lock-key"></i>
           Palavra-passe
         </span>
         <span class="info-row__value">••••••••</span>
@@ -222,7 +232,7 @@
 
       <div class="info-row">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">verified_user</span>
+          <i class="ph ph-shield-check"></i>
           Verificação
         </span>
         <span class="info-row__value" id="statusVerificacao" style="color:var(--success)">Verificado</span>
@@ -230,24 +240,24 @@
 
       <div class="info-row">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">event</span>
+          <i class="ph ph-calendar-blank"></i>
           Conta criada
         </span>
         <span class="info-row__value" id="dataCriacao">-</span>
       </div>
 
       <button class="btn btn--dark" onclick="abrirModalPassword()" type="button">
-        <span class="material-icons">lock_reset</span>
+        <i class="ph ph-arrows-clockwise"></i>
         Alterar Palavra-passe
       </button>
 
       <button class="btn btn--dark" onclick="logout()" type="button">
-        <span class="material-icons">logout</span>
+        <i class="ph ph-sign-out"></i>
         Terminar Sessão
       </button>
 
       <button class="btn btn--danger" onclick="eliminarConta()" type="button">
-        <span class="material-icons">delete_forever</span>
+        <i class="ph ph-trash"></i>
         Eliminar Conta
       </button>
     </section>
@@ -255,13 +265,13 @@
     <!-- PREFERÊNCIAS -->
     <section class="card">
       <div class="card__header">
-        <span class="material-icons card__icon" aria-hidden="true">tune</span>
+        <i class="ph ph-sliders-horizontal"></i>
         <h3 class="card__title">Preferências</h3>
       </div>
 
       <div class="info-row">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">notifications</span>
+          <i class="ph ph-bell"></i>
           Notificações
         </span>
         <span class="info-row__value" style="color:var(--success)">Ativas</span>
@@ -269,14 +279,13 @@
 
       <div class="info-row">
         <span class="info-row__label">
-          <span class="material-icons" style="font-size:16px;vertical-align:middle;margin-right:4px;color:var(--text-dim)">language</span>
+          <i class="ph ph-globe"></i>
           Idioma
         </span>
         <span class="info-row__value">Português</span>
       </div>
 
-      <button class="btn btn--dark" onclick="mostrarToast('Funcionalidade em desenvolvimento')" type="button">
-        <span class="material-icons">notifications_active</span>
+      <button> <a href="notificacoes.html" class="header-logo">
         Gerir Notificações
       </button>
     </section>
@@ -284,7 +293,6 @@
   </div>
 </main>
 
-<script src="js/media.js"></script>
 <script src="js/definicoes-conta.js"></script>
 
 </body>
