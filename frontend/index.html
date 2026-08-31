@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="EZNY - Compre e venda em Angola.">
-<meta name="theme-color" content="#0a0e17">
+<meta name="description" content="EZNY — compre e venda em Angola, sem taxas nem comissões.">
+<meta name="theme-color" content="#030912">
 <title>Anúncios | EZNY</title>
 
 <!-- Phosphor Icons -->
 <link rel="stylesheet" href="assets/css/phosphor.css">
 <link rel="stylesheet" href="css/index.css">
-<link rel="stylesheet" href="css/ezny-brand.css">
+<link rel="stylesheet" href="css/brand.css">
 </head>
 
 <body>
@@ -51,8 +51,8 @@
     <a href="favoritos.html" onclick="event.stopPropagation()"><i class="ph ph-heart"></i> Favoritos</a>
     <a href="settings.html" onclick="event.stopPropagation()"><i class="ph ph-gear"></i> Definições</a>
     <div class="sidebar-div"></div>
-    <a href="politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
-    <a href="sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
+    <a href="Politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
+    <a href="Sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
     <div class="sidebar-div"></div>
     <!-- Botão Premium dinâmico -->
     <a href="upgrade.html" id="sidebarPremiumBtn" class="sidebar-premium-btn" onclick="event.stopPropagation()" style="display:none;">
@@ -74,20 +74,40 @@
 
 <!-- TOP BAR -->
 <div class="top-bar">
-  <button class="menu-btn" onclick="toggleSidebar()">
+  <a class="brand-mark" href="index.html" aria-label="EZNY — início">
+    <img class="ezny-brand-lockup ezny-brand-lockup--compact" src="imagens/ezny-logo-brand.jpg" alt="EZNY — Compre. Venda. Conecte-se.">
+  </a>
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Abrir menu" data-testid="button-open-menu">
     <i class="ph ph-list"></i>
   </button>
   <div class="search-box">
     <i class="ph ph-magnifying-glass"></i>
-    <input type="text" placeholder="Pesquisar anúncios..." id="searchInput">
+    <input type="search" placeholder="O que procura em Angola?" id="searchInput" aria-label="Pesquisar anúncios" autocomplete="off" data-testid="input-search">
   </div>
 </div>
 
 <!-- GREETING -->
 <div class="greeting">
-  <h1>Bem-Vindo, <span id="userName">Visitante</span> <span class="wave"></span></h1>
-  <p>O que deseja encontrar hoje?</p>
+  <p class="eyebrow">Marketplace local, contacto direto</p>
+  <h1>Olá, <span id="userName">Visitante</span>.</h1>
+  <p>Encontre o que precisa. Fale diretamente com quem vende.</p>
 </div>
+
+<!-- PRINCÍPIOS EZNY -->
+<section class="trust-strip" aria-label="Como funciona o EZNY">
+  <div class="trust-item">
+    <span class="trust-icon"><i class="ph ph-handshake"></i></span>
+    <span><strong>Sem intermediários</strong><small>Comprador e vendedor falam diretamente</small></span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon"><i class="ph ph-coins"></i></span>
+    <span><strong>Sem taxas</strong><small>O anúncio e o contacto são gratuitos</small></span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon"><i class="ph ph-shield-check"></i></span>
+    <span><strong>Negócio consciente</strong><small>Combine com segurança e verifique antes de pagar</small></span>
+  </div>
+</section>
 
 <!-- HERO BANNER -->
 <div class="hero-banner">
@@ -100,13 +120,13 @@
         Ver veículos <i class="ph ph-caret-right"></i>
       </button>
     </div>
-    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=400&fit=crop" class="hero-img" alt="Veículo" id="heroImg">
+   <img src="assets/images/hero-vehicle.jpg" class="hero-img" alt="Veículo anunciado em Luanda" id="heroImg">
   </div>
   <div class="hero-dots">
-    <button class="hero-dot active" onclick="setSlide(0)"></button>
-    <button class="hero-dot" onclick="setSlide(1)"></button>
-    <button class="hero-dot" onclick="setSlide(2)"></button>
-    <button class="hero-dot" onclick="setSlide(3)"></button>
+   <button class="hero-dot active" onclick="setSlide(0)" aria-label="Ver veículos"></button>
+   <button class="hero-dot" onclick="setSlide(1)" aria-label="Ver imóveis"></button>
+   <button class="hero-dot" onclick="setSlide(2)" aria-label="Ver eletrónicos"></button>
+   <button class="hero-dot" onclick="setSlide(3)" aria-label="Explorar lazer e outros"></button>
   </div>
 </div>
 
@@ -153,7 +173,7 @@
 <div class="dest-section">
   <div class="sec-header">
     <h2><i class="ph ph-star"></i> Destaques para si</h2>
-    <a href="upgrade.html" class="ver-todos">Ver todos <i class="ph ph-caret-right"></i></a>
+    <a href="destaques.html" class="ver-todos">Ver todos <i class="ph ph-caret-right"></i></a>
   </div>
   <div class="dest-scroll" id="destScroll">
     <!-- Carregado dinamicamente -->
@@ -166,33 +186,34 @@
     <h2><i class="ph ph-fire"></i> Anúncios recentes</h2>
     <a href="anuncios.html" class="ver-todos" id="btnVerTodosAnuncios">Ver todos <i class="ph ph-caret-right"></i></a>
   </div>
-  <div class="anun-grid" id="anunGrid">
-    <div class="loading-wrap" style="grid-column:1/-1;">
-      <div class="spinner"></div>
-      <p style="color:var(--text-muted);font-size:0.9rem;">A carregar anúncios...</p>
-    </div>
+  <div class="anun-grid" id="anunGrid" aria-live="polite">
+     <div class="loading-wrap loading-skeletons" style="grid-column:1/-1;" aria-label="A carregar anúncios">
+       <div class="skeleton-card"></div>
+       <div class="skeleton-card"></div>
+       <div class="skeleton-card"></div>
+     </div>
   </div>
 </div>
 
 <!-- Bottom nav -->
 <nav class="bottom-nav">
-  <a href="index.html" class="nav-item ativo">
+  <a href="index.html" class="nav-item ativo" aria-current="page" data-testid="link-home">
     <i class="ph ph-house-line"></i>
     <span>Início</span>
   </a>
-  <a href="favoritos.html" class="nav-item">
+  <a href="favoritos.html" class="nav-item" data-testid="link-favorites">
     <i class="ph ph-heart"></i>
     <span>Favoritos</span>
   </a>
-  <a href="criar-anuncio.html" class="nav-pub-btn">
+  <a href="criar-anuncio.html" class="nav-pub-btn" aria-label="Publicar anúncio" data-testid="link-publish">
     <i class="ph ph-plus"></i>
   </a>
-  <a href="notificacoes.html" class="nav-item" style="position:relative;">
+  <a href="notificacoes.html" class="nav-item" style="position:relative;" data-testid="link-notifications">
     <span class="nav-badge" id="navBadgeNotificacoes">0</span>
     <i class="ph ph-bell"></i>
-    <span>Notifis</span>
+    <span>Notificações</span>
   </a>
-  <a href="perfil.html" class="nav-item ">
+  <a href="perfil.html" id="navPerfilLink" class="nav-item" data-testid="link-profile">
     <i class="ph ph-user"></i>
     <span>Perfil</span>
   </a>
@@ -303,7 +324,7 @@
           <div class="modal-avaliacao-estrelas" id="modalAvaliacaoEstrelas"></div>
           <span class="modal-avaliacao-num" id="modalAvaliacaoNum">0.0</span>
           <span class="modal-avaliacao-count" id="modalAvaliacaoCount">(0 avaliações)</span>
-        </div>>
+        </div>
                 </div>
               </div>
             </div>
@@ -392,24 +413,15 @@
 
 <!-- Toast do modal -->
 <div id="modalAnuncioToast" class="modal-anuncio-toast"></div><!-- Popup Tempo Real -->
-<div id="popupOverlay" class="popup-overlay" aria-hidden="true">
-  <article class="popup-modal" role="dialog" aria-modal="true" aria-labelledby="popupTitulo">
-    <button class="popup-close" id="btnFecharPopupTop" aria-label="Fechar"><i class="ph ph-x"></i></button>
-    <div class="popup-brand"><img src="assets/logo.jpg" alt="EZNY"><span>Comunicado EZNY</span></div>
-    <img id="popupImagem" class="popup-imagem" src="assets/logo.jpg" alt="" style="display:none">
-    <div class="popup-body">
-      <span class="popup-kicker" id="popupTipo">INFORMAÇÃO</span>
-      <h3 id="popupTitulo">Comunicado</h3>
-      <p id="popupConteudo">Conteúdo do comunicado...</p>
-      <div class="popup-actions">
-        <a id="popupLink" class="popup-link" href="#" target="_blank" rel="noopener" style="display:none">Saber mais</a>
-        <button class="btn-ok" id="btnFecharPopup">Entendido</button>
-      </div>
-    </div>
-  </article>
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-modal">
+    <i class="ph ph-megaphone"></i>
+    <h3 id="popupTitulo">Comunicado</h3>
+    <p id="popupConteudo">Conteúdo do comunicado...</p>
+    <button class="btn-ok" id="btnFecharPopup">Entendido</button>
+  </div>
 </div>
 
-<script src="js/media.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>
