@@ -100,7 +100,7 @@ app.get('/api/stats', verificarToken, requireAdmin, (req, res) => {
   const stats = {};
   const q = [
     ['visitas', 'SELECT COUNT(*)::int AS total FROM visitas'],
-    ['usuarios', 'SELECT COUNT(*)::int AS total FROM usuarios'],
+    ['usuarios', "SELECT COUNT(*)::int AS total FROM usuarios WHERE tipo != 'admin'"],
     ['anuncios', 'SELECT COUNT(*)::int AS total FROM anuncios'],
     ['denuncias', 'SELECT COUNT(*)::int AS total FROM denuncias'],
     ['comunicados', 'SELECT COUNT(*)::int AS total FROM comunicados'],
