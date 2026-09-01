@@ -511,6 +511,7 @@ function renderUsersTable() {
       const verificadoBadge = u.verificado ? '<span style="display:inline-flex;align-items:center;gap:2px;margin-left:4px;color:var(--info);font-size:11px"><i class="ph ph-check-circle" style="font-size:12px"></i>Verif.</span>' : "";
 
       html += '<tr><td><div class="cell-flex"><div class="avatar-fallback">' + initials + '</div><div class="cell-info"><div class="title">' + (u.nome || "Sem nome") + verificadoBadge + '</div><div class="subtitle">ID: #' + u.id + " | Tel: " + (u.telefone || "-") + '</div></div></div></td>';
+      html += '<td>' + (u.email || '-') + '</td>';
       html += '<td><span class="status-badge ' + tipoContaClass + '">' + tipoContaText + "</span></td>";
       html += '<td><span class="status-badge ' + estadoClass + '">' + estadoText + "</span></td>";
       html += "<td>" + formatDate(u.createdAt) + "</td>";
