@@ -38,11 +38,11 @@ function normalizeSql(sql) {
   let i = 0;
   q = q.replace(/\?/g, () => `$${++i}`);
 
-  // SQLite's INSERT OR IGNORE equivalent.
-  if (/^\s*INSERT\b/i.test(q) && !/\bON\s+CONFLICT\b/i.test(q)) {
-    q = `${q.trim()} ON CONFLICT DO NOTHING`;
-  }
-
+// SQLite's INSERT OR IGNORE equivalent.
+// Só ignorar conflitos quando o SQL original pediu explicitamente OR IGNORE.
+if (/^\s*INSERT\s+OR\s+IGNORE\b/i.test(String(sql)) && !/\bON\s+CONFLICT\b/i.test(q)) {
+  q = `${q.trim()} ON CONFLICT DO NOTHING`;
+}
   return q;
 }
 
