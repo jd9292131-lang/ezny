@@ -81,7 +81,7 @@ app.use('/api/anuncios', require('./routes/anuncios'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/comunicados', require('./routes/comunicados'));
 app.use('/api/mensagens', require('./routes/mensagens'));
-app.use('/api/avaliacoes', require('./routes/avaliacoes'));
+
 app.use('/api/premium', require('./routes/premium'));
 app.use('/api/destaques', require('./routes/destaques'));
 app.use('/api/pagamentos', require('./routes/pagamentos'));
