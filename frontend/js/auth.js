@@ -185,6 +185,7 @@ async function login() {
     const userData = {
       nome: data.nome || telefone,
       telefone: data.telefone || telefone,
+      email: data.email || null,
       tipo: data.tipo || 'user',
       tipo_conta: data.tipo_conta || 'normal'
     };
@@ -210,6 +211,7 @@ async function login() {
 // ═══════════════════════════════════════════════════════════
 async function cadastrar() {
   const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('emailCadastro').value.trim();
   const telefone = document.getElementById('telefoneCadastro').value.trim();
   const senha = document.getElementById('senhaCadastro').value;
   const senhaConfirmar = document.getElementById('senhaConfirmar').value;
@@ -218,9 +220,16 @@ async function cadastrar() {
 
   esconderMsgs();
 
-  // Validações
+  // Campos obrigatórios — email NÃO é obrigatório
   if (!nome || !telefone || !senha || !senhaConfirmar || !data_nascimento) {
-    mostrarErro('msgErroCadastro', 'Preencha todos os campos!');
+    mostrarErro('msgErroCadastro', 'Preencha todos os campos obrigatórios!');
+    return;
+  }
+
+  // Email só é validado se tiver sido preenchido
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    mostrarErro('msgErroCadastro', 'Introduza um email válido.');
+    document.getElementById('emailCadastro').focus();
     return;
   }
 
@@ -242,7 +251,13 @@ async function cadastrar() {
     const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, telefone, senha, data_nascimento })
+      body: JSON.stringify({
+        nome,
+        telefone,
+        senha,
+        data_nascimento,
+        email: email || null
+      })
     });
 
     const data = await res.json();
@@ -261,11 +276,15 @@ async function cadastrar() {
       return;
     }
 
-    mostrarSucesso('msgSucessoCadastro', 'Conta criada com sucesso! A redirecionar...');
+    mostrarSucesso(
+      'msgSucessoCadastro',
+      'Conta criada com sucesso! A redirecionar...'
+    );
 
     const userData = {
       nome: data.nome || nome,
-      telefone: telefone,
+      telefone: data.telefone || telefone,
+      email: data.email || null,
       tipo: data.tipo || 'user',
       tipo_conta: data.tipo_conta || 'normal'
     };
@@ -278,12 +297,12 @@ async function cadastrar() {
     }, 1200);
 
   } catch (err) {
+    console.error('[CADASTRO]', err);
     mostrarErro('msgErroCadastro', 'Erro de conexão com o servidor.');
     btn.disabled = false;
     btn.innerHTML = '<span>Criar Conta</span>';
   }
 }
-
 // Enter para submeter
 ['telefone', 'senha'].forEach(id => {
   document.getElementById(id)?.addEventListener('keypress', e => {
