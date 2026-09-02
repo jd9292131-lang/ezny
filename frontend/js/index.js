@@ -637,10 +637,25 @@ async function verificarPopups() {
     if(tit) tit.textContent=popupAtual.titulo || 'Comunicado EZNY';
     if(cont) cont.textContent=popupAtual.conteudo || '';
     if(tipo) tipo.textContent=(popupAtual.tipo || 'informação').toUpperCase();
-    if(img){
-      const src=popupAtual.imagem ? eznyImage(popupAtual.imagem) : 'assets/logo.jpg';
-      img.src=src; img.style.display='block'; img.onerror=()=>{img.src='assets/logo.jpg';};
-    }
+if(img){
+  const temImagem = !!popupAtual.imagem;
+
+  if(temImagem){
+    img.src = eznyImage(popupAtual.imagem);
+    img.style.display = 'block';
+  } else {
+    img.style.display = 'none';
+  }
+
+  img.onerror = () => {
+    img.style.display = 'none';
+  };
+}
+
+const icon = document.getElementById('popupIcon');
+if(icon){
+  icon.style.display = popupAtual.imagem ? 'none' : 'block';
+}  
     if(link){
       if(popupAtual.link){link.href=popupAtual.link;link.textContent=popupAtual.texto_botao || 'Saber mais';link.style.display='inline-flex';}
       else link.style.display='none';
