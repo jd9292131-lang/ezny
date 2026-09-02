@@ -333,7 +333,7 @@ function validarFormulario() {
 
   for (const campo of campos) {
     if (campo.required) {
-      const el = document.getElementById(campo.id);
+      const el = document.getElementById(campo.name);
       if (!el || !el.value.trim()) {
         mostrarToast('O campo "' + campo.label + '" é obrigatório', 'error');
         el.focus();
