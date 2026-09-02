@@ -194,7 +194,7 @@ async function login() {
     localStorage.setItem('token', data.token || '');
 
     if (data.tipo === 'admin') {
-      window.location.href = 'painel-admin.html';
+      window.location.href = 'M8g73@0ehdn3r0935fuNfehcjjs98d7Ct6r7ee9w0d9bz23909ej2mdd09@£rtcszajAfjk3.html';
     } else {
       window.location.href = 'index.html';
     }
