@@ -64,7 +64,10 @@ function navigateTo(page, el) {
   document.getElementById('breadcrumbText').textContent = titles[page] || 'EZNY';
   if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
   if (page === 'anuncios') renderAdsTable();
-  if (page === 'usuarios') renderUsersTable();
+  if (page === 'usuarios') {
+  updateNavBadge('nav-badge-usuarios', 0);
+  lastDataCounts.usuarios = statsData?.usuarios || allUsers.length;
+  }
   if (page === 'denuncias') renderDenunciasTable();
   if (page === 'comunicados') renderComunicadosTable();
   if (page === 'popups') renderPopupsTable();
@@ -1400,12 +1403,8 @@ function updateSidebarBadges(stats) {
   const novosAnuncios = Math.max(0, (stats.anuncios || 0) - lastDataCounts.anuncios);
   
   // Atualiza contadores de referência
-  lastDataCounts = {
-    usuarios: stats.usuarios || 0,
-    denuncias: stats.denuncias || 0,
-    anuncios: stats.anuncios || 0
-  };
-  
+  lastDataCounts.denuncias = stats.denuncias || 0;
+  lastDataCounts.anuncios = stats.anuncios || 0;  
   // Atualiza badges na sidebar
   updateNavBadge('nav-badge-usuarios', novosUsuarios);
   updateNavBadge('nav-badge-denuncias', novasDenuncias);
