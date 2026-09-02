@@ -2351,11 +2351,14 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 
 /* ===== IMAGEM DO POPUP ===== */
 .popup-imagem {
-  display: block;
-  width: 100%;
-  max-width: 520px;
-  max-height: 260px;
-  object-fit: contain;
-  border-radius: 12px;
-  margin: 0 auto 16px;
+  display: block !important;
+  width: calc(100% + 48px) !important;
+  max-width: none !important;
+  height: 380px !important;
+  max-height: 55vh !important;
+
+  margin: -28px -24px 20px !important;
+
+  object-fit: cover !important;
+  border-radius: 21px 21px 0 0 !important;
 }

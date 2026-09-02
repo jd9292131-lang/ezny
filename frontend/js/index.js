@@ -656,11 +656,23 @@ const icon = document.getElementById('popupIcon');
 if(icon){
   icon.style.display = popupAtual.imagem ? 'none' : 'block';
 }  
-    if(link){
-      if(popupAtual.link){link.href=popupAtual.link;link.textContent=popupAtual.texto_botao || 'Saber mais';link.style.display='inline-flex';}
-      else link.style.display='none';
-    }
-    if(ov){ov.classList.add('visivel');ov.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+
+if(link){
+  if(popupAtual.link){
+    link.href = popupAtual.link;
+    link.textContent = popupAtual.texto_botao || 'Saber mais';
+    link.style.display = 'inline-flex';
+  } else {
+    link.style.display = 'none';
+  }
+}
+
+const btnOk = document.getElementById('btnFecharPopup');
+if(btnOk){
+  btnOk.style.display = popupAtual.link ? 'none' : 'inline-flex';
+}
+
+if(ov){ov.classList.add('visivel');ov.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
   } catch(e) { console.warn('[POPUP]',e); }
 }
 
