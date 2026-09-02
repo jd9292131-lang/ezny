@@ -695,68 +695,198 @@ body.light-theme .toast{
 
 }
 /* ===== POPUP ===== */
+/* ===== POPUP EZNY ===== */
 .popup-overlay {
-  position:fixed !important; inset:0 !important;
-  background:rgba(0,0,0,0.85) !important;
-  backdrop-filter:blur(12px) !important;
-  z-index:999999 !important;
-  display:none !important;
-  align-items:center !important; justify-content:center !important;
-  padding:20px !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  z-index: 999999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
 }
-.popup-overlay.show { display:flex !important; }
+
+.popup-overlay.visivel {
+  display: flex !important;
+}
+
 .popup-modal {
-  background:var(--bg-card) !important;
-  border:1px solid var(--glass-border) !important;
-  border-radius:24px !important;
-  padding:36px 32px !important;
-  max-width:440px !important; width:100% !important;
-  text-align:center !important;
-  animation:popupIn 0.4s cubic-bezier(0.34,1.56,0.64,1) !important;
+  position: relative !important;
+  width: min(100%, 440px) !important;
+  max-height: calc(100dvh - 40px) !important;
+  overflow-y: auto !important;
+
+  background: linear-gradient(160deg, #10263a 0%, #081722 100%) !important;
+  border: 1px solid rgba(0, 210, 220, 0.22) !important;
+  border-radius: 22px !important;
+
+  padding: 28px 24px 24px !important;
+  text-align: center !important;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.03) !important;
+
+  animation: popupIn 0.3s ease-out !important;
 }
+
+body.light-theme .popup-modal {
+  background: linear-gradient(160deg, #ffffff 0%, #f3f7f8 100%) !important;
+  border-color: rgba(8, 127, 120, 0.18) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18) !important;
+}
+
 @keyframes popupIn {
-  from { opacity:0; transform:scale(0.9) translateY(20px); }
-  to { opacity:1; transform:scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
-.popup-modal i { font-size:48px; color:var(--primary); margin-bottom:14px; display:block; }
-.popup-modal h3 { font-size:1.4rem; font-weight:800; margin-bottom:10px; color:var(--text); }
-.popup-modal p { color:var(--text-muted); line-height:1.6; margin-bottom:24px; font-size:0.9rem; }
+
+/* Fechar */
+.popup-close {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+
+  width: 34px !important;
+  height: 34px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border: none !important;
+  border-radius: 50% !important;
+
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+
+  cursor: pointer !important;
+  z-index: 5 !important;
+}
+
+.popup-close i {
+  font-size: 18px !important;
+  margin: 0 !important;
+  color: inherit !important;
+}
+
+body.light-theme .popup-close {
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: var(--text) !important;
+}
+
+/* Tipo */
+.popup-tipo {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  margin-bottom: 14px !important;
+  padding: 5px 11px !important;
+
+  border-radius: 999px !important;
+  background: rgba(0, 210, 220, 0.10) !important;
+  border: 1px solid rgba(0, 210, 220, 0.18) !important;
+
+  color: #28d5df !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Imagem */
+.popup-imagem {
+  display: block !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  max-height: 260px !important;
+
+  object-fit: contain !important;
+  border-radius: 14px !important;
+
+  margin: 0 auto 18px !important;
+}
+
+/* Título */
+.popup-modal h3 {
+  margin: 0 0 8px !important;
+  color: var(--text) !important;
+
+  font-family: var(--font-display) !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+}
+
+/* Conteúdo */
+.popup-modal p {
+  margin: 0 0 20px !important;
+
+  color: var(--text-secondary) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+}
+
+/* Ícone */
+.popup-modal .popup-icon {
+  margin: 4px auto 14px !important;
+}
+
+.popup-modal .popup-icon i {
+  font-size: 38px !important;
+  color: var(--primary-light) !important;
+  margin: 0 !important;
+}
+
+/* Link / botão secundário */
+.popup-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 12px;
+  padding: 10px 18px;
+
+  border-radius: 10px;
+  background: rgba(0, 210, 220, 0.10);
+  color: #28d5df;
+
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Botão Entendido */
 .popup-modal .btn-ok {
-  background:linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color:white; border:none;
-  padding:12px 32px; border-radius:12px;
-  font-weight:700; font-size:0.95rem;
-  cursor:pointer; font-family:inherit;
-}
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 
-.notificacoes-btn {
-  width:40px; height:40px;
-  display:flex; align-items:center; justify-content:center;
-  border-radius:12px;
-  background:transparent;
-  border:none;
-  color:var(--text);
-  cursor:pointer;
-  position:relative;
-  text-decoration:none;
-  font-size:22px;
-}
+  min-width: 150px !important;
+  padding: 11px 26px !important;
 
-.notificacoes-badge {
-  position:absolute;
-  top:-2px; right:-2px;
-  background:#ef4444;
-  color:white;
-  font-size:10px;
-  font-weight:800;
-  padding:2px 6px;
-  border-radius:10px;
-  min-width:18px;
-  text-align:center;
-  border:2px solid var(--bg);
-  display:none;
-}
-/* ===== NAV BADGE ===== */
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  color: white !important;
+
+  border: none !important;
+  border-radius: 11px !important;
+
+  font-family: inherit !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+
+  cursor: pointer !important;
+  box-shadow: 0 6px 18px rgba(0, 190, 200, 0.18) !important;
+}/* ===== NAV BADGE ===== */
 .nav-badge {
   position:absolute;
   top:2px; right:8px;
