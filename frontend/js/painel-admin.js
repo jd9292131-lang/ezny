@@ -936,7 +936,7 @@ function validarAdminFormulario() {
   const campos = ADMIN_CATEGORIA_CONFIG[adminCategoriaAtual].campos;
   for (const campo of campos) {
     if (campo.required) {
-      const el = document.getElementById(campo.id);
+      const el = document.getElementById(campo.name);
       if (!el || (campo.type !== 'checkbox' && !String(el.value || '').trim())) {
         showToast('warning', 'Atenção', `O campo "${campo.label}" é obrigatório`);
         if (el) el.focus();
