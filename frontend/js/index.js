@@ -654,7 +654,20 @@ async function fecharPopup() {
   if(ov){ov.classList.remove('visivel');ov.setAttribute('aria-hidden','true');document.body.style.overflow='';}
   if(popupAtual){
     const token=localStorage.getItem('token');
-    if(token){try{await fetch(`${API_URL}/comunicados/popups/${popupAtual.id}/visto`,{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({origem:popupAtual.origem})});}catch(e){}}
+if(token){
+  try{
+    await fetch(`${API_URL}/comunicados/popups/${popupAtual.id}/visto`,{
+      method:'POST',
+      headers:{
+        'Authorization':'Bearer '+token,
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({origem:popupAtual.origem})
+    });
+
+    setTimeout(verificarPopups, 300);
+  }catch(e){}
+}
     popupAtual=null;
   }
 }
