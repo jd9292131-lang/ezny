@@ -2359,6 +2359,6 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 
   margin: -28px -24px 20px !important;
 
-  object-fit: cover !important;
-  border-radius: 21px 21px 0 0 !important;
+object-fit: contain !important;
+ border-radius: 21px 21px 0 0 !important;
 }
