@@ -271,20 +271,18 @@ function handleImageUpload(files) {
   });
 
   if (arquivosValidos.length === 0) return;
+arquivosValidos.forEach(file => {
+  const preview = URL.createObjectURL(file);
 
-  arquivosValidos.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      imagensSelecionadas.push({
-        file: file,
-        preview: e.target.result,
-        name: file.name
-      });
-      renderizarPreviews();
-      atualizarPreview();
-    };
-    reader.readAsDataURL(file);
+  imagensSelecionadas.push({
+    file: file,
+    preview: preview,
+    name: file.name
   });
+
+  renderizarPreviews();
+  atualizarPreview();
+});
 }
 
 function renderizarPreviews() {
@@ -315,11 +313,15 @@ function renderizarPreviews() {
 }
 
 function removerImagem(index) {
+  const imagem = imagensSelecionadas[index];
+  if (imagem?.preview?.startsWith('blob:')) {
+    URL.revokeObjectURL(imagem.preview);
+  }
+
   imagensSelecionadas.splice(index, 1);
   renderizarPreviews();
   atualizarPreview();
 }
-
 // =========================
 // VALIDAR
 // =========================
