@@ -2200,3 +2200,14 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .empty-state-link:hover { background:rgba(8,127,120,.09); }
 
+
+/* ===== IMAGEM DO POPUP ===== */
+.popup-imagem {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  max-height: 260px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin: 0 auto 16px;
+}
