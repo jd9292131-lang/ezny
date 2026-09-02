@@ -128,15 +128,47 @@
 </nav>
 
 <!-- POPUP -->
+<!-- Popup Tempo Real -->
 <div id="popupOverlay" class="popup-overlay">
   <div class="popup-modal">
-    <i class="ph ph-megaphone"></i>
+
+    <button type="button" id="btnFecharPopupTop" class="popup-close" aria-label="Fechar">
+      <i class="ph ph-x"></i>
+    </button>
+
+    <div class="popup-tipo" id="popupTipo">COMUNICADO</div>
+
+    <img
+      id="popupImagem"
+      class="popup-imagem"
+      src="assets/logo.jpg"
+      alt="Imagem do comunicado"
+      style="display:none;"
+    >
+
+    <div class="popup-icon" id="popupIcon">
+      <i class="ph ph-megaphone"></i>
+    </div>
+
     <h3 id="popupTitulo">Comunicado</h3>
+
     <p id="popupConteudo">Conteúdo do comunicado...</p>
-    <button class="btn-ok" id="btnFecharPopup">Entendido</button>
+
+    <a
+      id="popupLink"
+      class="popup-link"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display:none;"
+    ></a>
+
+    <button type="button" class="btn-ok" id="btnFecharPopup">
+      Entendido
+    </button>
+
   </div>
 </div>
-
 <!-- ═══════════════════════════════════════════════════════════════
      MODAL DETALHE DO ANÚNCIO — Unificado (igual ao anuncios.html)
      ═══════════════════════════════════════════════════════════════ -->
