@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/phosphor.css">
 <link rel="stylesheet" href="css/suporte.css">
 <link rel="stylesheet" href="css/ezny-brand.css">
+<base target="_blank">
 </head>
 <body>
 
@@ -16,11 +17,14 @@
      HEADER
      ═══════════════════════════════════════ -->
 <header class="header">
-  <h1 class="header__title">Centro de Ajuda</h1>
+  <button class="header__back" onclick="history.back()" aria-label="Voltar">
+    <i class="ph ph-arrow-left"></i>
+  </button>
+    <h1 class="header__title">Centro de Ajuda</h1>
   <p class="header__subtitle">Encontre respostas para as perguntas mais frequentes sobre a EZNY.</p>
 
   <div class="search-box">
-    <span class="material-icons">search</span>
+    <i class="ph ph-magnifying-glass"></i>
     <input type="text" id="searchInput" placeholder="Pesquisar perguntas..." oninput="filtrarFAQ(this.value)">
   </div>
 </header>
@@ -33,18 +37,18 @@
   <!-- Tabs de Categoria -->
   <div class="category-tabs" id="categoryTabs">
     <button class="category-tab active" data-category="all" onclick="filtrarCategoria('all')">
-      <span class="material-icons">apps</span>
+      <i class="ph ph-squares-four"></i>
       Todas
     </button>
     <button class="category-tab" data-category="conta" onclick="filtrarCategoria('conta')">
-      <span class="material-icons">person</span>
+      <i class="ph ph-user"></i>
       Conta
     </button>
     <button class="category-tab" data-category="anuncios" onclick="filtrarCategoria('anuncios')">
 <i class="ph ph-package"></i>      Anúncios
     </button>
     <button class="category-tab" data-category="pagamentos" onclick="filtrarCategoria('pagamentos')">
-      <span class="material-icons">payments</span>
+      <i class="ph ph-credit-card"></i>
       Pagamentos
     </button>
     <button class="category-tab" data-category="seguranca" onclick="filtrarCategoria('seguranca')">
@@ -55,7 +59,7 @@
 
   <!-- Sem resultados -->
   <div class="no-results" id="noResults">
-    <span class="material-icons">search_off</span>
+    <i class="ph ph-magnifying-glass-minus"></i>
     <h3>Nenhum resultado encontrado</h3>
     <p>Tente pesquisar com termos diferentes ou navegue pelas categorias.</p>
   </div>
@@ -63,7 +67,7 @@
   <!-- FAQ: Conta -->
   <div class="faq-section" data-category="conta">
     <div class="faq-section-title">
-      <span class="material-icons">person</span>
+      <i class="ph ph-user"></i>
       <h3>Conta e Registo</h3>
     </div>
     <div class="faq-list">
@@ -71,7 +75,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Como crio uma conta na EZNY?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -92,7 +96,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Esqueci a minha palavra-passe. Como recupero?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -106,7 +110,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Posso alterar o número de telefone da minha conta?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -119,7 +123,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Como elimino a minha conta permanentemente?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -134,7 +138,7 @@
           </div>
         </div>
       </div>
-    <v>
+    </div>
   </div>
 
   <!-- FAQ: Anúncios -->
@@ -148,7 +152,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Como publico um anúncio?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -169,7 +173,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Quantas fotos posso adicionar a um anúncio?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -182,7 +186,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Por quanto tempo fica visível o meu anúncio?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -195,7 +199,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">O que acontece se o meu anúncio for removido?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -217,7 +221,7 @@
   <!-- FAQ: Pagamentos -->
   <div class="faq-section" data-category="pagamentos">
     <div class="faq-section-title">
-      <span class="material-icons">payments</span>
+      <i class="ph ph-credit-card"></i>
       <h3>Pagamentos e Taxas</h3>
     </div>
     <div class="faq-list">
@@ -225,7 +229,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">A plataforma processa pagamentos entre utilizadores?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -239,7 +243,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Quais são as taxas de publicação?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -260,7 +264,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Os pagamentos são reembolsáveis?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -280,7 +284,7 @@
   <!-- FAQ: Segurança -->
   <div class="faq-section" data-category="seguranca">
     <div class="faq-section-title">
-<i class="ph-fill ph-shield-check"></i>
+<i class="ph ph-shield-check"></i>
       <h3>Segurança e Privacidade</h3>
     </div>
     <div class="faq-list">
@@ -288,7 +292,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Como protejo a minha conta?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -308,7 +312,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">O que fazer se detectar um golpe ou fraude?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -328,7 +332,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Quais dados a plataforma recolhe sobre mim?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -347,7 +351,7 @@
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span class="q-icon">Q</span>
           <span class="q-text">Como encontro o comprador/vendedor com segurança?</span>
-          <span class="q-toggle"><span class="material-icons">expand_more</span></span>
+          <span class="q-toggle"><i class="ph ph-caret-down"></i></span>
         </button>
         <div class="faq-answer">
           <div class="faq-answer-content">
@@ -372,12 +376,12 @@
     <p>A nossa equipa está disponível para ajudar. Entre em contacto connosco.</p>
     <div class="contact-buttons">
       <a href="reportar.html" class="contact-btn contact-btn--primary">
-        <span class="material-icons">report_problem</span>
+        <i class="ph ph-warning"></i>
         Comunicar Problema
       </a>
-      <a href="mailto:suporte@ezny.ao" class="contact-btn contact-btn--secondary">
-        <span class="material-icons">email</span>
-        suporte@ezny.ao
+      <a href="mailto:contacto.ezny@gmail.com" class="contact-btn contact-btn--secondary">
+        <i class="ph ph-envelope"></i>
+        contacto.ezny@gmail.com
       </a>
     </div>
   </div>
