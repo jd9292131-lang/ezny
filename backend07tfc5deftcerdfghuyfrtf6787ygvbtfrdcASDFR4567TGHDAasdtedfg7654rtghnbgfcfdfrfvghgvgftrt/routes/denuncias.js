@@ -1,4 +1,4 @@
-/* backend/routes/denuncias.js */
+/* backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/routes/denuncias.js */
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
@@ -22,7 +22,6 @@ router.post("/criar", verificarToken, (req, res) => {
     INSERT INTO denuncias (denunciante_id, usuario_reportado_id, anuncio_id, tipo_denuncia, descricao, status)
     VALUES (?, ?, ?, ?, ?, 'pendente')
   `;
-
   db.run(sql, [denuncianteId, usuario_reportado_id || null, anuncio_id || null, tipo_denuncia || 'outro', descricao.trim()], function(err) {
     if (err) {
       console.error("[DENUNCIAS] Erro ao criar:", err.message);

@@ -1,4 +1,4 @@
-/* backend/routes/anuncios.js */
+/* backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/routes/anuncios.js */
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
@@ -725,7 +725,7 @@ router.post(
         if (!titulo) return res.status(400).json({ erro: 'Título é obrigatório' });
         if (preco === null || preco <= 0) return res.status(400).json({ erro: 'Preço válido é obrigatório (deve ser maior que 0)' });
 
-        // O backend é a última barreira: os campos obrigatórios são definidos pela categoria,
+        // O backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt é a última barreira: os campos obrigatórios são definidos pela categoria,
         // independentemente de qual frontend enviou o formulário.
         for (const campo of CATEGORIA_REGRAS[categoriaNormalizada]) {
           const value = campo === 'title' ? titulo : campo === 'price' ? preco : (req.body[campo] ?? atributos[campo]);

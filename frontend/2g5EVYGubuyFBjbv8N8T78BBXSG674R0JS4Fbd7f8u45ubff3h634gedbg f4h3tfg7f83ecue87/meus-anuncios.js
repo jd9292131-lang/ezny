@@ -189,7 +189,7 @@ function mostrarDebug() {
 
   html += '\n' + '─'.repeat(50) + '\n';
   html += 'Nenhum endpoint funcionou.\n';
-  html += 'Verifique se o backend tem uma rota para listar anúncios do utilizador logado.\n';
+  html += 'Verifique se o backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt tem uma rota para listar anúncios do utilizador logado.\n';
   html += 'Token presente: ' + (getToken() ? 'Sim' : 'Não');
 
   output.textContent = html;

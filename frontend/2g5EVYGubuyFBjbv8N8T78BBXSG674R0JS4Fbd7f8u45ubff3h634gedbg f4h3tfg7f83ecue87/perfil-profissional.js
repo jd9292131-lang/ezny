@@ -72,7 +72,7 @@ async function carregarPerfil() {
     }
 
     const data = await res.json();
-    console.log('[PERFIL] Resposta do backend:', data);
+    console.log('[PERFIL] Resposta do backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt:', data);
 
     perfilData = data.perfil;
     const publicacoes = data.publicacoes || [];

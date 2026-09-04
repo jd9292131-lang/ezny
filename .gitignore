@@ -2,8 +2,8 @@ node_modules/
 .env
 .env.*
 !/.env.example
-backend/database.db
-backend/uploads/
+backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/database.db
+backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/uploads/
 .vercel/
 .DS_Store
 desktop.ini

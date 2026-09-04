@@ -29,7 +29,7 @@ Para uma base Neon nova:
 
 ```bash
 npm install
-npm run migrate --prefix backend
+npm run migrate --prefix backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt
 ```
 
 O script aplica o schema, importa o snapshot e sincroniza as sequências `BIGSERIAL`.
@@ -38,7 +38,7 @@ Para uma base que já contenha tabelas EZNY, faça primeiro um backup e confirme
 
 ## Imagens
 
-Configure `BLOB_READ_WRITE_TOKEN` no projeto Vercel. O backend envia JPG, PNG e WebP até 5 MB por ficheiro, com máximo de 10 imagens por anúncio.
+Configure `BLOB_READ_WRITE_TOKEN` no projeto Vercel. O backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt envia JPG, PNG e WebP até 5 MB por ficheiro, com máximo de 10 imagens por anúncio.
 
 Os nomes antigos guardados no snapshot (por exemplo `img-...jpg`) não têm os ficheiros correspondentes no ZIP. Esses quatro anúncios precisam que as imagens originais sejam recuperadas/uploadadas antes da publicação para ficarem visíveis em produção.
 

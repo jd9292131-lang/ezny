@@ -1,7 +1,7 @@
 const { Pool, types } = require('pg');
 
 // PostgreSQL BIGINT/BIGSERIAL chega como string no pg por defeito.
-// Os IDs do EZNY são seguros como Number e o frontend/backend comparam-nos como números.
+// Os IDs do EZNY são seguros como Number e o frontend/backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt comparam-nos como números.
 types.setTypeParser(20, value => Number(value));
 
 const connectionString = process.env.DATABASE_URL;

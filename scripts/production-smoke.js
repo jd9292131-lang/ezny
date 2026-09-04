@@ -1,5 +1,5 @@
 require('dotenv').config();
-const db = require('../backend/config/db');
+const db = require('../backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/config/db');
 
 (async () => {
   const checks = [];

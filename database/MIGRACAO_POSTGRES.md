@@ -10,7 +10,7 @@ A persistência de produção usa PostgreSQL via `pg` e `DATABASE_URL`.
 
 ```bash
 npm install
-npm run migrate --prefix backend
+npm run migrate --prefix backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt
 npm run start
 ```
 
@@ -26,7 +26,7 @@ O script de migração:
 ## Verificação
 
 ```bash
-cd backend
+cd backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt
 node scripts/check-postgres.js
 ```
 

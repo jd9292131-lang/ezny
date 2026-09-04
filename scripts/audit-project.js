@@ -38,17 +38,17 @@ for (const file of files.filter(f => /\.(html?|htm)$/i.test(f))) {
 }
 
 // SQLite compatibility should now be isolated to the adapter/migration documentation.
-for (const file of files.filter(f => f.startsWith(path.join(root, 'backend')) && f.endsWith('.js'))) {
+for (const file of files.filter(f => f.startsWith(path.join(root, 'backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt')) && f.endsWith('.js'))) {
   const text = fs.readFileSync(file, 'utf8');
   for (const pattern of [/INSERT\s+OR\s+(IGNORE|REPLACE)\s+INTO/i, /db\.prepare\s*\(/i, /\bPRAGMA\b/i, /\bAUTOINCREMENT\b/i, /strftime\s*\(/i]) {
-    if (pattern.test(text) && !(/backend[\\/]config[\\/]db\.js$/i.test(path.relative(root, file)) && pattern.source.startsWith('INSERT'))) warnings.push(`SQLite residual: ${path.relative(root, file)} (${pattern})`);
+    if (pattern.test(text) && !(/backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt[\\/]config[\\/]db\.js$/i.test(path.relative(root, file)) && pattern.source.startsWith('INSERT'))) warnings.push(`SQLite residual: ${path.relative(root, file)} (${pattern})`);
   }
 }
 
 // Secret-bearing environment files must never be part of a deployable ZIP.
 for (const file of files) {
   const rel = path.relative(root, file);
-  if (/^(\.env$|\.env\.local$|backend[\\/]\.env$|backend[\\/]\.env\.local$)/i.test(rel)) {
+  if (/^(\.env$|\.env\.local$|backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt[\\/]\.env$|backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt[\\/]\.env\.local$)/i.test(rel)) {
     errors.push(`Ficheiro de ambiente não deve ser distribuído: ${rel}`);
   }
 }

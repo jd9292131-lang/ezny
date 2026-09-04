@@ -7,7 +7,7 @@ const MAX_IMAGENS = 4;
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 // =========================
-// CAMPOS POR CATEGORIA — Alinhados com o backend
+// CAMPOS POR CATEGORIA — Alinhados com o backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt
 // =========================
 const CATEGORIA_CONFIG = window.EZNY_CATEGORIAS;
 

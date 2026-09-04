@@ -2,8 +2,8 @@
 node_modules/
 .vercel/
 database/migration_seed.sql
-backend/scripts/migrate-sqlite-to-postgres.js
-backend/auditoria-sqlite-compat.txt
+backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/scripts/migrate-sqlite-to-postgres.js
+backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/auditoria-sqlite-compat.txt
 AUDITORIA*.md
 MIGRACAO_FASE_1.md
 MIGRACAO_FASE_1B.md

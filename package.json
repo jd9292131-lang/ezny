@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "node backend/server.js",
-    "start": "node backend/server.js",
+    "dev": "node backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/server.js",
+    "start": "node backend07tfc5deftcerdfghuyfrtf6787ygvbtfrdcASDFR4567TGHDAasdtedfg7654rtghnbgfcfdfrfvghgvgftrt/server.js",
     "build": "echo \"EZNY frontend ready\"",
     "audit": "npm audit --omit=dev",
     "audit:project": "node scripts/audit-project.js",
