@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
-const { verificarToken } = require("../middleware/auth");
+const { verificarToken, requireAdmin } = require("../middleware/auth");
 
 /* =========================
    LISTAR MINHAS NOTIFICAÇÕES
@@ -70,6 +70,38 @@ router.post("/todas-lidas", verificarToken, (req, res) => {
       res.json({ sucesso: true, total: this.changes });
     }
   );
+});
+
+router.post("/admin/enviar", verificarToken, requireAdmin, async (req, res) => {
+  const usuarioId = Number(req.body?.usuario_id);
+  const titulo = String(req.body?.titulo || "").trim();
+  const mensagem = String(req.body?.mensagem || "").trim();
+  if (!Number.isInteger(usuarioId) || usuarioId <= 0) {
+    return res.status(400).json({ erro: "Selecione um utilizador válido" });
+  }
+  if (!titulo || titulo.length > 255 || !mensagem || mensagem.length > 2000) {
+    return res.status(400).json({ erro: "Título e mensagem são obrigatórios (máximo 255 e 2000 caracteres)" });
+  }
+  try {
+    const result = await db.transaction(async tx => {
+      const user = await tx.get("SELECT id,nome,banido FROM usuarios WHERE id=?", [usuarioId]);
+      if (!user) throw Object.assign(new Error("Utilizador não encontrado"), { code: "NOT_FOUND" });
+      await tx.run(
+        "INSERT INTO notificacoes (usuario_id,tipo,titulo,mensagem,lida) VALUES (?,?,?,?,0)",
+        [usuarioId, "info", titulo, mensagem]
+      );
+      await tx.run(
+        "INSERT INTO admin_logs (admin_id,acao,entidade,entidade_id,detalhes) VALUES (?,?,?,?,?)",
+        [req.user.id, "ENVIAR_NOTIFICACAO", "utilizador", usuarioId, titulo]
+      );
+      return user;
+    });
+    res.status(201).json({ sucesso: true, destinatario: result.nome || `#${result.id}` });
+  } catch (err) {
+    if (err.code === "NOT_FOUND") return res.status(404).json({ erro: err.message });
+    console.error("[NOTIFICAÇÕES] Erro ao enviar notificação administrativa:", err.message);
+    res.status(500).json({ erro: "Não foi possível enviar a notificação" });
+  }
 });
 
 /* =====================================================

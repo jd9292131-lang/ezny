@@ -21,14 +21,14 @@
 
 <!-- Header -->
 <div class="prof-header">
-  <button class="prof-header-btn" onclick="history.back()">
+  <button class="prof-header-btn" data-csp-handler="4a567db476e653bb">
     <i class="ph ph-arrow-left"></i>
   </button>
   <div class="prof-header-titulo" id="headerTitulo">
     <i class="ph ph-sketch-logo premium-icon"></i>
     <span>Perfil Profissional</span>
   </div>
-  <button class="prof-header-btn" onclick="toggleMenu()" id="btnMenu" style="display:none;">
+  <button class="prof-header-btn" data-csp-handler="7c340cc72bcc6c08" id="btnMenu" style="display:none;">
     <i class="ph ph-dots-three-vertical"></i>
   </button>
 </div>
@@ -54,10 +54,10 @@
         <div class="prof-avatar-placeholder" id="profAvatarPlaceholder">U</div>
       </div>
       <div class="prof-acoes" id="profAcoes">
-        <button class="prof-btn prof-btn-seguir" id="btnSeguir" onclick="toggleSeguir()">
+        <button class="prof-btn prof-btn-seguir" id="btnSeguir" data-csp-handler="22bb08b34470b3e5">
           <i class="ph ph-user-plus"></i> Seguir
         </button>
-        <button class="prof-btn prof-btn-msg" onclick="iniciarChat()">
+        <button class="prof-btn prof-btn-msg" data-csp-handler="d6957b4198c63db0">
           <i class="ph ph-chat-circle-text"></i> Mensagem
         </button>
       </div>
@@ -68,7 +68,7 @@
   <div class="prof-nome-wrap">
     <div class="prof-nome" id="profNome">
       Utilizador
-      <span class="verificado-badge" id="profVerificado" style="display:none;" onclick="mostrarInfoVerificado()"><i class="ph ph-check"></i></span>
+      <span class="verificado-badge" id="profVerificado" style="display:none;" data-csp-handler="1064cf75b3617669"><i class="ph ph-check"></i></span>
       <span class="premium-badge" id="profPremiumBadge" style="display:none;">Premium</span>
     </div>
     <div class="prof-bio" id="profBio"></div>
@@ -77,19 +77,19 @@
 
   <!-- Stats -->
   <div class="prof-stats" id="profStats">
-    <div class="prof-stat" onclick="mudarTab('publicacoes')">
+    <div class="prof-stat" data-csp-handler="bd6cf86b7ced638b">
       <span class="prof-stat-valor" id="statAnuncios">0</span>
       <span class="prof-stat-label">Anúncios</span>
     </div>
-    <div class="prof-stat" onclick="mostrarListaSeguidores()">
+    <div class="prof-stat" data-csp-handler="13517184a9772c6a">
       <span class="prof-stat-valor" id="statSeguidores">0</span>
       <span class="prof-stat-label">Seguidores</span>
     </div>
-    <div class="prof-stat" onclick="mostrarListaSeguindo()">
+    <div class="prof-stat" data-csp-handler="1e92461dd45e9eb7">
       <span class="prof-stat-valor" id="statSeguindo">0</span>
       <span class="prof-stat-label">A seguir</span>
     </div>
-    <div class="prof-stat" onclick="mudarTab('avaliacoes')">
+    <div class="prof-stat" data-csp-handler="515848cdd60b740d">
       <span class="prof-stat-valor" id="statAvaliacao">—</span>
       <span class="prof-stat-label">Avaliação</span>
     </div>
@@ -97,9 +97,9 @@
 
   <!-- Tabs -->
   <div class="prof-tabs">
-    <button class="prof-tab ativo" onclick="mudarTab('publicacoes', this)">Publicações</button>
-    <button class="prof-tab" onclick="mudarTab('sobre', this)">Sobre</button>
-    <button class="prof-tab" onclick="mudarTab('avaliacoes', this)">Avaliações</button>
+    <button class="prof-tab ativo" data-csp-handler="174a0ca99a1adea1">Publicações</button>
+    <button class="prof-tab" data-csp-handler="e4da81648d71dcb8">Sobre</button>
+    <button class="prof-tab" data-csp-handler="c1eccf37451d7c06">Avaliações</button>
   </div>
 
   <!-- Tab: Publicações -->
@@ -125,14 +125,14 @@
     <div class="prof-avaliar-wrap" id="wrapAvaliar" style="display:none;">
       <div class="prof-avaliar-titulo">Avaliar este vendedor</div>
       <div class="prof-estrelas-input" id="estrelasInput">
-        <button onclick="setEstrela(1)"><i class="ph ph-star"></i></button>
-        <button onclick="setEstrela(2)"><i class="ph ph-star"></i></button>
-        <button onclick="setEstrela(3)"><i class="ph ph-star"></i></button>
-        <button onclick="setEstrela(4)"><i class="ph ph-star"></i></button>
-        <button onclick="setEstrela(5)"><i class="ph ph-star"></i></button>
+        <button data-csp-handler="80ef4aa07ed13fdb"><i class="ph ph-star"></i></button>
+        <button data-csp-handler="ca2b396473aa700d"><i class="ph ph-star"></i></button>
+        <button data-csp-handler="126e48422180d067"><i class="ph ph-star"></i></button>
+        <button data-csp-handler="527af218ef64efde"><i class="ph ph-star"></i></button>
+        <button data-csp-handler="4d1eb4add60e698f"><i class="ph ph-star"></i></button>
       </div>
       <textarea class="prof-avaliar-textarea" id="inputAvaliacao" placeholder="Partilhe a sua experiência com este vendedor..."></textarea>
-      <button class="prof-avaliar-btn" onclick="enviarAvaliacao()">
+      <button class="prof-avaliar-btn" data-csp-handler="319885239e4ca1f0">
         <i class="ph ph-paper-plane-right"></i> Enviar avaliação
       </button>
     </div>
@@ -146,18 +146,18 @@
   <i class="ph ph-warning-circle"></i>
   <h3>Perfil não encontrado</h3>
   <p style="margin-top:8px;font-size:0.85rem;">Este utilizador não existe ou não é premium.</p>
-  <button onclick="history.back()" style="margin-top:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none;padding:10px 24px;border-radius:12px;font-weight:600;cursor:pointer;">Voltar</button>
+  <button data-csp-handler="4a567db476e653bb" style="margin-top:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none;padding:10px 24px;border-radius:12px;font-weight:600;cursor:pointer;">Voltar</button>
 </div>
 
 <!-- ===== MODAL DETALHE ANÚNCIO ===== -->
-<div class="modal-overlay" id="modalAnuncio" onclick="fecharModalAnuncio(event)">
-  <div class="modal-anuncio" onclick="event.stopPropagation()">
+<div class="modal-overlay" id="modalAnuncio" data-csp-handler="2304ae414185dc3a">
+  <div class="modal-anuncio" data-csp-handler="2ef9e075c1c3dbff">
     <div class="modal-anuncio-header">
       <div class="modal-anuncio-titulo">
         <i class="ph ph-package" style="color:var(--primary);"></i>
         Detalhe do Anúncio
       </div>
-      <button class="modal-anuncio-fechar" onclick="fecharModalAnuncio()">
+      <button class="modal-anuncio-fechar" data-csp-handler="d479aaab65aaa408">
         <i class="ph ph-x"></i>
       </button>
     </div>
@@ -165,8 +165,8 @@
       <div class="modal-anuncio-img-wrap" id="modalAnuncioImgWrap">
         <img src="" class="modal-anuncio-img" id="modalAnuncioImg" alt="">
         <div class="modal-anuncio-img-nav" id="modalAnuncioImgNav" style="display:none;">
-          <button onclick="mudarImagemAnuncio(-1)"><i class="ph ph-caret-left"></i></button>
-          <button onclick="mudarImagemAnuncio(1)"><i class="ph ph-caret-right"></i></button>
+          <button data-csp-handler="1c20c33a2bde3dee"><i class="ph ph-caret-left"></i></button>
+          <button data-csp-handler="4eec42bf94b051f3"><i class="ph ph-caret-right"></i></button>
         </div>
         <div class="modal-anuncio-img-dots" id="modalAnuncioDots"></div>
       </div>
@@ -179,13 +179,13 @@
 
       <!-- Reações -->
       <div class="modal-reacoes-wrap" id="modalReacoes">
-        <button class="modal-reacao-btn" id="btnLike" onclick="toggleReacao()">
+        <button class="modal-reacao-btn" id="btnLike" data-csp-handler="4f7a567caf699c1f">
           <i class="ph ph-heart"></i> <span id="countLike">0</span>
         </button>
-        <button class="modal-reacao-btn" onclick="focusComentario()">
+        <button class="modal-reacao-btn" data-csp-handler="797387ffb621e46f">
           <i class="ph ph-chat-circle"></i> <span id="countComentarios">0</span>
         </button>
-        <button class="modal-reacao-btn" onclick="partilharAnuncio()">
+        <button class="modal-reacao-btn" data-csp-handler="eed912b6b1a03b7a">
           <i class="ph ph-share-network"></i>
         </button>
       </div>
@@ -198,8 +198,8 @@
         </div>
         <div id="modalComentariosLista"></div>
         <div class="modal-comentario-input-wrap" id="wrapComentar" style="display:none;">
-          <input type="text" class="modal-comentario-input" id="inputComentario" placeholder="Escreva um comentário..." onkeypress="if(event.key==='Enter')enviarComentario()">
-          <button class="modal-comentario-btn" id="btnEnviarComentario" onclick="enviarComentario()">
+          <input type="text" class="modal-comentario-input" id="inputComentario" placeholder="Escreva um comentário..." data-csp-handler="7246da80f58c425f">
+          <button class="modal-comentario-btn" id="btnEnviarComentario" data-csp-handler="3e779b8a53563d0e">
             <i class="ph ph-paper-plane-right"></i>
           </button>
         </div>
@@ -214,13 +214,13 @@
         <i class="ph ph-caret-right" style="color:var(--text-muted);"></i>
       </a>
       <div class="modal-anuncio-acoes">
-        <button class="modal-anuncio-btn modal-anuncio-btn-primary" onclick="contactarWhatsApp()">
+        <button class="modal-anuncio-btn modal-anuncio-btn-primary" data-csp-handler="87bf50cf1eb83b1b">
           <i class="ph-fill ph-whatsapp-logo"></i> WhatsApp
         </button>
-        <button class="modal-anuncio-btn modal-anuncio-btn-secondary" onclick="partilharAnuncio()">
+        <button class="modal-anuncio-btn modal-anuncio-btn-secondary" data-csp-handler="eed912b6b1a03b7a">
           <i class="ph-fill ph-share-network"></i> Partilhar
         </button>
-        <button class="modal-anuncio-btn modal-anuncio-btn-danger" onclick="abrirDenunciaAnuncio()" title="Denunciar">
+        <button class="modal-anuncio-btn modal-anuncio-btn-danger" data-csp-handler="f712086e75f693a1" title="Denunciar">
           <i class="ph-fill ph-warning-circle"></i>
         </button>
       </div>
@@ -229,14 +229,14 @@
 </div>
 
 <!-- ===== MODAL EDITAR PERFIL ===== -->
-<div class="modal-editar-overlay" id="modalEditar" onclick="fecharModalEditar(event)">
-  <div class="modal-editar" onclick="event.stopPropagation()">
+<div class="modal-editar-overlay" id="modalEditar" data-csp-handler="64c7bdd99e83ebbf">
+  <div class="modal-editar" data-csp-handler="2ef9e075c1c3dbff">
     <div class="modal-anuncio-header">
       <div class="modal-anuncio-titulo">
         <i class="ph-fill ph-pencil-simple" style="color:var(--premium);"></i>
         Editar Perfil
       </div>
-      <button class="modal-anuncio-fechar" onclick="fecharModalEditar()">
+      <button class="modal-anuncio-fechar" data-csp-handler="51b51a7e65320232">
         <i class="ph ph-x"></i>
       </button>
     </div>
@@ -249,24 +249,24 @@
       <!-- Upload Capa -->
       <div class="editar-grupo">
         <label class="editar-label">Foto de Capa</label>
-        <div class="editar-upload-wrap" id="editarCapaWrap" onclick="document.getElementById('editarCapaInput').click()">
+        <div class="editar-upload-wrap" id="editarCapaWrap" data-csp-handler="637685d0d8e8bd3c">
           <img src="" id="editarCapaPreview" style="display:none;">
           <i class="ph ph-image" id="editarCapaIcon"></i>
           <span id="editarCapaText">Toque para alterar capa</span>
-          <input type="file" id="editarCapaInput" accept="image/*" onchange="previewCapa(this)" style="display:none;">
+          <input type="file" id="editarCapaInput" accept="image/*" data-csp-handler="9fa8760d17eb05a0" style="display:none;">
         </div>
       </div>
 
       <!-- Upload Avatar -->
       <div class="editar-grupo">
         <label class="editar-label">Foto de Perfil</label>
-        <div class="editar-avatar-upload" id="editarAvatarWrap" onclick="document.getElementById('editarAvatarInput').click()">
+        <div class="editar-avatar-upload" id="editarAvatarWrap" data-csp-handler="35b70cce0e0c632e">
           <div class="editar-avatar-placeholder" id="editarAvatarPlaceholder">U</div>
           <img src="" id="editarAvatarPreview" style="display:none;">
           <div class="editar-avatar-overlay">
             <i class="ph ph-camera"></i>
           </div>
-          <input type="file" id="editarAvatarInput" accept="image/*" onchange="previewAvatar(this)" style="display:none;">
+          <input type="file" id="editarAvatarInput" accept="image/*" data-csp-handler="30d6be1993f61eda" style="display:none;">
         </div>
       </div>
 
@@ -315,7 +315,7 @@
         <input type="text" class="editar-input" id="editarHorario" placeholder="Ex: Seg-Sex: 08h-18h">
       </div>
 
-      <button class="editar-btn-salvar" id="btnSalvarPerfil" onclick="salvarPerfil()">
+      <button class="editar-btn-salvar" id="btnSalvarPerfil" data-csp-handler="01dc8ed42bbe9e9c">
         <i class="ph-fill ph-floppy-disk"></i> Salvar Alterações
       </button>
     </div>
@@ -323,14 +323,14 @@
 </div>
 
 <!-- ===== MODAL LISTA SEGUIDORES/SEGUINDO ===== -->
-<div class="modal-lista-overlay" id="modalLista" onclick="fecharModalLista(event)">
-  <div class="modal-lista" onclick="event.stopPropagation()">
+<div class="modal-lista-overlay" id="modalLista" data-csp-handler="9ab50c1fa08412da">
+  <div class="modal-lista" data-csp-handler="2ef9e075c1c3dbff">
     <div class="modal-anuncio-header">
       <div class="modal-anuncio-titulo" id="modalListaTitulo">
         <i class="ph ph-users" style="color:var(--primary);"></i>
         Lista
       </div>
-      <button class="modal-anuncio-fechar" onclick="fecharModalLista()">
+      <button class="modal-anuncio-fechar" data-csp-handler="3d4a192a85a72771">
         <i class="ph ph-x"></i>
       </button>
     </div>
@@ -339,8 +339,8 @@
 </div>
 
 <!-- ===== MODAL DENÚNCIA ===== -->
-<div class="modal-denuncia-overlay" id="modalDenuncia" onclick="fecharModalDenuncia(event)">
-  <div class="modal-denuncia" onclick="event.stopPropagation()">
+<div class="modal-denuncia-overlay" id="modalDenuncia" data-csp-handler="ea375faed53420ee">
+  <div class="modal-denuncia" data-csp-handler="2ef9e075c1c3dbff">
     <div class="modal-denuncia-body">
       <div class="modal-denuncia-titulo">
         <i class="ph-fill ph-warning-circle"></i>
@@ -374,8 +374,8 @@
       <textarea class="denuncia-textarea" id="inputDenuncia" placeholder="Descreva com mais detalhes o que aconteceu..."></textarea>
 
       <div class="denuncia-btns">
-        <button class="denuncia-btn-cancelar" onclick="fecharModalDenuncia()">Cancelar</button>
-        <button class="denuncia-btn-enviar" id="btnEnviarDenuncia" onclick="enviarDenuncia()">
+        <button class="denuncia-btn-cancelar" data-csp-handler="8425170603e9f33d">Cancelar</button>
+        <button class="denuncia-btn-enviar" id="btnEnviarDenuncia" data-csp-handler="37e90939b84f230c">
           <i class="ph-fill ph-paper-plane-right"></i> Enviar Denúncia
         </button>
       </div>
@@ -407,5 +407,6 @@
 
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/perfil-profissional.js"></script>
+<script src="csp-handlers.js"></script>
 </body>
 </html>

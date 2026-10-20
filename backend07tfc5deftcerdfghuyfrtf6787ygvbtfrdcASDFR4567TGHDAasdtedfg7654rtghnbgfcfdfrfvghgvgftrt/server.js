@@ -87,6 +87,7 @@ app.use('/api/destaques', require('./routes/destaques'));
 app.use('/api/pagamentos', require('./routes/pagamentos'));
 app.use('/api/denuncias', require('./routes/denuncias'));
 app.use('/api/notificacoes', require('./routes/notificacoes'));
+app.use('/api/suporte', require('./routes/suporte'));
 
 // Upload local apenas para desenvolvimento. Em produção, migrar para armazenamento externo.
 const uploadsPath = path.join(__dirname, 'uploads');

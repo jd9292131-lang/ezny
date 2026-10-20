@@ -718,8 +718,7 @@ window.toggleFavModal = function() {
   favoritos = favs;
 
   document.querySelectorAll('.anun-fav').forEach(btn => {
-    const onclick = btn.getAttribute('onclick') || '';
-    if (onclick.includes('' + id)) {
+    if (btn.dataset.cspItemId === String(id)) {
       const icon = btn.querySelector('i');
       if (icon) icon.className = isFav ? 'ph ph-heart' : 'ph ph-heart-fill';
       btn.classList.toggle('ativo', !isFav);

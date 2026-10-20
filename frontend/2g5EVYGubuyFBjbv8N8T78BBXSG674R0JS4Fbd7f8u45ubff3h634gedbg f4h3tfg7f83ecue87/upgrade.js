@@ -6,6 +6,7 @@ let planoSelecionado = 'premium_30d';
 const PLANOS = { premium_15d: { valor: 2500, dias: 15 }, premium_30d: { valor: 5000, dias: 30 } };
 let toastTimer = null;
 let userId = null;
+let pagamentoPendente = false;
 
 /* ============================================================
    INIT
@@ -82,7 +83,8 @@ async function carregarEstadoPremiumDetalhado(){
       el.innerHTML=`<i class="ph-fill ph-crown" style="color:var(--premium)"></i> Premium ativo${status.premium_ate?` até ${new Date(status.premium_ate).toLocaleDateString('pt-PT')}`:''}`;
       el.style.color='#ffd58a';
     }else if(pendente){
-      el.innerHTML=`<i class="ph ph-clock" style="color:#f59e0b"></i> Pedido pendente · ${pendente.referencia}`;
+      mostrarDadosPagamento(pendente);
+      el.innerHTML=`<i class="ph ph-clock" style="color:#f59e0b"></i> Pagamento pendente de validação · Pedido ${pendente.referencia}`;
       el.style.color='#ffd58a';
       const btn=document.getElementById('btnAtivar'); if(btn){btn.innerHTML='<i class="ph ph-receipt"></i> Ver pedido pendente';btn.onclick=()=>{abrirPagamento();};}
     }else{
@@ -149,8 +151,33 @@ function toggleFaq(btn) {
    ============================================================ */
 
 function gerarReferencia() {
-  const ref = 'PREMIUM-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-  document.getElementById('refDescritivo').textContent = ref;
+  document.getElementById('refEntidade').textContent = '—';
+  document.getElementById('refBanco').textContent = '—';
+  document.getElementById('refPedido').textContent = '—';
+}
+
+function mostrarDadosPagamento(pagamento) {
+  pagamentoPendente = pagamento.status === 'pendente';
+  if (PLANOS[pagamento.plano]) {
+    planoSelecionado = pagamento.plano;
+    document.querySelectorAll('.premium-plan-option').forEach(option => {
+      option.classList.toggle('selecionado', option.dataset.plan === pagamento.plano);
+      option.disabled = pagamentoPendente;
+    });
+    atualizarPlanoUI();
+  }
+  document.getElementById('refEntidade').textContent = pagamento.entidade || 'Não configurada';
+  document.getElementById('refBanco').textContent = pagamento.referencia_pagamento || 'Não configurada';
+  document.getElementById('refPedido').textContent = pagamento.referencia_pedido || pagamento.referencia || '—';
+  document.getElementById('refNumero').textContent = pagamento.entidade && pagamento.referencia_pagamento
+    ? `${pagamento.entidade} / ${pagamento.referencia_pagamento}`
+    : 'Dados de pagamento indisponíveis';
+  document.getElementById('refValor').textContent = `${Number(pagamento.valor || 0).toLocaleString('pt-PT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Kz`;
+  const btn = document.getElementById('btnConfirmarPagamento');
+  btn.disabled = pagamentoPendente;
+  btn.innerHTML = pagamentoPendente
+    ? '<i class="ph ph-clock"></i> A aguardar validação'
+    : '<i class="ph ph-check"></i> Criar pedido e mostrar dados';
 }
 
 function selecionarPagamento(btn, metodo) {
@@ -179,10 +206,11 @@ function fecharModal(e) {
 }
 
 function copiarReferencia() {
-  const ref = document.getElementById('refNumero').textContent;
-  const desc = document.getElementById('refDescritivo').textContent;
+  const entidade = document.getElementById('refEntidade').textContent;
+  const referencia = document.getElementById('refBanco').textContent;
+  const codigoPedido = document.getElementById('refPedido').textContent;
   const plano=PLANOS[planoSelecionado]||PLANOS.premium_30d;
-  const texto = `EZNY Premium\n${ref}\nDescritivo: ${desc}\nValor: ${plano.valor.toLocaleString('pt-PT')} Kz\nDuração: ${plano.dias} dias`;
+  const texto = `EZNY Premium\nEntidade: ${entidade}\nReferência Multicaixa: ${referencia}\nValor: ${plano.valor.toLocaleString('pt-PT')} Kz\nCódigo do pedido EZNY: ${codigoPedido}\nDuração: ${plano.dias} dias`;
 
   if (navigator.clipboard) {
     navigator.clipboard.writeText(texto).then(() => {
@@ -201,6 +229,7 @@ function copiarReferencia() {
 }
 
 async function confirmarPagamento() {
+  if (pagamentoPendente) return;
   const btn = document.getElementById('btnConfirmarPagamento');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> A criar pedido...';
@@ -211,23 +240,33 @@ async function confirmarPagamento() {
       headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
       body: JSON.stringify({ metodo: metodoPagamento, plano: planoSelecionado })
     });
-    const data = await res.json();
+    const data = await res.json().catch(() => ({}));
     if (res.ok) {
       const p = data.pagamento;
-      document.getElementById('refDescritivo').textContent = p.referencia;
-      if (p.entidade) document.getElementById('refNumero').textContent = p.entidade + ' / ' + p.referencia;
-      fecharModal();
-      toast('Pedido criado. O Premium será ativado após confirmação do pagamento.', 'ok');
-      setTimeout(() => { window.location.href = 'perfil.html'; }, 2200);
-    } else {
-      toast(data.erro || 'Não foi possível criar o pedido.', 'erro');
-      btn.disabled = false;
-      btn.innerHTML = '<i class="ph ph-check"></i> Já paguei';
+      mostrarDadosPagamento({ ...p, referencia_pedido: p.referencia_pedido || p.referencia });
+      document.getElementById('premiumStatus').textContent = 'Pedido criado. Efetue o pagamento fora do EZNY e aguarde a validação manual.';
+      const activateButton = document.getElementById('btnAtivar');
+      activateButton.innerHTML = '<i class="ph ph-receipt"></i> Ver pedido pendente';
+      activateButton.onclick = () => abrirPagamento();
+      toast('Pedido criado. O Premium será ativado após validação manual do pagamento.', 'ok');
+      return;
     }
+    if (res.status === 409 && data.pagamento_id) {
+      const pedidosRes = await fetch(`${API_URL}/pagamentos/me`, { headers: { Authorization: 'Bearer ' + token } });
+      const pedidos = pedidosRes.ok ? await pedidosRes.json() : [];
+      const pendente = Array.isArray(pedidos) ? pedidos.find(p => p.status === 'pendente') : null;
+      if (pendente) {
+        mostrarDadosPagamento(pendente);
+        toast('Já existe um pedido pendente. Os dados foram carregados.', 'info');
+        return;
+      }
+    }
+    throw new Error(data.erro || `Não foi possível criar o pedido (HTTP ${res.status}).`);
   } catch (e) {
-    toast('Erro de rede. Tente novamente.', 'erro');
+    console.error('[PREMIUM] Erro ao criar pedido:', e);
+    toast(e.message || 'Erro de rede. Tente novamente.', 'erro');
     btn.disabled = false;
-    btn.innerHTML = '<i class="ph ph-check"></i> Já paguei';
+    btn.innerHTML = '<i class="ph ph-check"></i> Criar pedido e mostrar dados';
   }
 }
 /* ============================================================
@@ -251,4 +290,3 @@ function toast(msg, tipo) {
   t.innerHTML = '<i class="ph-fill ph-' + (tipo === 'erro' ? 'warning-circle' : tipo === 'ok' ? 'check-circle' : 'info') + '"></i> <span>' + msg + '</span>';
   toastTimer = setTimeout(() => t.classList.remove('visivel'), 3500);
 }
-

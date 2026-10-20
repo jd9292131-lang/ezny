@@ -27,7 +27,7 @@
 
 <!-- Header -->
 <div class="header">
-  <button class="header-btn" onclick="history.back()">
+  <button class="header-btn" data-csp-handler="d48ccdad373f245b">
     <i class="ph ph-arrow-left"></i>
   </button>
   <div class="header-titulo">
@@ -94,12 +94,12 @@
       <div class="preview-meta-grid" id="previewMetaGrid"></div>
     </div>
 
-    <form id="anuncioForm" onsubmit="event.preventDefault();">
+    <form id="anuncioForm" data-csp-handler="b363240608d44f34">
 
       <!-- CATEGORIA -->
       <div class="form-group">
         <label>Categoria</label>
-        <select id="categoria" required onchange="handleCategoriaChange()">
+        <select id="categoria" required data-csp-handler="2e3f61fced110e5e">
           <option value="" disabled selected>Selecionar categoria</option>
           <option value="telefone">Telemóveis e Tablets</option>
           <option value="carro">Carros e Motas</option>
@@ -123,7 +123,7 @@
         <div class="upload-label">Fotos do Anúncio <span style="color:var(--text-muted);font-weight:400;">(máx. 4)</span></div>
 
         <div class="upload-area" id="uploadArea">
-          <input type="file" id="inputImagens" accept="image/jpeg,image/png,image/webp" multiple onchange="handleImageUpload(this.files)">
+          <input type="file" id="inputImagens" accept="image/jpeg,image/png,image/webp" multiple data-csp-handler="bc083600c48495cc">
           <div class="upload-icon">
             <i class="ph ph-images"></i>
           </div>
@@ -137,7 +137,7 @@
 
       <!-- BOTÃO ENVIAR -->
       <div class="btn-group">
-        <button type="button" id="publicarBtn" class="btn btn-success" onclick="publicar()">
+        <button type="button" id="publicarBtn" class="btn btn-success" data-csp-handler="c41095c6314c9bdd">
           <i class="ph ph-paper-plane-right"></i>
           <span id="btnTexto">Enviar para Aprovação</span>
         </button>
@@ -151,5 +151,6 @@
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/anuncio-categorias.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/criar-anuncio.js"></script>
+<script src="csp-handlers.js"></script>
 </body>
 </html>

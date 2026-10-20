@@ -7,11 +7,12 @@
 <title>EZNY - Entrar</title>
 <link rel="icon" type="image/png" href="assets/ezny-logo-transparent.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
 
 <link rel="stylesheet" href="css/auth.css">
 <link rel="stylesheet" href="css/ezny-brand.css">
-</head>
+  <link rel="stylesheet" href="assets/css/phosphor.css">
+
 
 <body>
 
@@ -25,8 +26,8 @@
 
 
   <div class="tabs">
-    <button class="active" onclick="abrirAba('login')">Entrar</button>
-    <button onclick="abrirAba('cadastro')">Criar Conta</button>
+    <button class="active" data-csp-handler="2c9ac12a82b515d8">Entrar</button>
+    <button data-csp-handler="6b496a086e5129bf">Criar Conta</button>
   </div>
 
   <div class="tab-content">
@@ -63,13 +64,13 @@
         <div class="input-container">
           <span class="input-icon"><i class="ph ph-lock-key"></i></span>
           <input id="senha" type="password" placeholder="••••••••" autocomplete="current-password">
-          <button type="button" class="toggle-password" onclick="toggleSenha('senha', this)" aria-label="Mostrar senha">
+          <button type="button" class="toggle-password" data-csp-handler="e5bbdf95f02f2ca7" aria-label="Mostrar senha">
             <i class="ph ph-eye-slash"></i>
           </button>
         </div>
       </div>
 
-      <button class="submit" id="btnLogin" onclick="login()">
+      <button class="submit" id="btnLogin" data-csp-handler="4361ddd74a6d4b71">
         <span>Entrar</span>
       </button>
             <p class="termos-link">
@@ -137,8 +138,8 @@
         <label>Senha</label>
         <div class="input-container">
           <span class="input-icon"><i class="ph ph-lock-key"></i></span>
-          <input id="senhaCadastro" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" oninput="verificarForcaSenha()">
-          <button type="button" class="toggle-password" onclick="toggleSenha('senhaCadastro', this)" aria-label="Mostrar senha">
+          <input id="senhaCadastro" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" data-csp-handler="075f32c5c59296fd">
+          <button type="button" class="toggle-password" data-csp-handler="a01670254aa83ddb" aria-label="Mostrar senha">
             <i class="ph ph-eye-slash"></i>
           </button>
         </div>
@@ -154,14 +155,14 @@
         <label>Confirmar senha</label>
         <div class="input-container">
           <span class="input-icon"><i class="ph ph-lock-key-open"></i></span>
-          <input id="senhaConfirmar" type="password" placeholder="Repita a senha" autocomplete="new-password" oninput="verificarConfirmacaoSenha()">
-          <button type="button" class="toggle-password" onclick="toggleSenha('senhaConfirmar', this)" aria-label="Mostrar senha">
+          <input id="senhaConfirmar" type="password" placeholder="Repita a senha" autocomplete="new-password" data-csp-handler="9481b05e043f9397">
+          <button type="button" class="toggle-password" data-csp-handler="d2d5af0e08ab1993" aria-label="Mostrar senha">
             <i class="ph ph-eye-slash"></i>
           </button>
         </div>
       </div>
 
-      <button class="submit" id="btnCadastro" onclick="cadastrar()">
+      <button class="submit" id="btnCadastro" data-csp-handler="8f75b950f434cdf8">
         <span>Criar Conta</span>
       </button>
 
@@ -176,5 +177,6 @@
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/auth.js"></script>
 
+<script src="csp-handlers.js"></script>
 </body>
 </html>

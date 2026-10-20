@@ -8,11 +8,12 @@
 <title>Meus Anúncios | EZNY</title>
 <link rel="icon" type="image/png" href="assets/ezny-logo-transparent.png">
 <!-- Phosphor Icons Web - CDN Oficial (regular + fill) -->
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
 
 <link rel="stylesheet" href="css/meus-anuncios.css">
 <link rel="stylesheet" href="css/ezny-brand.css">
-</head>
+  <link rel="stylesheet" href="assets/css/phosphor.css">
+
 
 <body>
 
@@ -23,14 +24,14 @@
 <div id="toast" class="toast"><i class="ph-fill ph-warning-circle"></i> Precisa iniciar sessão!</div>
 
 <!-- Modal Confirmação Eliminar -->
-<div id="modalEliminar" class="modal-overlay" onclick="fecharModal(event)">
-  <div class="modal-box" onclick="event.stopPropagation()">
+<div id="modalEliminar" class="modal-overlay" data-csp-handler="7c70430df9a7e451">
+  <div class="modal-box" data-csp-handler="6c71c52018baeb4e">
     <i class="ph-fill ph-trash"></i>
     <h3>Eliminar Anúncio</h3>
     <p>Tem a certeza que deseja eliminar este anúncio? Esta ação não pode ser desfeita.</p>
     <div class="modal-actions">
-      <button class="modal-btn modal-btn-cancelar" onclick="fecharModal()">Cancelar</button>
-      <button class="modal-btn modal-btn-confirmar" id="btnConfirmarEliminar" onclick="confirmarEliminar()">
+      <button class="modal-btn modal-btn-cancelar" data-csp-handler="74c9eaaa9399342f">Cancelar</button>
+      <button class="modal-btn modal-btn-confirmar" id="btnConfirmarEliminar" data-csp-handler="0858e6bee71c2140">
         <i class="ph-fill ph-trash" style="margin-right:6px;"></i> Eliminar
       </button>
     </div>
@@ -59,12 +60,12 @@
   <div id="debugPanel" class="debug-panel" style="display:none;">
     <h4><i class="ph ph-bug"></i> Debug - Endpoints testados</h4>
     <pre id="debugOutput"></pre>
-    <button onclick="testarEndpointsManualmente()">Testar endpoints novamente</button>
+    <button data-csp-handler="b64f22bc1b6412b5">Testar endpoints novamente</button>
   </div>
 
   <!-- FILTROS -->
   <div class="filtros">
-    <select id="filtroStatus" onchange="filtrarMeusAnuncios()">
+    <select id="filtroStatus" data-csp-handler="ab6e30b69a50d5c8">
       <option value="">Todos os estados</option>
       <option value="active">Aprovados</option>
       <option value="pending">Pendentes</option>
@@ -116,5 +117,6 @@
   </a>
 </nav>
 
+<script src="csp-handlers.js"></script>
 </body>
 </html>

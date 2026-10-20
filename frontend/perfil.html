@@ -21,11 +21,11 @@
 
 <!-- Header -->
 <div class="prof-header">
-  <button class="prof-header-btn" onclick="history.back()">
+  <button class="prof-header-btn" data-csp-handler="797424fad1f9c4d2">
     <i class="ph ph-arrow-left"></i>
   </button>
   <div class="prof-header-titulo">Perfil</div>
-  <button class="prof-header-btn" onclick="toggleTema()" title="Alternar tema">
+  <button class="prof-header-btn" data-csp-handler="ac1fd181de1765d3" title="Alternar tema">
     <i class="ph ph-moon" id="iconTema"></i>
   </button>
 </div>
@@ -45,7 +45,7 @@
       <div id="avatarWrap">
         <div class="perfil-avatar-placeholder" id="avatarPlaceholder">U</div>
       </div>
-      <button class="perfil-avatar-edit" onclick="editarAvatar()" title="Alterar foto">
+      <button class="perfil-avatar-edit" data-csp-handler="8fdb64d54fc92ea8" title="Alterar foto">
         <i class="ph-fill ph-camera"></i>
       </button>
     </div>
@@ -72,10 +72,10 @@
     </div>
 
     <div class="perfil-acoes" id="perfilAcoes">
-      <button class="perfil-btn perfil-btn-premium" id="btnUpgrade" onclick="irUpgrade()">
+      <button class="perfil-btn perfil-btn-premium" id="btnUpgrade" data-csp-handler="02d17cfa14bf17b0">
         <i class="ph-fill ph-crown"></i> Tornar Premium
       </button>
-      <button class="perfil-btn perfil-btn-editar" onclick="abrirEditar()">
+      <button class="perfil-btn perfil-btn-editar" data-csp-handler="69e27a5cb7d8e14c">
         <i class="ph-fill ph-pencil-simple"></i> Editar
       </button>
     </div>
@@ -86,7 +86,7 @@
     <i class="ph-fill ph-crown"></i>
     <h3>Destaque-se no EZNY</h3>
     <p>Obtenha um perfil profissional, comentários nos anúncios, avaliações de clientes e muito mais visibilidade.</p>
-    <button class="perfil-btn perfil-btn-premium" onclick="irUpgrade()" style="width:100%;">
+    <button class="perfil-btn perfil-btn-premium" data-csp-handler="02d17cfa14bf17b0" style="width:100%;">
       <i class="ph-fill ph-crown"></i> Saber mais sobre Premium
     </button>
   </div>
@@ -129,7 +129,7 @@
 
   <!-- Logout -->
   <div style="padding:0 16px 24px;">
-    <button class="perfil-btn" onclick="abrirModalLogout()" style="width:100%; background:var(--glass); color:var(--text-muted); border:1px solid var(--glass-border);">
+    <button class="perfil-btn" data-csp-handler="00e61c27f03b95bc" style="width:100%; background:var(--glass); color:var(--text-muted); border:1px solid var(--glass-border);">
       <i class="ph-fill ph-sign-out"></i> Terminar Sessão
     </button>
   </div>
@@ -137,12 +137,12 @@
 </div>
 
 <!-- Modal Editar Perfil -->
-<div id="modalEditar" class="modal-overlay" onclick="fecharEditar(event)">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
+<div id="modalEditar" class="modal-overlay" data-csp-handler="8c708dc1ca935bcb">
+  <div class="modal-sheet" data-csp-handler="2507012aa67c7619">
     <div class="modal-handle"></div>
     <div class="modal-header">
       <h3><i class="ph-fill ph-pencil-simple" style="color:var(--primary);margin-right:8px;"></i>Editar Perfil</h3>
-      <button class="modal-header-btn" onclick="fecharEditar()">
+      <button class="modal-header-btn" data-csp-handler="f0c9301a0710dc9a">
         <i class="ph ph-x"></i>
       </button>
     </div>
@@ -169,8 +169,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="modal-btn modal-btn-cancel" onclick="fecharEditar()">Cancelar</button>
-      <button class="modal-btn modal-btn-ok" onclick="salvarPerfil()">
+      <button class="modal-btn modal-btn-cancel" data-csp-handler="f0c9301a0710dc9a">Cancelar</button>
+      <button class="modal-btn modal-btn-ok" data-csp-handler="5e6facc0da8ad265">
         <i class="ph-fill ph-check"></i> Guardar
       </button>
     </div>
@@ -179,14 +179,14 @@
 
 
 <!-- Modal Terminar Sessão -->
-<div id="modalLogout" class="modal-confirm" onclick="fecharModalLogout(event)">
-  <div class="modal-confirm-box" onclick="event.stopPropagation()">
+<div id="modalLogout" class="modal-confirm" data-csp-handler="c86f5159336f78bd">
+  <div class="modal-confirm-box" data-csp-handler="2507012aa67c7619">
     <i class="ph-fill ph-sign-out" style="color:var(--text-muted);"></i>
     <h3>Terminar Sessão</h3>
     <p>Tem a certeza que deseja sair da sua conta?</p>
     <div class="modal-confirm-acoes">
-      <button class="modal-confirm-btn modal-confirm-btn-cancel" onclick="fecharModalLogout()">Cancelar</button>
-      <button class="modal-confirm-btn modal-confirm-btn-ok" style="background:linear-gradient(135deg, var(--primary), var(--primary-dark));" onclick="confirmarLogout()">
+      <button class="modal-confirm-btn modal-confirm-btn-cancel" data-csp-handler="2628a873eefaca19">Cancelar</button>
+      <button class="modal-confirm-btn modal-confirm-btn-ok" style="background:linear-gradient(135deg, var(--primary), var(--primary-dark));" data-csp-handler="836174d957899401">
         <i class="ph-fill ph-sign-out"></i> Sair
       </button>
     </div>
@@ -219,5 +219,6 @@
 
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/perfil.js"></script>
+<script src="csp-handlers.js"></script>
 </body>
 </html>

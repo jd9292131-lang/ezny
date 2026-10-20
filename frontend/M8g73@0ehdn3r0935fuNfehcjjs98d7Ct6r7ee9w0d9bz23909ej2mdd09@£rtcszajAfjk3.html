@@ -7,17 +7,18 @@
 <title>EZNY — Painel Administrativo</title>
 <link rel="icon" type="image/png" href="assets/ezny-logo-transparent.png">
 <!-- Phosphor Icons (profissionais) -->
-<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/vendor/chart.umd.min.4.5.1.js"></script>
 
 <link rel="stylesheet" href="css/painel-admin.css">
 <link rel="stylesheet" href="css/ezny-brand.css">
-</head>
+  <link rel="stylesheet" href="assets/css/phosphor.css">
+
 
 <body>
   <!-- SIDEBAR -->
@@ -30,47 +31,50 @@
     </div>
   </div>
   <div class="nav-menu">
-    <button class="nav-item active" onclick="navigateTo('dashboard', this)">
+    <button class="nav-item active" data-csp-handler="3e8ba2aa232106b3">
       <i class="ph ph-squares-four"></i><span>Dashboard</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('anuncios', this)">
+    <button class="nav-item" data-csp-handler="fbbf36e794a8403a">
       <i class="ph ph-package"></i><span>Anúncios</span>
       <span class="nav-badge" id="nav-badge-anuncios" style="display:none;">0</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('usuarios', this)">
+    <button class="nav-item" data-csp-handler="0f3be6f390497375">
       <i class="ph ph-users"></i><span>Utilizadores</span>
       <span class="nav-badge" id="nav-badge-usuarios" style="display:none;">0</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('denuncias', this)">
+    <button class="nav-item" data-csp-handler="a1696187e4742456">
       <i class="ph ph-warning-circle"></i><span>Denúncias</span>
       <span class="nav-badge" id="nav-badge-denuncias" style="display:none;">0</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('comunicados', this)">
+    <button class="nav-item" data-csp-handler="52935b8a1e8a4e14">
+      <i class="ph ph-chat-circle-dots"></i><span>Relatos de problemas</span>
+    </button>
+    <button class="nav-item" data-csp-handler="6e96e1308e38c192">
       <i class="ph ph-megaphone"></i><span>Comunicados</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('notificacoes', this)">
+    <button class="nav-item" data-csp-handler="5475d28f47b96545">
       <i class="ph ph-bell"></i><span>Notificações</span>
       <span class="nav-badge" id="nav-badge-notificacoes" style="display:none;">0</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('enviar-comunicados', this)">
+    <button class="nav-item" data-csp-handler="276d3a7e239e3d27">
       <i class="ph ph-paper-plane-right"></i><span>Enviar Comunicados</span>
     </button>
 
-    <button class="nav-item" onclick="navigateTo('popups', this)">
+    <button class="nav-item" data-csp-handler="b49d21018f779a75">
       <i class="ph ph-megaphone"></i><span>Popups (Tempo Real)</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('pagamentos', this)">
+    <button class="nav-item" data-csp-handler="0cf99b51e412c11c">
       <i class="ph ph-credit-card"></i><span>Pagamentos</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('estatisticas', this)">
+    <button class="nav-item" data-csp-handler="9899be108cc4cde8">
       <i class="ph ph-chart-line-up"></i><span>Estatísticas</span>
     </button>
-    <button class="nav-item" onclick="navigateTo('configuracoes', this)">
+    <button class="nav-item" data-csp-handler="19e328aef9484596">
       <i class="ph ph-gear"></i><span>Configurações</span>
     </button>
   </div>
   <div class="sidebar-footer">
-    <div class="user-mini" onclick="logout()">
+    <div class="user-mini" data-csp-handler="a914d9ea008d8703">
       <div class="user-avatar" id="userAvatar">A</div>
       <div class="user-info">
         <div class="name" id="userName">Admin</div>
@@ -90,7 +94,7 @@
       </div>
     </div>
     <div class="topbar-right">
-      <button class="icon-btn" onclick="refreshAll()" title="Atualizar">
+      <button class="icon-btn" data-csp-handler="1d34e9dd6847fc53" title="Atualizar">
         <i class="ph ph-arrows-clockwise"></i>
       </button>
       <button class="icon-btn" style="position:relative" title="Notificações">
@@ -172,7 +176,7 @@
         </div>
       </div>
       <div class="table-card active-users-card" style="margin:20px 0">
-        <div class="table-header"><div><div class="table-title">Utilizadores ativos agora</div><div style="font-size:12px;color:var(--text-muted);margin-top:4px">Sessões com atividade nos últimos 2 minutos</div></div><button class="btn btn-secondary btn-sm" onclick="carregarAtivosAdmin()"><i class="ph ph-arrows-clockwise"></i> Atualizar</button></div>
+        <div class="table-header"><div><div class="table-title">Utilizadores ativos agora</div><div style="font-size:12px;color:var(--text-muted);margin-top:4px">Sessões com atividade nos últimos 2 minutos</div></div><button class="btn btn-secondary btn-sm" data-csp-handler="2e29fa18d4319991"><i class="ph ph-arrows-clockwise"></i> Atualizar</button></div>
         <div id="activeUsersPanel"><div class="empty-state"><i class="ph ph-hourglass"></i><h4>A carregar...</h4></div></div>
       </div>
       <div class="charts-grid">
@@ -180,9 +184,9 @@
           <div class="chart-header">
             <div class="chart-title">Tendência de Visitas (7 dias)</div>
             <div class="chart-filters">
-              <button class="filter-btn active" onclick="setChartPeriod(7, this)">7D</button>
-              <button class="filter-btn" onclick="setChartPeriod(30, this)">30D</button>
-              <button class="filter-btn" onclick="setChartPeriod(90, this)">90D</button>
+              <button class="filter-btn active" data-csp-handler="c4b0e43a076cad98">7D</button>
+              <button class="filter-btn" data-csp-handler="07a1ae433101c2a3">30D</button>
+              <button class="filter-btn" data-csp-handler="4bca375882847894">90D</button>
             </div>
           </div>
           <div class="chart-container"><canvas id="visitsChart"></canvas></div>
@@ -195,7 +199,7 @@
       <div class="table-card">
         <div class="table-header">
           <div class="table-title">Últimos Anúncios</div>
-          <button class="btn btn-primary btn-sm" onclick="openModal()">
+          <button class="btn btn-primary btn-sm" data-csp-handler="cd81e6627cc274c9">
             <i class="ph ph-plus" style="font-size:16px"></i>Novo Anúncio
           </button>
         </div>
@@ -214,14 +218,14 @@
             <span class="status-badge active" id="adsCountBadge">0 ativos</span>
           </div>
           <div class="table-actions">
-            <input type="text" class="form-input" placeholder="Pesquisar..." style="width:220px;padding:8px 12px;font-size:13px" id="adsSearch" onkeyup="filterAds()">
-            <select class="form-select" style="width:140px;padding:8px 12px;font-size:13px" id="adsFilter" onchange="filterAds()">
+            <input type="text" class="form-input" placeholder="Pesquisar..." style="width:220px;padding:8px 12px;font-size:13px" id="adsSearch" data-csp-handler="471f25bb8c009852">
+            <select class="form-select" style="width:140px;padding:8px 12px;font-size:13px" id="adsFilter" data-csp-handler="6d8054dcdc0c0455">
               <option value="">Todos</option>
               <option value="active">Ativos</option>
               <option value="pending">Pendentes</option>
             <option value="rejected">Rejeitados</option>     
                  </select>
-            <button class="btn btn-primary btn-sm" onclick="openModal()">
+            <button class="btn btn-primary btn-sm" data-csp-handler="cd81e6627cc274c9">
               <i class="ph ph-plus" style="font-size:16px"></i>Criar
             </button>
           </div>
@@ -247,8 +251,8 @@
             <span class="status-badge active" id="usersCountBadge">0 registados</span>
           </div>
           <div class="table-actions">
-            <input type="text" class="form-input" placeholder="Pesquisar..." style="width:220px;padding:8px 12px;font-size:13px" id="usersSearch" onkeyup="filterUsers()">
-            <select class="form-select" style="width:140px;padding:8px 12px;font-size:13px" id="usersFilter" onchange="filterUsers()">
+            <input type="text" class="form-input" placeholder="Pesquisar..." style="width:220px;padding:8px 12px;font-size:13px" id="usersSearch" data-csp-handler="8d55851cf7c3292a">
+            <select class="form-select" style="width:140px;padding:8px 12px;font-size:13px" id="usersFilter" data-csp-handler="d342a478a7700932">
               <option value="">Todos</option>
               <option value="normal">Normal</option>
               <option value="premium">Premium</option>
@@ -278,8 +282,21 @@
         </div>
         <div style="overflow-x:auto">
           <table class="data-table" id="denunciasTable">
-            <thead><tr><th>ID</th><th>Descrição</th><th>Data</th><th style="text-align:right">Ações</th></tr></thead>
-            <tbody id="denunciasTableBody"><tr><td colspan="4"><div class="empty-state"><i class="ph ph-hourglass"></i><h4>A carregar...</h4></div></td></tr></tbody>
+            <thead><tr><th>ID</th><th>Denunciante</th><th>Utilizador/Anúncio denunciado</th><th>Motivo / Descrição</th><th>Estado</th><th>Data</th></tr></thead>
+            <tbody id="denunciasTableBody"><tr><td colspan="6"><div class="empty-state"><i class="ph ph-hourglass"></i><h4>A carregar...</h4></div></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="page-relatos">
+      <h2 class="section-title">Relatos de problemas</h2>
+      <p class="section-subtitle">Pedidos de suporte enviados pelos utilizadores</p>
+      <div class="table-card">
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>ID</th><th>Tipo</th><th>Relato</th><th>Utilizador / Contacto</th><th>Anexo</th><th>Data</th></tr></thead>
+            <tbody id="relatosTableBody"><tr><td colspan="6"><div class="empty-state"><i class="ph ph-hourglass"></i><h4>A carregar...</h4></div></td></tr></tbody>
           </table>
         </div>
       </div>
@@ -292,7 +309,7 @@
       <div class="table-card">
         <div class="table-header">
           <div class="table-title">Todos os Comunicados</div>
-          <button class="btn btn-primary btn-sm" onclick="openComunicadoModal()">
+          <button class="btn btn-primary btn-sm" data-csp-handler="8d26863d48c0cb41">
             <i class="ph ph-plus" style="font-size:16px"></i>Novo
           </button>
         </div>
@@ -350,7 +367,7 @@
       <div class="table-card">
         <div class="table-header">
           <div class="table-title">Popups Activos</div>
-          <button class="btn btn-primary btn-sm" onclick="openComunicadoModal()">
+          <button class="btn btn-primary btn-sm" data-csp-handler="8d26863d48c0cb41">
             <i class="ph ph-plus" style="font-size:16px"></i>Novo comunicado visual
           </button>
         </div>
@@ -400,7 +417,7 @@
               <label class="form-label">Utilizadores dos últimos (dias)</label>
               <input type="number" class="form-input" id="notifNovosDias" value="7" min="1" max="365">
             </div>
-            <button class="btn btn-primary" style="width:100%" onclick="enviarNotificacaoNovos()">
+            <button class="btn btn-primary" style="width:100%" data-csp-handler="ce039c89dd1d4d3c">
               <i class="ph ph-paper-plane-right" style="font-size:16px"></i>Enviar para Novos
             </button>
           </div>
@@ -424,8 +441,31 @@
               <label class="form-label">Utilizadores com mais de (dias)</label>
               <input type="number" class="form-input" id="notifAntigosDias" value="30" min="1" max="365">
             </div>
-            <button class="btn btn-warning" style="width:100%" onclick="enviarNotificacaoAntigos()">
+            <button class="btn btn-warning" style="width:100%" data-csp-handler="b245bc3e34d41e50">
               <i class="ph ph-paper-plane-right" style="font-size:16px"></i>Enviar para Antigos
+            </button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-title">📨 Notificar um Utilizador</div>
+          </div>
+          <div style="padding:24px">
+            <div class="form-group full-width" style="margin-bottom:16px">
+              <label class="form-label" for="notifUsuarioId">Destinatário</label>
+              <select class="form-select" id="notifUsuarioId"><option value="">Selecione um utilizador...</option></select>
+            </div>
+            <div class="form-group full-width" style="margin-bottom:16px">
+              <label class="form-label" for="notifUsuarioTitulo">Título</label>
+              <input type="text" class="form-input" id="notifUsuarioTitulo" maxlength="255" placeholder="Título da notificação">
+            </div>
+            <div class="form-group full-width" style="margin-bottom:16px">
+              <label class="form-label" for="notifUsuarioMensagem">Mensagem</label>
+              <textarea class="form-textarea" id="notifUsuarioMensagem" maxlength="2000" placeholder="Escreva a mensagem..." style="min-height:80px"></textarea>
+            </div>
+            <button class="btn btn-primary" style="width:100%" data-csp-handler="11f03f110b759cb9">
+              <i class="ph ph-paper-plane-right" style="font-size:16px"></i>Enviar notificação
             </button>
           </div>
         </div>
@@ -449,7 +489,7 @@
                 Este popup será mostrado a TODOS os utilizadores que ainda não o viram.
               </div>
             </div>
-            <button class="btn btn-primary" style="width:100%" onclick="enviarPopupTodos()">
+            <button class="btn btn-primary" style="width:100%" data-csp-handler="4dfc8bc0d30119b5">
               <i class="ph ph-megaphone" style="font-size:16px"></i>Criar Popup Global
             </button>
           </div>
@@ -471,7 +511,7 @@
     <section class="page-section" id="page-estatisticas">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:12px">
   <h2 class="section-title">Estatísticas Detalhadas</h2>
-  <button class="btn btn-danger btn-sm" onclick="resetVisitas()">
+  <button class="btn btn-danger btn-sm" data-csp-handler="a170ef04b18b16e7">
     <i class="ph ph-trash" style="font-size:16px"></i> Reset Visitas
   </button>
 </div>
@@ -497,15 +537,15 @@
         <div style="padding:24px">
           <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)">
             <div><div style="font-weight:600;margin-bottom:4px">Notificações por Email</div><div style="font-size:13px;color:var(--text-muted)">Receber alertas de novos anúncios</div></div>
-            <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+            <button class="toggle-switch active" id="settingEmailNotifications" data-csp-handler="cbb756396fb4d234" aria-label="Ativar notificações por email"></button>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)">
-            <div><div style="font-weight:600;margin-bottom:4px">Modo Manutenção</div><div style="font-size:13px;color:var(--text-muted)">Colocar site em manutenção</div></div>
-            <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+            <div><div style="font-weight:600;margin-bottom:4px">Pausar novos anúncios</div><div style="font-size:13px;color:var(--text-muted)">Impedir novas publicações durante manutenção</div></div>
+            <button class="toggle-switch" id="settingMaintenance" data-csp-handler="cbb756396fb4d234" aria-label="Pausar criação de anúncios"></button>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)">
             <div><div style="font-weight:600;margin-bottom:4px">Aprovação Automática</div><div style="font-size:13px;color:var(--text-muted)">Aprovar anúncios sem revisão</div></div>
-            <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+            <button class="toggle-switch" id="settingAutoApproval" data-csp-handler="cbb756396fb4d234" aria-label="Ativar aprovação automática de anúncios"></button>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0">
             <div><div style="font-weight:600;margin-bottom:4px">API Endpoint</div><div style="font-size:13px;color:var(--text-muted)">URL base para requisições</div></div>
@@ -513,7 +553,7 @@
           </div>
         </div>
         <div style="padding:20px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end">
-          <button class="btn btn-primary" onclick="saveSettings()">
+          <button class="btn btn-primary" data-csp-handler="56dd00dc995a7581">
             <i class="ph ph-floppy-disk" style="font-size:16px"></i>Guardar
           </button>
         </div>
@@ -528,14 +568,14 @@
   <div class="modal" style="max-width: 680px">
     <div class="modal-header">
       <div class="modal-title">Criar Novo Anúncio</div>
-      <button class="modal-close" onclick="closeModal()"><i class="ph ph-x"></i></button>
+      <button class="modal-close" data-csp-handler="f9de46f7f29632a4"><i class="ph ph-x"></i></button>
     </div>
     <div class="modal-body">
       <div class="form-grid">
         <!-- CATEGORIA -->
         <div class="form-group full-width">
           <label class="form-label">Categoria</label>
-          <select class="form-select" id="mCategoria" onchange="handleAdminCategoriaChange()">
+          <select class="form-select" id="mCategoria" data-csp-handler="925643a88eb362cd">
             <option value="">Selecionar categoria...</option>
             <option value="telefone">Telemóveis e Tablets</option>
             <option value="carro">Carros e Motas</option>
@@ -558,18 +598,18 @@
       <!-- Upload -->
       <div class="form-group full-width" style="margin-top: 16px;">
         <label class="form-label">Imagem</label>
-        <div class="upload-area" id="uploadArea" onclick="document.getElementById('mImagem').click()">
+        <div class="upload-area" id="uploadArea" data-csp-handler="391d4547269e7aab">
           <i class="ph ph-cloud-arrow-up"></i>
           <div class="upload-text">Clique ou arraste imagem aqui</div>
           <div class="upload-hint">PNG, JPG até 5MB</div>
         </div>
-        <input type="file" id="mImagem" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+        <input type="file" id="mImagem" accept="image/*" style="display:none" data-csp-handler="a235f87257db9086">
         <div class="preview-grid" id="previewGrid"></div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="criarAnuncio()">
+      <button class="btn btn-secondary" data-csp-handler="f9de46f7f29632a4">Cancelar</button>
+      <button class="btn btn-primary" data-csp-handler="54f4d5233b14465d">
         <i class="ph ph-paper-plane-right" style="font-size:16px"></i>Publicar
       </button>
     </div>
@@ -580,16 +620,16 @@
   <div class="modal" style="max-width:480px">
     <div class="modal-header">
       <div class="modal-title" id="banModalTitle">Banir Utilizador</div>
-      <button class="modal-close" onclick="closeBanModal()"><i class="ph ph-x"></i></button>
+      <button class="modal-close" data-csp-handler="f4c47d48fc671c7f"><i class="ph ph-x"></i></button>
     </div>
     <div class="modal-body">
       <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px">Escolha o tipo de banimento para <b id="banTargetName">utilizador</b>:</p>
       <div class="ban-options">
-        <div class="ban-option selected" onclick="selectBanType('permanente', this)" id="banOptPerm">
+        <div class="ban-option selected" data-csp-handler="a97d42cbf2382dd0" id="banOptPerm">
           <i class="ph ph-prohibit"></i>
           <div><div class="ban-option-title">Banimento Permanente</div><div class="ban-option-desc">Utilizador nunca mais poderá aceder nem criar conta com este telefone.</div></div>
         </div>
-        <div class="ban-option" onclick="selectBanType('temporario', this)" id="banOptTemp">
+        <div class="ban-option" data-csp-handler="e3db841ec86f6762" id="banOptTemp">
           <i class="ph ph-clock"></i>
           <div><div class="ban-option-title">Banimento Temporário</div><div class="ban-option-desc">Escolha uma data para o banimento expirar automaticamente.</div></div>
         </div>
@@ -600,8 +640,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeBanModal()">Cancelar</button>
-      <button class="btn btn-danger" onclick="confirmBan()">
+      <button class="btn btn-secondary" data-csp-handler="f4c47d48fc671c7f">Cancelar</button>
+      <button class="btn btn-danger" data-csp-handler="eca475a5cdc2eebe">
         <i class="ph ph-prohibit" style="font-size:16px"></i>Confirmar Banimento
       </button>
     </div>
@@ -615,8 +655,8 @@
     <h3>Confirmar Exclusão</h3>
     <p>Tem certeza que deseja eliminar este item? Esta ação não pode ser desfeita.</p>
     <div class="confirm-actions">
-      <button class="btn btn-secondary" onclick="closeConfirm()">Cancelar</button>
-      <button class="btn btn-danger" onclick="confirmDelete()">Eliminar</button>
+      <button class="btn btn-secondary" data-csp-handler="6f2c40baa15571dc">Cancelar</button>
+      <button class="btn btn-danger" data-csp-handler="218153cd5acee961">Eliminar</button>
     </div>
   </div>
 </div>
@@ -627,7 +667,7 @@
   <div class="modal" style="max-width:760px">
     <div class="modal-header">
       <div><div class="modal-title">Criar comunicado profissional</div><div style="font-size:12px;color:var(--text-muted);margin-top:4px">Crie uma comunicação visual com imagem, CTA e segmentação.</div></div>
-      <button class="modal-close" onclick="closeComunicadoModal()"><i class="ph ph-x"></i></button>
+      <button class="modal-close" data-csp-handler="cf313aadf6731259"><i class="ph ph-x"></i></button>
     </div>
     <div class="modal-body">
       <div class="form-grid">
@@ -645,7 +685,7 @@
       <div class="campaign-preview" id="campaignPreview"><div class="campaign-preview-label">Pré-visualização</div><div class="campaign-preview-card"><img id="campaignPreviewImg" src="assets/logo.jpg" alt=""><div><span>COMUNICADO EZNY</span><h4 id="campaignPreviewTitle">Título do comunicado</h4><p id="campaignPreviewText">O conteúdo aparecerá aqui.</p><button type="button">Saber mais</button></div></div></div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeComunicadoModal()">Cancelar</button><button class="btn btn-primary" onclick="criarComunicado()"><i class="ph ph-paper-plane-right" style="font-size:16px"></i>Publicar comunicado</button>
+      <button class="btn btn-secondary" data-csp-handler="cf313aadf6731259">Cancelar</button><button class="btn btn-primary" data-csp-handler="aae04602d8c02ee7"><i class="ph ph-paper-plane-right" style="font-size:16px"></i>Publicar comunicado</button>
     </div>
   </div>
 </div>
@@ -655,7 +695,7 @@
   <div class="modal" style="max-width:500px">
     <div class="modal-header">
       <div class="modal-title">Criar Popup (Tempo Real)</div>
-      <button class="modal-close" onclick="closePopupModal()"><i class="ph ph-x"></i></button>
+      <button class="modal-close" data-csp-handler="1dbb7e54ac144990"><i class="ph ph-x"></i></button>
     </div>
     <div class="modal-body">
       <div class="form-group full-width">
@@ -668,8 +708,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closePopupModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="criarPopup()">
+      <button class="btn btn-secondary" data-csp-handler="1dbb7e54ac144990">Cancelar</button>
+      <button class="btn btn-primary" data-csp-handler="99b1deefff34f609">
         <i class="ph ph-paper-plane-right" style="font-size:16px"></i>Publicar Popup
       </button>
     </div>
@@ -688,6 +728,7 @@
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/anuncio-categorias.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/painel-admin.js"></script>
+<script src="csp-handlers.js"></script>
 </body>
 
 

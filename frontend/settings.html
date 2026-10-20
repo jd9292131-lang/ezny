@@ -11,10 +11,11 @@
 <meta name="apple-mobile-web-app-title" content="EZNY">
 <title>Definições | EZNY</title>
 <link rel="icon" type="image/png" href="assets/ezny-logo-transparent.png">
-<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
 <link rel="stylesheet" href="css/settings.css">
 <link rel="stylesheet" href="css/ezny-brand.css">
-</head>
+  <link rel="stylesheet" href="assets/css/phosphor.css">
+
 
 <body>
 
@@ -32,10 +33,10 @@
     <h3>Terminar Sessão</h3>
     <p>Tem a certeza que deseja terminar a sua sessão?</p>
     <div class="modal-acoes">
-      <button class="modal-btn modal-btn-cancel" onclick="fecharModalLogout()">
+      <button class="modal-btn modal-btn-cancel" data-csp-handler="83e483e2a71bd13e">
         <i class="ph ph-x"></i> Cancelar
       </button>
-      <button class="modal-btn modal-btn-ok" onclick="confirmarLogout()">
+      <button class="modal-btn modal-btn-ok" data-csp-handler="483d57bf4405e1b3">
         <i class="ph ph-sign-out"></i> Sim, terminar
       </button>
     </div>
@@ -49,37 +50,37 @@
     <span id="userSidebar">Menu</span>
   </div>
   <nav class="sidebar-nav">
-    <a href="index.html" onclick="event.stopPropagation()">
+    <a href="index.html" data-csp-handler="f8749b982d12a208">
       <i class="ph ph-house"></i> Início
     </a>
-    <a href="notificacoes.html" onclick="event.stopPropagation()">
+    <a href="notificacoes.html" data-csp-handler="f8749b982d12a208">
       <i class="ph ph-bell"></i> Notificações
       <span id="sidebarNotifBadge" style="margin-left:auto;background:#ef4444;color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;display:none;">0</span>
     </a>
-    <a href="criar-anuncio.html" onclick="event.stopPropagation()"><i class="ph ph-plus-square"></i> Vender</a>
-    <a href="meus-anuncios.html" onclick="event.stopPropagation()"><i class="ph ph-package"></i> Meus anúncios</a>
-    <a href="favoritos.html" onclick="event.stopPropagation()"><i class="ph ph-heart"></i> Favoritos</a>
-    <a href="settings.html" onclick="event.stopPropagation()" style="background:rgba(0,190,200,0.06);">
+    <a href="criar-anuncio.html" data-csp-handler="f8749b982d12a208"><i class="ph ph-plus-square"></i> Vender</a>
+    <a href="meus-anuncios.html" data-csp-handler="f8749b982d12a208"><i class="ph ph-package"></i> Meus anúncios</a>
+    <a href="favoritos.html" data-csp-handler="f8749b982d12a208"><i class="ph ph-heart"></i> Favoritos</a>
+    <a href="settings.html" data-csp-handler="f8749b982d12a208" style="background:rgba(0,190,200,0.06);">
       <i class="ph ph-gear"></i> Definições
       <i class="ph ph-caret-right" style="margin-left:auto;font-size:16px;color:var(--primary-light);"></i>
     </a>
     <div class="sidebar-div"></div>
-    <a href="Politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
-    <a href="Sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
+    <a href="Politica.html" data-csp-handler="f8749b982d12a208"><i class="ph ph-shield-check"></i> Política</a>
+    <a href="Sobre.html" data-csp-handler="f8749b982d12a208"><i class="ph ph-info"></i> Sobre Nós</a>
   </nav>
   <div class="sidebar-foot">
-    <button onclick="event.stopPropagation(); logout()">
+    <button data-csp-handler="088b64f90316a0bf">
       <i class="ph ph-sign-out"></i> Terminar sessão
     </button>
   </div>
 </div>
 
 <!-- Overlay -->
-<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="overlay" class="overlay" data-csp-handler="3e3317d73e584c4d"></div>
 
 <!-- TOP BAR -->
 <div class="top-bar">
-  <button class="back-btn" onclick="history.back()">
+  <button class="back-btn" data-csp-handler="13928af5ac16cf61">
     <i class="ph ph-caret-left"></i>
   </button>
   <div class="top-title">Definições</div>
@@ -90,9 +91,9 @@
   <div class="profile-avatar-wrap">
     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111827'/%3E%3Ccircle cx='100' cy='80' r='40' fill='%2300bec8' opacity='0.2'/%3E%3Cpath d='M100 120c-33 0-60 20-60 45v15h120v-15c0-25-27-45-60-45z' fill='%2300bec8' opacity='0.2'/%3E%3Ccircle cx='100' cy='75' r='28' fill='%2300bec8'/%3E%3Cpath d='M100 115c-30 0-55 18-55 40v10h110v-10c0-22-25-40-55-40z' fill='%2300bec8'/%3E%3C/svg%3E" 
          class="profile-avatar" alt="Avatar" id="profileAvatar" 
-         onclick="document.getElementById('avatarInput').click()">
+         data-csp-handler="95084dbfd19f9b3d">
     <div class="avatar-edit-badge"><i class="ph ph-camera"></i></div>
-    <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
+    <input type="file" id="avatarInput" accept="image/*" style="display:none" data-csp-handler="5f2087e0338bdc60">
   </div>
   <div class="profile-info">
     <div class="profile-name" id="profileName">
@@ -193,7 +194,7 @@
         <p id="darkModeText">Modo escuro</p>
       </div>
       <label class="toggle-switch">
-        <input type="checkbox" id="darkModeToggle" checked onchange="alternarTema()">
+        <input type="checkbox" id="darkModeToggle" checked data-csp-handler="bc33046227229cf1">
         <span class="toggle-slider"></span>
       </label>
     </div>    
@@ -241,7 +242,7 @@
         <i class="ph ph-handshake"></i>
       </div>
       <div class="settings-item-content">
-        <h4>Coontacto</h4>
+        <h4>Contacto</h4>
         <p>Entre em contacto connosco</p>
       </div>
       <i class="ph ph-caret-right settings-item-arrow"></i>
@@ -288,7 +289,7 @@
 </div>
 
 <!-- LOGOUT BUTTON -->
-<button class="logout-btn" onclick="logout()">
+<button class="logout-btn" data-csp-handler="daf32d8ed96ab52e">
   <i class="ph ph-sign-out"></i> Terminar Sessão
 </button>
 
@@ -317,5 +318,6 @@
 </nav>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/settings.js"></script>
 
+<script src="csp-handlers.js"></script>
 </body>
 </html>

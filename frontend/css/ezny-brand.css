@@ -26,8 +26,13 @@ html {
   color-scheme: dark;
 }
 
+html:has(body.light-theme) {
+  background: #f3f6f8;
+  color-scheme: light;
+}
+
 body,
-body.light-theme {
+body {
   --bg: var(--ezny-ink) !important;
   --bg-card: var(--ezny-panel) !important;
   --bg-elevated: var(--ezny-panel-2) !important;
@@ -50,6 +55,72 @@ body.light-theme {
     radial-gradient(circle at -10% 45%, rgba(8, 169, 199, 0.07), transparent 24rem),
     var(--ezny-ink) !important;
   color: var(--ezny-white) !important;
+  transition: none !important;
+}
+
+body.light-theme {
+  --ezny-ink: #f3f6f8 !important;
+  --ezny-navy: #e8eef2 !important;
+  --ezny-panel: #ffffff !important;
+  --ezny-panel-2: #edf3f6 !important;
+  --ezny-white: #172b3a !important;
+  --ezny-muted: #536b7d !important;
+  --ezny-border: rgba(23, 43, 58, 0.14) !important;
+  --ezny-shadow: 0 12px 32px rgba(23, 43, 58, 0.1) !important;
+  --bg: #f3f6f8 !important;
+  --bg-card: #ffffff !important;
+  --bg-elevated: #edf3f6 !important;
+  --glass: rgba(23, 43, 58, 0.04) !important;
+  --glass-border: rgba(23, 43, 58, 0.12) !important;
+  --text: #172b3a !important;
+  --text-primary: #172b3a !important;
+  --text-secondary: rgba(23, 43, 58, 0.76) !important;
+  --text-muted: #536b7d !important;
+  --text-tertiary: rgba(23, 43, 58, 0.58) !important;
+  background:
+    radial-gradient(circle at 88% -8%, rgba(25, 217, 237, 0.1), transparent 28rem),
+    radial-gradient(circle at -10% 45%, rgba(8, 169, 199, 0.06), transparent 24rem),
+    #f3f6f8 !important;
+  color: #172b3a !important;
+}
+
+body.light-theme .top-bar,
+body.light-theme .topbar,
+body.light-theme .header,
+body.light-theme .app-header,
+body.light-theme .app-header .header-bar,
+body.light-theme .sidebar,
+body.light-theme .sidebar-foot,
+body.light-theme .bottom-nav {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #172b3a !important;
+  border-color: rgba(23, 43, 58, 0.12) !important;
+}
+
+body.light-theme .top-bar .menu-btn,
+body.light-theme .menu-btn,
+body.light-theme .notificacoes-btn,
+body.light-theme .header-btn,
+body.light-theme .btn-back,
+body.light-theme .btn-icon,
+body.light-theme .topbar button {
+  color: #172b3a !important;
+}
+
+body.light-theme input,
+body.light-theme select,
+body.light-theme textarea,
+body.light-theme .search-box input,
+body.light-theme .filtros input,
+body.light-theme .filtros select {
+  background: #ffffff !important;
+  border-color: rgba(23, 43, 58, 0.18) !important;
+  color: #172b3a !important;
+}
+
+body.light-theme input::placeholder,
+body.light-theme textarea::placeholder {
+  color: rgba(23, 43, 58, 0.55) !important;
 }
 
 body {

@@ -40,8 +40,13 @@ router.post("/criar", verificarToken, async (req, res) => {
   const planoId = normalizarPlano(req.body?.plano);
   const plan = PLANS[planoId];
   const metodo = String(req.body?.metodo || "transferencia").trim().toLowerCase();
-  const metodos = ["multicaixa", "transferencia", "deposito"];
+  const metodos = ["multicaixa"];
   if (!metodos.includes(metodo)) return res.status(400).json({ erro: "Método de pagamento inválido" });
+  const entidade = String(process.env.PAYMENT_ENTITY || "").trim();
+  const referenciaPagamento = String(process.env.PAYMENT_REFERENCE || "").trim();
+  if (!entidade || !referenciaPagamento) {
+    return res.status(503).json({ erro: "Os dados Multicaixa do EZNY ainda não estão configurados." });
+  }
 
   try {
     const result = await db.transaction(async tx => {
@@ -60,8 +65,8 @@ router.post("/criar", verificarToken, async (req, res) => {
         [req.user.id, planoId, "pendente", plan.valor, "AOA", referencia]
       );
       const pagamento = await tx.run(
-        "INSERT INTO pagamentos (usuario_id,plano,metodo,entidade,referencia,valor,moeda,status,premium_historico_id) VALUES (?,?,?,?,?,?,?,?,?)",
-        [req.user.id, planoId, metodo, process.env.PAYMENT_ENTITY || "", referencia, plan.valor, "AOA", "pendente", historico.lastID]
+        "INSERT INTO pagamentos (usuario_id,plano,metodo,entidade,referencia_pagamento,referencia,valor,moeda,status,premium_historico_id) VALUES (?,?,?,?,?,?,?,?,?,?)",
+        [req.user.id, planoId, metodo, entidade, referenciaPagamento, referencia, plan.valor, "AOA", "pendente", historico.lastID]
       );
       return { pagamentoId: pagamento.lastID, historicoId: historico.lastID, referencia };
     });
@@ -77,7 +82,9 @@ router.post("/criar", verificarToken, async (req, res) => {
         moeda: "AOA",
         metodo,
         referencia: result.referencia,
-        entidade: process.env.PAYMENT_ENTITY || null,
+        referencia_pedido: result.referencia,
+        referencia_pagamento: referenciaPagamento,
+        entidade,
         status: "pendente"
       },
       mensagem: "Pedido criado. O Premium só será ativado após confirmação do pagamento."
@@ -92,7 +99,7 @@ router.post("/criar", verificarToken, async (req, res) => {
 });
 
 router.get("/me", verificarToken, (req,res)=>{
-  db.all("SELECT id,plano,metodo,entidade,referencia,valor,moeda,status,criado_em,confirmado_em,observacao FROM pagamentos WHERE usuario_id=? ORDER BY id DESC LIMIT 20",[req.user.id],(err,rows)=>{
+  db.all("SELECT id,plano,metodo,entidade,referencia_pagamento,referencia,valor,moeda,status,criado_em,confirmado_em,observacao FROM pagamentos WHERE usuario_id=? ORDER BY id DESC LIMIT 20",[req.user.id],(err,rows)=>{
     if(err) return res.status(500).json({erro:"Erro ao consultar pagamentos"});
     res.json(rows||[]);
   });

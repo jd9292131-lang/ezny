@@ -1040,8 +1040,7 @@ window.toggleFavModal = function() {
   
   // Sincronizar nos cards
   document.querySelectorAll('.anun-fav').forEach(btn => {
-    const onclick = btn.getAttribute('onclick') || '';
-    if (onclick.includes('' + id)) btn.classList.toggle('ativo', !isFav);
+    if (btn.dataset.cspItemId === String(id)) btn.classList.toggle('ativo', !isFav);
   });
 };
 

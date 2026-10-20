@@ -42,22 +42,22 @@
 
   <!-- Tipo de Problema -->
   <div class="issue-types" id="issueTypes">
-    <div class="issue-type" data-type="bug" onclick="selecionarTipo(this)">
+    <div class="issue-type" data-type="bug" data-csp-handler="a6543565be7a05c8">
       <i class="ph-fill ph-bug"></i>
       <h4>Bug / Erro</h4>
       <p>Algo não funciona como esperado</p>
     </div>
-    <div class="issue-type" data-type="feature" onclick="selecionarTipo(this)">
+    <div class="issue-type" data-type="feature" data-csp-handler="a6543565be7a05c8">
 <i class="ph-fill ph-lightbulb"></i>
       <h4>Sugestão</h4>
       <p>Uma ideia para melhorar</p>
     </div>
-    <div class="issue-type" data-type="security" onclick="selecionarTipo(this)">
+    <div class="issue-type" data-type="security" data-csp-handler="a6543565be7a05c8">
 <i class="ph-fill ph-shield-check"></i>
       <h4>Segurança</h4>
       <p>Vulnerabilidade ou risco</p>
     </div>
-    <div class="issue-type" data-type="other" onclick="selecionarTipo(this)">
+    <div class="issue-type" data-type="other" data-csp-handler="a6543565be7a05c8">
 <i class="ph-fill ph-dots-three-outline"></i>
       <h4>Outro</h4>
       <p>Não se encaixa acima</p>
@@ -65,7 +65,7 @@
   </div>
 
   <!-- Formulário -->
-  <form class="form-card" id="reportForm" onsubmit="enviarReport(event)">
+  <form class="form-card" id="reportForm" data-csp-handler="1f3c3e17fa3e5068">
     <div class="form-card__header">
       <i class="ph-fill ph-pencil-simple" aria-hidden="true"></i>
       <h3>Detalhes do Problema</h3>
@@ -145,8 +145,8 @@
       <label class="form-label">
         Anexar Screenshot ou Ficheiro
       </label>
-      <div class="file-upload" id="fileUpload" onclick="document.getElementById('fileInput').click()">
-        <input type="file" id="fileInput" accept="image/*,.pdf,.txt,.zip" onchange="handleFileSelect(this)">
+      <div class="file-upload" id="fileUpload" data-csp-handler="1161c4237949bb38">
+        <input type="file" id="fileInput" accept="image/*,.pdf,.txt,.zip" data-csp-handler="85b4228bb4ede4dd">
 <i class="ph-fill ph-cloud-arrow-up"></i>
         <p>Clique para selecionar um ficheiro</p>
         <span>Imagens, PDF, TXT ou ZIP (max. 5MB)</span>
@@ -167,5 +167,6 @@
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/reportar.js"></script>
 
+<script src="csp-handlers.js"></script>
 </body>
 </html>

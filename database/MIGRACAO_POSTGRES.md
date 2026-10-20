@@ -46,3 +46,11 @@ Não dependa de SQLite nem de uploads locais. Configure:
 - `JWT_SECRET`, `CORS_ORIGINS` e `CRON_SECRET`.
 
 O EZNY continua a ser um marketplace de contacto: pagamentos entre utilizadores não passam pela plataforma. A área de pagamentos existente é exclusivamente para serviços Premium da própria EZNY.
+
+## Atualizações do fluxo Premium e suporte
+
+Para uma base já existente, execute `database/migrations/002-support-and-system-settings.sql` uma vez antes de publicar a versão que usa relatos de suporte, configurações administrativas e a referência Multicaixa separada. Para uma base nova, as tabelas e colunas também constam em `database/schema.postgres.sql`.
+
+Configure no ambiente do backend `PAYMENT_ENTITY` e `PAYMENT_REFERENCE` com os dados oficiais da conta EZNY. Estes campos não devem ser guardados no código. A criação do pedido apenas apresenta os dados e grava uma referência interna única; o pagamento é feito fora do site, e um administrador deve verificar o recebimento e confirmar o pedido na área **Pagamentos**. A integração não recebe confirmação automática do Multicaixa Express.
+
+Para envio de relatos por email, configure `SUPPORT_EMAIL_TO` e as variáveis `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS` e `SMTP_FROM` a partir do modelo `.env.example`. Se o SMTP falhar ou não estiver configurado, o relato continua registado no painel e a resposta ao utilizador indica explicitamente que o email não foi enviado. Nunca publique as credenciais SMTP.

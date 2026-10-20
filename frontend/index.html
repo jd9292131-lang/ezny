@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="description" content="EZNY — compre e venda em Angola, sem taxas nem comissões.">
 <meta name="theme-color" content="#030912">
-<title>Anúncios</title>
+<title>EZNY-Market</title>
 <link rel="icon" type="image/png" href="assets/ezny-logo-transparent.png">
 <!-- Phosphor Icons -->
 <link rel="stylesheet" href="assets/css/phosphor.css">
@@ -29,10 +29,10 @@
     <h3>Terminar Sessão</h3>
     <p>Tem a certeza que deseja terminar a sua sessão?</p>
     <div class="modal-acoes">
-      <button class="modal-btn modal-btn-cancel" onclick="fecharModalLogout()">
+      <button class="modal-btn modal-btn-cancel" data-csp-handler="46685403a7e036ac">
         <i class="ph ph-x"></i> Cancelar
       </button>
-      <button class="modal-btn modal-btn-ok" onclick="confirmarLogout()">
+      <button class="modal-btn modal-btn-ok" data-csp-handler="af3d1891294596ad">
         <i class="ph ph-sign-out"></i> Sim, terminar
       </button>
     </div>
@@ -46,38 +46,38 @@
     <span id="userSidebar">Menu</span>
   </div>
   <nav class="sidebar-nav">
-    <a href="criar-anuncio.html" onclick="event.stopPropagation()"><i class="ph ph-plus-square"></i> Vender</a>
-    <a href="meus-anuncios.html" onclick="event.stopPropagation()"><i class="ph ph-package"></i> Meus anúncios</a>
-    <a href="favoritos.html" onclick="event.stopPropagation()"><i class="ph ph-heart"></i> Favoritos</a>
-    <a href="settings.html" onclick="event.stopPropagation()"><i class="ph ph-gear"></i> Definições</a>
+    <a href="criar-anuncio.html" data-csp-handler="f26edef237d1ca48"><i class="ph ph-plus-square"></i> Vender</a>
+    <a href="meus-anuncios.html" data-csp-handler="f26edef237d1ca48"><i class="ph ph-package"></i> Meus anúncios</a>
+    <a href="favoritos.html" data-csp-handler="f26edef237d1ca48"><i class="ph ph-heart"></i> Favoritos</a>
+    <a href="settings.html" data-csp-handler="f26edef237d1ca48"><i class="ph ph-gear"></i> Definições</a>
     <div class="sidebar-div"></div>
-    <a href="politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
-    <a href="sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
+    <a href="politica.html" data-csp-handler="f26edef237d1ca48"><i class="ph ph-shield-check"></i> Política</a>
+    <a href="sobre.html" data-csp-handler="f26edef237d1ca48"><i class="ph ph-info"></i> Sobre Nós</a>
     <div class="sidebar-div"></div>
     <!-- Botão Premium dinâmico -->
-    <a href="upgrade.html" id="sidebarPremiumBtn" class="sidebar-premium-btn" onclick="event.stopPropagation()" style="display:none;">
+    <a href="upgrade.html" id="sidebarPremiumBtn" class="sidebar-premium-btn" data-csp-handler="f26edef237d1ca48" style="display:none;">
       <i class="ph ph-sketch-logo"></i> Tornar Premium
     </a>
-    <a href="perfil-profissional.html?id=123" id="sidebarProfBtn" class="sidebar-prof-btn" onclick="event.stopPropagation()" style="display:none;">
+    <a href="perfil-profissional.html?id=123" id="sidebarProfBtn" class="sidebar-prof-btn" data-csp-handler="f26edef237d1ca48" style="display:none;">
       <i class="ph ph-user-gear"></i> Perfil Profissional
     </a>
   </nav>
   <div class="sidebar-foot">
-    <button onclick="event.stopPropagation(); logout()">
+    <button data-csp-handler="d508af0017a737c9">
       <i class="ph ph-sign-out"></i> Terminar sessão
     </button>
   </div>
 </div>
 
 <!-- Overlay -->
-<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="overlay" class="overlay" data-csp-handler="c9e66d3feb6b2f56"></div>
 
 <!-- TOP BAR -->
 <div class="top-bar">
   <a class="brand-mark" href="index.html" aria-label="EZNY — início">
     <img class="ezny-brand-lockup ezny-brand-lockup--compact" src="assets/logo.jpg" alt="EZNY — Compre. Venda. Conecte-se.">
   </a>
-  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Abrir menu" data-testid="button-open-menu">
+  <button class="menu-btn" data-csp-handler="c9e66d3feb6b2f56" aria-label="Abrir menu" data-testid="button-open-menu">
     <i class="ph ph-list"></i>
   </button>
   <div class="search-box">
@@ -116,17 +116,17 @@
       <div class="hero-label">Encontre o seu próximo</div>
       <div class="hero-title">Veículo ideal</div>
       <div class="hero-desc">As melhores oportunidades estão aqui</div>
-      <button class="hero-btn" onclick="irCategoria('carro')">
+      <button class="hero-btn" data-csp-handler="5eec54b30e8d4e2c">
         Ver veículos <i class="ph ph-caret-right"></i>
       </button>
     </div>
    <img src="assets/hero-vehicle.jpg" class="hero-img" alt="Veículo anunciado em Luanda" id="heroImg">
   </div>
   <div class="hero-dots">
-   <button class="hero-dot active" onclick="setSlide(0)" aria-label="Ver veículos"></button>
-   <button class="hero-dot" onclick="setSlide(1)" aria-label="Ver imóveis"></button>
-   <button class="hero-dot" onclick="setSlide(2)" aria-label="Ver eletrónicos"></button>
-   <button class="hero-dot" onclick="setSlide(3)" aria-label="Explorar lazer e outros"></button>
+   <button class="hero-dot active" data-csp-handler="2dea61478848f03c" aria-label="Ver veículos"></button>
+   <button class="hero-dot" data-csp-handler="96f9acd94a0012a0" aria-label="Ver imóveis"></button>
+   <button class="hero-dot" data-csp-handler="b27b3a6461622d4c" aria-label="Ver eletrónicos"></button>
+   <button class="hero-dot" data-csp-handler="9455d716d5a884a9" aria-label="Explorar lazer e outros"></button>
   </div>
 </div>
 
@@ -136,32 +136,32 @@
     <h2>Categorias</h2>
   </div>
   <div class="cats-scroll">
-    <div onclick="irCategoria('telefone')" class="cat-card">
+    <div data-csp-handler="ff294d987feee8c3" class="cat-card">
       <div class="cat-icon-wrap"><i class="ph ph-device-mobile"></i></div>
       <div class="cat-name">Electrónicos</div>
       <div class="cat-count" id="catCount1">... anúncios</div>
     </div>
-    <div onclick="irCategoria('carro')" class="cat-card">
+    <div data-csp-handler="5eec54b30e8d4e2c" class="cat-card">
       <div class="cat-icon-wrap"><i class="ph ph-car"></i></div>
       <div class="cat-name">Veículos</div>
       <div class="cat-count" id="catCount2">... anúncios</div>
     </div>
-    <div onclick="irCategoria('imovel')" class="cat-card">
+    <div data-csp-handler="b622f5008df08bed" class="cat-card">
       <div class="cat-icon-wrap"><i class="ph ph-house"></i></div>
       <div class="cat-name">Imóveis</div>
       <div class="cat-count" id="catCount3">... anúncios</div>
     </div>
-    <div onclick="irCategoria('arrendamento')" class="cat-card">
+    <div data-csp-handler="2dc0c22f299a77b5" class="cat-card">
       <div class="cat-icon-wrap"><i class="ph ph-key"></i></div>
       <div class="cat-name">Arrendar</div>
       <div class="cat-count" id="catCount4">... anúncios</div>
     </div>
-    <div onclick="irCategoria('casa')" class="cat-card">
+    <div data-csp-handler="9b6fdab318ca8acb" class="cat-card">
       <div class="cat-icon-wrap"><i class="ph ph-armchair"></i></div>
       <div class="cat-name">Casa e Jardim</div>
       <div class="cat-count" id="catCount5">... anúncios</div>
     </div>
-    <div onclick="irCategoria('outro')" class="cat-card">
+    <div data-csp-handler="253cb6b5fdc1cb88" class="cat-card">
       <div class="cat-icon-wrap"><i class="ph ph-soccer-ball"></i></div>
       <div class="cat-name">Lazer e Outros</div>
       <div class="cat-count" id="catCount6">... anúncios</div>
@@ -223,22 +223,22 @@
      MODAL DETALHE DO ANÚNCIO — Estilo Foto
      ═══════════════════════════════════════════════════════════════ -->
 
-<div id="modalAnuncioOverlay" class="modal-overlay-full" onclick="fecharModalAnuncio(event)">
-  <div class="modal-anuncio-sheet" onclick="event.stopPropagation()">
+<div id="modalAnuncioOverlay" class="modal-overlay-full" data-csp-handler="a0e3a2e1f2e06037">
+  <div class="modal-anuncio-sheet" data-csp-handler="f26edef237d1ca48">
 
     <!-- Header -->
     <div class="modal-anuncio-header">
-      <button class="modal-anuncio-btn" onclick="fecharModalAnuncio()" title="Voltar">
+      <button class="modal-anuncio-btn" data-csp-handler="0d42141f392720b1" title="Voltar">
         <i class="ph ph-caret-left"></i>
       </button>
       <div class="modal-anuncio-acoes">
-        <button class="modal-anuncio-btn" onclick="partilharAnuncioModal()" title="Partilhar">
+        <button class="modal-anuncio-btn" data-csp-handler="9a5ba73b92fafff0" title="Partilhar">
           <i class="ph ph-share-network"></i>
         </button>
-        <button class="modal-anuncio-btn" id="modalAnuncioBtnFav" onclick="toggleFavModal()" title="Favorito">
+        <button class="modal-anuncio-btn" id="modalAnuncioBtnFav" data-csp-handler="5da9265e1750f423" title="Favorito">
           <i class="ph ph-heart" id="modalAnuncioIconFav"></i>
         </button>
-        <button class="modal-anuncio-btn" onclick="fecharModalAnuncio()" title="Fechar">
+        <button class="modal-anuncio-btn" data-csp-handler="0d42141f392720b1" title="Fechar">
           <i class="ph ph-x"></i>
         </button>
       </div>
@@ -256,7 +256,7 @@
       <!-- Coluna Esquerda: Imagens -->
       <div class="modal-anuncio-col-img">
         <div class="modal-anuncio-galeria" id="modalImgWrap">
-          <img src="" id="modalImgPrincipal" alt="" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3QgZmlsbD0iIzFhMWQyNCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiLz48dGV4dCBmaWxsPSIjNGI1NTYzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZHk9IjEwIiB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtyBTZW0gaW1hZ2VtPC90ZXh0PjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJkMzEzOSIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNMTIwLDE4MCBMMTYwLDE0MCBMMjAwLDE4MCBMMjQwLDEyMCBMMjgwLDE4MCIvPjxjaXJjbGUgZmlsbD0iIzJkMzEzOSIgY3g9IjE2MCIgY3k9IjExMCIgcj0iMTUiLz48L3N2Zz4='">
+          <img src="" id="modalImgPrincipal" alt="" data-csp-handler="c83ec3b350acc08d">
           <div class="modal-anuncio-galeria-badge">
             <i class="ph ph-camera"></i>
             <span id="modalImgCounter">1 / 1</span>
@@ -328,7 +328,7 @@
                 </div>
               </div>
             </div>
-            <button class="modal-vendedor-seta" onclick="irPerfilVendedor()">
+            <button class="modal-vendedor-seta" data-csp-handler="db658499f2064706">
               <i class="ph ph-caret-right"></i>
             </button>
           </div>
@@ -336,14 +336,14 @@
 
         <!-- Botões -->
         <div class="modal-acoes-btns">
-          <button class="modal-btn-msg" onclick="enviarMensagemModal()">
+          <button class="modal-btn-msg" data-csp-handler="9a7a087ccc5b99fe">
             <i class="ph ph-chat-circle-dots"></i> Enviar mensagem
           </button>
           <div class="modal-acoes-row">
-            <button class="modal-btn-ligar" onclick="ligarVendedorModal()">
+            <button class="modal-btn-ligar" data-csp-handler="059f9eb261b7361d">
               <i class="ph ph-phone"></i> Ligar
             </button>
-            <button class="modal-btn-wa" onclick="whatsappVendedorModal()">
+            <button class="modal-btn-wa" data-csp-handler="376f7f56955a037d">
               <i class="ph ph-whatsapp-logo"></i> WhatsApp
             </button>
           </div>
@@ -365,7 +365,7 @@
           <div class="modal-equip-wrap" id="modalEquipamentos">
             <!-- JS -->
           </div>
-          <button class="modal-btn-ver-mais" id="modalBtnVerMaisEquip" onclick="toggleEquipamentosModal()" style="display:none;">
+          <button class="modal-btn-ver-mais" id="modalBtnVerMaisEquip" data-csp-handler="7341013e18e6c348" style="display:none;">
             Ver mais
           </button>
         </div>
@@ -394,7 +394,7 @@
             </div>
             <div class="modal-comentario-input-wrap">
               <input type="text" id="modalComentarioInput" class="modal-comentario-input" placeholder="Escreva um comentário...">
-              <button class="modal-comentario-btn-enviar" onclick="enviarComentarioModal()">
+              <button class="modal-comentario-btn-enviar" data-csp-handler="4be596bb9a099e4d">
                 <i class="ph ph-paper-plane-right"></i>
               </button>
             </div>
@@ -454,5 +454,6 @@
 </div>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/index.js"></script>
+<script src="csp-handlers.js"></script>
 </body>
 </html>

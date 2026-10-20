@@ -17,6 +17,7 @@ const DOM = {
   statusText: document.getElementById('statusText'),
   btnEnviar: document.getElementById('btnEnviar'),
   fileUpload: document.getElementById('fileUpload'),
+  fileInput: document.getElementById('fileInput'),
   fileName: document.getElementById('fileName'),
   toast: document.getElementById('toast'),
   toastText: document.getElementById('toastText')
@@ -126,8 +127,8 @@ async function enviarReport(evento) {
   const formData = new FormData(DOM.form);
 
   // Validações
-  const titulo = formData.get('titulo').trim();
-  const descricao = formData.get('descricao').trim();
+  const titulo = String(formData.get('titulo') || '').trim();
+  const descricao = String(formData.get('descricao') || '').trim();
 
   if (titulo.length < 5) {
     mostrarStatus('O título deve ter pelo menos 5 caracteres.', 'error');
@@ -144,17 +145,19 @@ async function enviarReport(evento) {
   DOM.btnEnviar.disabled = true;
 
   try {
-    // Simular envio (substituir pelo endpoint real)
-    // const resposta = await fetch('/api/suporte/reportar', {
-    //   method: 'POST',
-    //   headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-    //   body: formData
-    // });
+    if (ficheiroSelecionado) formData.append('anexo', ficheiroSelecionado);
+    const resposta = await fetch('/api/suporte/relatar', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+      body: formData
+    });
+    const resultado = await resposta.json().catch(() => ({}));
+    if (!resposta.ok) throw new Error(resultado.erro || `Falha ao enviar o relato (HTTP ${resposta.status}).`);
 
-    // Simulação
-    await new Promise(r => setTimeout(r, 1500));
-
-    mostrarToast('Problema reportado com sucesso! Obrigado pelo feedback.', 'success');
+    mostrarToast(
+      resultado.mensagem || 'Problema reportado com sucesso! Obrigado pelo feedback.',
+      resultado.email_enviado ? 'success' : 'info'
+    );
 
     // Reset form
     DOM.form.reset();
@@ -162,10 +165,11 @@ async function enviarReport(evento) {
     DOM.fileUpload.classList.remove('has-file');
     DOM.fileName.textContent = '';
     ficheiroSelecionado = null;
+    if (DOM.fileInput) DOM.fileInput.value = '';
 
   } catch (erro) {
     console.error('Erro ao enviar:', erro);
-    mostrarStatus('Erro ao enviar o reporte. Tente novamente.', 'error');
+    mostrarStatus(erro.message || 'Erro ao enviar o reporte. Tente novamente.', 'error');
   } finally {
     DOM.btnEnviar.classList.remove('loading');
     DOM.btnEnviar.disabled = false;

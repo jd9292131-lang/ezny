@@ -18,7 +18,7 @@
 
 <!-- Header -->
 <div class="header">
-  <button class="header-btn" onclick="history.back()">
+  <button class="header-btn" data-csp-handler="2f7d5d130638a990">
     <i class="ph ph-arrow-left"></i>
   </button>
   <div class="header-titulo">EZNY Premium</div>
@@ -54,13 +54,13 @@
     <div class="plano">
       <div class="plano-tag"><i class="ph ph-crown"></i> Premium</div>
       <div class="premium-plan-picker" role="group" aria-label="Escolher duração do Premium">
-        <button type="button" class="premium-plan-option" data-plan="premium_15d" onclick="selecionarPlano('premium_15d', this)"><strong>2.500 Kz</strong><span>15 dias</span></button>
-        <button type="button" class="premium-plan-option selecionado" data-plan="premium_30d" onclick="selecionarPlano('premium_30d', this)"><strong>5.000 Kz</strong><span>30 dias</span></button>
+        <button type="button" class="premium-plan-option" data-plan="premium_15d" data-csp-handler="9386121330760a01"><strong>2.500 Kz</strong><span>15 dias</span></button>
+        <button type="button" class="premium-plan-option selecionado" data-plan="premium_30d" data-csp-handler="709d79be25c73802"><strong>5.000 Kz</strong><span>30 dias</span></button>
       </div>
       <div class="plano-preco" id="planoPreco">5.000 <span>Kz / 30 dias</span></div>
       <div class="plano-periodo">Plano renovável por novo pedido. Não cobramos comissão pelas transações entre utilizadores.</div>
       <div class="premium-status" id="premiumStatus"><i class="ph ph-spinner"></i> A verificar o estado da conta...</div>
-      <button class="plano-btn" id="btnAtivar" onclick="abrirPagamento()">
+      <button class="plano-btn" id="btnAtivar" data-csp-handler="d49fae73ca701f76">
       <i class="ph ph-sketch-logo"></i> Ativar Premium
       </button>
       <div class="plano-garantia"><i class="ph ph-shield-check"></i> O Premium é ativado apenas após confirmação do pagamento.</div>
@@ -172,17 +172,17 @@
     <div class="secao-titulo"><i class="ph ph-question"></i>Dúvidas</div>
 
     <div class="faq-item">
-      <button class="faq-pergunta" onclick="toggleFaq(this)">
+      <button class="faq-pergunta" data-csp-handler="08f5f228440270d8">
         Como pago?
         <i class="ph ph-caret-down"></i>
       </button>
       <div class="faq-resposta">
-        Escolha um método disponível e crie o pedido. O Premium só é ativado depois de a equipa EZNY confirmar o pagamento.
+        Selecione um plano, crie o pedido e use os dados Multicaixa apresentados para pagar fora do EZNY. A equipa confirma o recebimento manualmente; criar o pedido não ativa o Premium.
       </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-pergunta" onclick="toggleFaq(this)">
+      <button class="faq-pergunta" data-csp-handler="08f5f228440270d8">
         Posso cancelar?
         <i class="ph ph-caret-down"></i>
       </button>
@@ -192,7 +192,7 @@
     </div>
 
     <div class="faq-item">
-      <button class="faq-pergunta" onclick="toggleFaq(this)">
+      <button class="faq-pergunta" data-csp-handler="08f5f228440270d8">
         E se não gostar?
         <i class="ph ph-caret-down"></i>
       </button>
@@ -202,7 +202,7 @@
     </div>
 
     <div class="faq-item">
-      <button class="faq-pergunta" onclick="toggleFaq(this)">
+      <button class="faq-pergunta" data-csp-handler="08f5f228440270d8">
         O que acontece se cancelar?
         <i class="ph ph-caret-down"></i>
       </button>
@@ -215,61 +215,43 @@
 </div>
 
 <!-- Modal pagamento -->
-<div id="modalPagamento" class="modal-overlay" onclick="fecharModal(event)">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
+<div id="modalPagamento" class="modal-overlay" data-csp-handler="7d6f326cfe9ce2e5">
+  <div class="modal-sheet" data-csp-handler="552e9e9e3c40c7a2">
     <div class="modal-handle"></div>
     <div class="modal-body">
       <h3><i class="ph ph-sketch-logo" style="color:var(--premium);"></i> Ativar Premium</h3>
       <p class="modal-sub" id="modalPlanoSub">Escolha como quer pagar os 5.000 Kz</p>
 
       <div class="pagamento-wrap" style="margin:0 0 16px;padding:0;border:none;background:transparent;">
-        <div class="pagamento-titulo">Método de pagamento</div>
+        <div class="pagamento-titulo">Pagamento externo</div>
 
-        <button class="pag-opcao selecionado" onclick="selecionarPagamento(this, 'multicaixa')">
+        <button class="pag-opcao selecionado" data-csp-handler="d8e1a2f53cdc6b63">
           <div class="pag-opcao-ico"><i class="ph ph-credit-card"></i></div>
           <div class="pag-opcao-info">
             <h4>Multicaixa Express</h4>
-            <p>Pagamento instantâneo</p>
+            <p>Conclua o pagamento fora do EZNY; a ativação é confirmada pela equipa.</p>
           </div>
           <div class="pag-opcao-check"><i class="ph ph-check"></i></div>
-        </button>
-
-        <button class="pag-opcao" onclick="selecionarPagamento(this, 'transferencia')">
-          <div class="pag-opcao-ico"><i class="ph ph-bank"></i></div>
-          <div class="pag-opcao-info">
-            <h4>Transferência bancária</h4>
-            <p>Pode levar até 24h</p>
-          </div>
-          <div class="pag-opcao-check"></div>
-        </button>
-
-        <button class="pag-opcao" onclick="selecionarPagamento(this, 'deposito')">
-          <div class="pag-opcao-ico"><i class="ph ph-money"></i></div>
-          <div class="pag-opcao-info">
-            <h4>Depósito bancário</h4>
-            <p>Guarde o comprovativo</p>
-          </div>
-          <div class="pag-opcao-check"></div>
         </button>
       </div>
 
       <div class="ref-pagamento" id="refPagamento">
-        <h4><i class="ph ph-copy"></i> Referência de pagamento</h4>
-        <div class="ref-num" id="refNumero">Será apresentada após criar o pedido</div>
-        <p>EZNY<br>Valor: <strong id="refValor">5.000,00 Kz</strong><br>No descritivo coloque: <strong id="refDescritivo">PREMIUM-123</strong></p>
-        <button class="ref-copiar" onclick="copiarReferencia()">
+        <h4><i class="ph ph-copy"></i> Dados para pagamento Multicaixa Express</h4>
+        <div class="ref-num" id="refNumero">Crie o pedido para consultar os dados</div>
+        <p>Entidade: <strong id="refEntidade">—</strong><br>Referência Multicaixa: <strong id="refBanco">—</strong><br>Valor: <strong id="refValor">5.000,00 Kz</strong><br>Código interno do pedido EZNY: <strong id="refPedido">—</strong><br>A conta Premium só é ativada após validação manual do pagamento.</p>
+        <button class="ref-copiar" data-csp-handler="d83090e90dbcffb6">
           <i class="ph ph-copy"></i> Copiar dados
         </button>
       </div>
 
       <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;text-align:center;">
-        <i class="ph ph-lock-key"></i> Pedido seguro. A conta só é ativada após confirmação do pagamento.
+        <i class="ph ph-lock-key"></i> O pagamento é feito fora do EZNY; criar o pedido não ativa a conta.
       </p>
     </div>
     <div class="modal-footer">
-      <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">Voltar</button>
-      <button class="modal-btn modal-btn-ok" id="btnConfirmarPagamento" onclick="confirmarPagamento()">
-        <i class="ph ph-check"></i> Criar pedido de pagamento
+      <button class="modal-btn modal-btn-cancel" data-csp-handler="bc4a3e1002c28498">Voltar</button>
+      <button class="modal-btn modal-btn-ok" id="btnConfirmarPagamento" data-csp-handler="89e07a0e01783dc3">
+        <i class="ph ph-check"></i> Criar pedido e mostrar dados
       </button>
     </div>
   </div>
@@ -301,5 +283,6 @@
 
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/upgrade.js"></script>
+<script src="csp-handlers.js"></script>
 </body>
 </html>

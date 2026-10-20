@@ -25,10 +25,10 @@
       Tem a certeza que deseja terminar a sua sessão? Terá de iniciar sessão novamente para aceder à sua conta.
     </p>
     <div class="modal__actions">
-      <button class="btn btn--cancel" onclick="fecharModalLogout()" type="button">
+      <button class="btn btn--cancel" data-csp-handler="a4447f73905061bc" type="button">
         Cancelar
       </button>
-      <button class="btn btn--danger" onclick="confirmarLogout()" type="button">
+      <button class="btn btn--danger" data-csp-handler="9121d29dcadc7ef6" type="button">
         Sim, terminar
       </button>
     </div>
@@ -46,7 +46,7 @@
     <h3 id="modalTitleEditar" class="modal__title">Editar Perfil</h3>
     <p class="modal__text">Atualize as suas informações pessoais.</p>
 
-    <form class="modal-form" id="formEditar" onsubmit="salvarPerfil(event)">
+    <form class="modal-form" id="formEditar" data-csp-handler="84e0f0d7e40d00ac">
       <div class="form-group">
         <label class="form-label" for="editNome">Nome Completo</label>
         <input type="text" class="form-input" id="editNome" name="nome" required maxlength="100">
@@ -65,7 +65,7 @@
       </div>
 
       <div class="modal__actions" style="margin-top: var(--space-lg);">
-        <button type="button" class="btn btn--cancel" onclick="fecharModalEditar()">
+        <button type="button" class="btn btn--cancel" data-csp-handler="d033752e5a29269b">
           Cancelar
         </button>
         <button type="submit" class="btn btn--primary" id="btnSalvarPerfil">
@@ -88,7 +88,7 @@
     <h3 id="modalTitlePassword" class="modal__title">Alterar Palavra-passe</h3>
     <p class="modal__text">Escolha uma palavra-passe segura.</p>
 
-    <form class="modal-form" id="formPassword" onsubmit="salvarPassword(event)">
+    <form class="modal-form" id="formPassword" data-csp-handler="9befa8ed678c0b44">
       <div class="form-group">
         <label class="form-label" for="currentPassword">Palavra-passe Atual</label>
         <input type="password" class="form-input" id="currentPassword" name="currentPassword" required>
@@ -106,7 +106,7 @@
       </div>
 
       <div class="modal__actions" style="margin-top: var(--space-lg);">
-        <button type="button" class="btn btn--cancel" onclick="fecharModalPassword()">
+        <button type="button" class="btn btn--cancel" data-csp-handler="e3e8ba6132f538b9">
           Cancelar
         </button>
         <button type="submit" class="btn btn--primary" id="btnSalvarPassword">
@@ -135,7 +135,7 @@
 
   <!-- Logo EZNY -->
   <a href="index.html" class="header-logo">
-    <img src="assets/images/logo-ezny.png" alt="EZNY" class="header-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <img src="assets/images/logo-ezny.png" alt="EZNY" class="header-logo-img" data-csp-handler="ec9700f3b734d5ad">
     <div class="header-logo-fallback" style="display:none;">
       <span class="header-logo-brand"></span>
     </div>
@@ -156,7 +156,7 @@
 <main class="container">
   <!-- PERFIL -->
   <section class="profile" aria-label="Perfil do utilizador">
-    <div class="profile__avatar" id="avatar" aria-hidden="true" onclick="editarAvatar()">
+    <div class="profile__avatar" id="avatar" aria-hidden="true" data-csp-handler="9143d978b9787cc7">
       <i class="ph ph-user"></i>
       <div class="avatar-edit">
         <i class="ph ph-camera"></i>
@@ -182,7 +182,7 @@
         <h3 class="card__title">Informações Pessoais</h3>
       </div>
 
-      <div class="info-row editable" onclick="abrirModalEditar()">
+      <div class="info-row editable" data-csp-handler="d856514916f3450e">
         <span class="info-row__label">
           <i class="ph ph-identification-card"></i>
           Nome
@@ -191,7 +191,7 @@
         <i class="ph ph-pencil-simple"></i>
       </div>
 
-      <div class="info-row editable" onclick="abrirModalEditar()">
+      <div class="info-row editable" data-csp-handler="d856514916f3450e">
         <span class="info-row__label">
           <i class="ph ph-phone"></i>
           Telefone
@@ -200,7 +200,7 @@
         <i class="ph ph-pencil-simple"></i>
       </div>
 
-      <div class="info-row editable" onclick="abrirModalEditar()">
+      <div class="info-row editable" data-csp-handler="d856514916f3450e">
         <span class="info-row__label">
           <i class="ph ph-envelope"></i>
           Email
@@ -209,7 +209,7 @@
         <i class="ph ph-pencil-simple"></i>
       </div>
 
-      <button class="btn btn--primary" onclick="abrirModalEditar()" type="button">
+      <button class="btn btn--primary" data-csp-handler="d856514916f3450e" type="button">
         <i class="ph ph-pencil-simple"></i>
         Editar Perfil
       </button>
@@ -246,17 +246,17 @@
         <span class="info-row__value" id="dataCriacao">-</span>
       </div>
 
-      <button class="btn btn--dark" onclick="abrirModalPassword()" type="button">
+      <button class="btn btn--dark" data-csp-handler="7b15e34bcf615912" type="button">
         <i class="ph ph-arrows-clockwise"></i>
         Alterar Palavra-passe
       </button>
 
-      <button class="btn btn--dark" onclick="logout()" type="button">
+      <button class="btn btn--dark" data-csp-handler="0363746330b06544" type="button">
         <i class="ph ph-sign-out"></i>
         Terminar Sessão
       </button>
 
-      <button class="btn btn--danger" onclick="eliminarConta()" type="button">
+      <button class="btn btn--danger" data-csp-handler="ea2a55b2129e4ab4" type="button">
         <i class="ph ph-trash"></i>
         Eliminar Conta
       </button>
@@ -295,5 +295,6 @@
 
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/definicoes-conta.js"></script>
 
+<script src="csp-handlers.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ const db = require("../config/db");
 const { upload, tratarErroUpload } = require("../middleware/upload");
 const { verificarToken } = require("../middleware/auth");
 const { isPremium } = require("../middleware/premium");
+const { enviarEmail } = require("../services/email");
 const fs = require('fs');
 const path = require('path');
 
@@ -693,17 +694,26 @@ router.post(
       }
 
       // Verificar tipo de conta para definir status
-      db.get("SELECT tipo_conta FROM usuarios WHERE id = ?", [req.user.id], (errTipo, userRow) => {
+      db.get(`SELECT tipo_conta,
+                     COALESCE((SELECT value FROM system_settings WHERE key='auto_approve_ads'),'false') AS auto_approve_ads,
+                     COALESCE((SELECT value FROM system_settings WHERE key='maintenance_mode'),'false') AS maintenance_mode
+                FROM usuarios WHERE id = ?`, [req.user.id], (errTipo, userRow) => {
         if (errTipo) {
           console.error("[ANUNCIOS] Erro ao verificar tipo_conta:", errTipo.message);
           return res.status(500).json({ erro: "Erro no servidor" });
         }
 
+        if (userRow.maintenance_mode === 'true' && req.user.tipo !== 'admin') {
+          return res.status(503).json({ erro: 'A plataforma está em manutenção. Tente novamente mais tarde.' });
+        }
+
         // O plano NORMAL não tem limite comercial de anúncios.
-        // A única diferença de publicação é a aprovação prévia: PREMIUM publica diretamente.
+        // PREMIUM, administradores e a aprovação automática definida pelo sistema publicam diretamente.
         const contaPremium = req.user.tipo === 'admin' || (userRow && userRow.tipo_conta === 'premium');
-        const status = contaPremium ? 'active' : 'pendente';
-        const mensagem = contaPremium
+        const publicacaoDireta = contaPremium
+          || (userRow && userRow.auto_approve_ads === 'true');
+        const status = publicacaoDireta ? 'active' : 'pendente';
+        const mensagem = publicacaoDireta
           ? 'Anúncio publicado com sucesso!'
           : 'Anúncio enviado para aprovação';
 
@@ -840,6 +850,29 @@ router.post(
                 [`O perfil que segue publicou um novo anúncio: ${titulo}`, anuncioId, req.user.id]
               ).catch(e => console.error('[ANUNCIOS] Falha ao notificar seguidores:', e.message));
             }
+
+            db.get("SELECT value FROM system_settings WHERE key='email_notifications'", [], (settingErr, setting) => {
+              if (settingErr) {
+                console.error('[ANUNCIOS] Falha ao consultar alertas por email:', settingErr.message);
+                return;
+              }
+              if (setting?.value !== 'true') return;
+              enviarEmail({
+                subject: `[EZNY] Novo anúncio ${codigo}`,
+                text: [
+                  `Foi criado um novo anúncio na plataforma.`,
+                  `Título: ${titulo}`,
+                  `Código: ${codigo}`,
+                  `Categoria: ${categoriaNormalizada}`,
+                  `Estado: ${status}`,
+                  `Utilizador: ${req.user.nome} (ID ${req.user.id})`
+                ].join('\n')
+              }).then(result => {
+                if (!result.enviado) {
+                  console.error(`[ANUNCIOS] Alerta email ${result.estado}: ${codigo}`);
+                }
+              });
+            });
 
             res.json({
               sucesso: true,

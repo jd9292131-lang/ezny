@@ -5,6 +5,51 @@ const db = require("../config/db");
 const { verificarToken, requireAdmin } = require("../middleware/auth");
 router.use(verificarToken, requireAdmin);
 
+const SYSTEM_SETTING_KEYS = ['email_notifications', 'maintenance_mode', 'auto_approve_ads'];
+router.get('/settings', async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT key, value FROM system_settings WHERE key = ANY($1::text[])', [SYSTEM_SETTING_KEYS]);
+    const stored = Object.fromEntries(rows.map(row => [row.key, row.value === 'true']));
+    res.json({
+      email_notifications: stored.email_notifications || false,
+      maintenance_mode: stored.maintenance_mode || false,
+      auto_approve_ads: stored.auto_approve_ads || false
+    });
+  } catch (err) {
+    console.error('[ADMIN] Erro ao carregar configurações:', err.message);
+    res.status(500).json({ erro: 'Erro ao carregar configurações do sistema' });
+  }
+});
+
+router.post('/settings', async (req, res) => {
+  const values = {};
+  for (const key of SYSTEM_SETTING_KEYS) {
+    if (typeof req.body?.[key] !== 'boolean') {
+      return res.status(400).json({ erro: `A configuração "${key}" deve ser booleana` });
+    }
+    values[key] = String(req.body[key]);
+  }
+  try {
+    await db.transaction(async tx => {
+      for (const key of SYSTEM_SETTING_KEYS) {
+        await tx.run(
+          `INSERT INTO system_settings (key, value, updated_by) VALUES (?, ?, ?)
+           ON CONFLICT (key) DO UPDATE SET value=EXCLUDED.value, updated_by=EXCLUDED.updated_by, updated_at=CURRENT_TIMESTAMP`,
+          [key, values[key], req.user.id]
+        );
+      }
+      await tx.run(
+        'INSERT INTO admin_logs (admin_id,acao,entidade,detalhes) VALUES (?,?,?,?)',
+        [req.user.id, 'ATUALIZAR_CONFIGURACOES', 'sistema', JSON.stringify(values)]
+      );
+    });
+    res.json({ sucesso: true, configuracoes: req.body });
+  } catch (err) {
+    console.error('[ADMIN] Erro ao guardar configurações:', err.message);
+    res.status(500).json({ erro: 'Erro ao guardar configurações do sistema' });
+  }
+});
+
 /* ============================================================
    FUNÇÃO AUXILIAR: Eliminar anúncios de um utilizador
 ============================================================ */

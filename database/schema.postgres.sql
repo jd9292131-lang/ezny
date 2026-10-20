@@ -180,13 +180,14 @@ CREATE TABLE IF NOT EXISTS premium_historico (
 
 CREATE TABLE IF NOT EXISTS pagamentos (
   id BIGSERIAL PRIMARY KEY, usuario_id BIGINT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-  plano VARCHAR(40) NOT NULL DEFAULT 'premium_30d', metodo VARCHAR(40) NOT NULL, entidade TEXT,
+  plano VARCHAR(40) NOT NULL DEFAULT 'premium_30d', metodo VARCHAR(40) NOT NULL, entidade TEXT, referencia_pagamento TEXT,
   referencia TEXT NOT NULL UNIQUE, valor NUMERIC(14,2) NOT NULL, moeda VARCHAR(8) NOT NULL DEFAULT 'AOA',
   status VARCHAR(20) NOT NULL DEFAULT 'pendente', premium_historico_id BIGINT REFERENCES premium_historico(id) ON DELETE SET NULL,
   comprovativo TEXT, criado_em TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, confirmado_em TIMESTAMPTZ,
   confirmado_por BIGINT REFERENCES usuarios(id) ON DELETE SET NULL, cancelado_em TIMESTAMPTZ,
   cancelado_por BIGINT REFERENCES usuarios(id) ON DELETE SET NULL, observacao TEXT
 );
+ALTER TABLE pagamentos ADD COLUMN IF NOT EXISTS referencia_pagamento TEXT;
 CREATE INDEX IF NOT EXISTS idx_pagamentos_usuario_status ON pagamentos(usuario_id,status);
 CREATE INDEX IF NOT EXISTS idx_pagamentos_status ON pagamentos(status);
 
@@ -196,3 +197,16 @@ CREATE TABLE IF NOT EXISTS admin_logs (
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_admin_logs_admin ON admin_logs(admin_id,"createdAt");
+
+CREATE TABLE IF NOT EXISTS system_settings (
+  key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_by BIGINT REFERENCES usuarios(id) ON DELETE SET NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS relatos_suporte (
+  id BIGSERIAL PRIMARY KEY, usuario_id BIGINT REFERENCES usuarios(id) ON DELETE SET NULL,
+  tipo VARCHAR(40) NOT NULL, titulo VARCHAR(120) NOT NULL, descricao TEXT NOT NULL, email TEXT,
+  anexo_nome TEXT, anexo_tipo VARCHAR(150), anexo_dados BYTEA,
+  estado VARCHAR(20) NOT NULL DEFAULT 'novo', created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_relatos_suporte_created ON relatos_suporte(created_at DESC);

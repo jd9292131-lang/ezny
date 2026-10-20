@@ -16,6 +16,7 @@ let currentPage = 'dashboard';
 let allAds = [];
 let allUsers = [];
 let allDenuncias = [];
+let allRelatos = [];
 let allComunicados = [];
 let allPopups = [];
 let allPagamentos = [];
@@ -53,6 +54,7 @@ function navigateTo(page, el) {
     anuncios: 'EZNY / Anúncios', 
     usuarios: 'EZNY / Utilizadores',
     denuncias: 'EZNY / Denúncias', 
+    relatos: 'EZNY / Relatos de problemas',
     comunicados: 'EZNY / Comunicados',
     notificacoes: 'EZNY / Notificações',
     pagamentos: 'EZNY / Pagamentos',
@@ -69,6 +71,7 @@ function navigateTo(page, el) {
   lastDataCounts.usuarios = statsData?.usuarios || allUsers.length;
   }
   if (page === 'denuncias') renderDenunciasTable();
+  if (page === 'relatos') renderRelatosTable();
   if (page === 'comunicados') renderComunicadosTable();
   if (page === 'popups') renderPopupsTable();
   if (page === 'pagamentos') renderPagamentosTable();
@@ -165,6 +168,7 @@ async function loadAllData() {
   console.log('Utilizadores:', users);
   if (users && Array.isArray(users)) {
     allUsers = users;
+    preencherDestinatariosNotificacao();
     console.log('Users carregados:', allUsers.length);
   } else {
     allUsers = [];
@@ -172,10 +176,17 @@ async function loadAllData() {
   }
 
   // 4. Denúncias
-  const den = await apiGet('/denuncias');
+  const den = await apiGet('/denuncias/admin/todas');
   console.log('Denúncias:', den);
   if (den && Array.isArray(den)) allDenuncias = den;
   else allDenuncias = [];
+
+  const relatos = await apiGet('/suporte/admin/relatos');
+  if (relatos && Array.isArray(relatos)) allRelatos = relatos;
+  else allRelatos = [];
+
+  const settings = await apiGet('/admin/settings');
+  if (settings && typeof settings === 'object') aplicarConfiguracoes(settings);
 
   // 5. Comunicados
   const com = await apiGet('/comunicados/todos');
@@ -536,17 +547,75 @@ function renderUsersTable() {
 function renderDenunciasTable() {
   const tbody = document.getElementById("denunciasTableBody");
   if (!allDenuncias.length) { 
-    tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><i class="ph ph-tray"></i><h4>Sem denúncias</h4></div></td></tr>'; 
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="ph ph-tray"></i><h4>Sem denúncias</h4></div></td></tr>';
     return; 
   }
-  let html = "";
-  allDenuncias.forEach(function(d) {
-    html += '<tr><td>#' + d.id + "</td><td>" + (d.descricao || "-") + "</td><td>" + formatDate(d.createdAt) + "</td>";
-    html += '<td style="text-align:right"><div class="row-actions">';
-    html += '<button class="btn btn-icon btn-danger" onclick="askDelete(' + d.id + ', ' + "'" + "denuncia" + "'" + ')" title="Apagar"><i class="ph ph-trash" style="font-size:16px"></i></button>';
-    html += "</div></td></tr>";
-  });
-  tbody.innerHTML = html;
+  tbody.innerHTML = allDenuncias.map(d => {
+    const alvo = d.reportado_nome || (d.anuncio_titulo ? `Anúncio: ${d.anuncio_titulo}` : '—');
+    const status = d.status || 'pendente';
+    return `<tr><td>#${d.id}</td><td>${escapeHtml(d.denunciante_nome || 'Utilizador removido')}</td><td>${escapeHtml(alvo)}</td><td><strong>${escapeHtml(d.tipo_denuncia || 'outro')}</strong><br>${escapeHtml(d.descricao || '—')}</td><td><select class="form-select" aria-label="Estado da denúncia ${Number(d.id)}" data-csp-handler="934ca3e7b82b012f" data-id="${Number(d.id)}"><option value="pendente" ${status === 'pendente' ? 'selected' : ''}>Pendente</option><option value="em_analise" ${status === 'em_analise' ? 'selected' : ''}>Em análise</option><option value="resolvida" ${status === 'resolvida' ? 'selected' : ''}>Resolvida</option><option value="rejeitada" ${status === 'rejeitada' ? 'selected' : ''}>Rejeitada</option></select></td><td>${formatDate(d.createdAt)}</td></tr>`;
+  }).join('');
+}
+
+async function atualizarEstadoDenuncia(select) {
+  const id = Number(select.dataset.id);
+  const status = select.value;
+  if (!Number.isInteger(id) || id <= 0) return;
+  select.disabled = true;
+  const result = await apiPost(`/denuncias/admin/${id}/status`, { status });
+  select.disabled = false;
+  if (!result || !result.sucesso) {
+    showToast('error', 'Erro', result?.erro || 'Não foi possível atualizar a denúncia.');
+    await loadAllData();
+    return;
+  }
+  const denuncia = allDenuncias.find(item => Number(item.id) === id);
+  if (denuncia) denuncia.status = status;
+  showToast('success', 'Atualizado', 'Estado da denúncia atualizado.');
+}
+
+function renderRelatosTable() {
+  const tbody = document.getElementById('relatosTableBody');
+  if (!tbody) return;
+  if (!allRelatos.length) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="ph ph-tray"></i><h4>Sem relatos recebidos</h4></div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = allRelatos.map(r => {
+    const attachment = r.anexo_nome ? `<button class="btn btn-secondary" data-csp-handler="3866e99c117e4521" data-id="${Number(r.id)}">Descarregar</button>` : '—';
+    return `<tr><td>#${r.id}</td><td>${escapeHtml(r.tipo || 'outro')}</td><td><strong>${escapeHtml(r.titulo)}</strong><br>${escapeHtml(r.descricao)}</td><td>${escapeHtml(r.nome || 'Utilizador removido')}<br>${escapeHtml(r.email || '')}</td><td>${attachment}</td><td>${formatDate(r.created_at)}</td></tr>`;
+  }).join('');
+}
+
+function preencherDestinatariosNotificacao() {
+  const select = document.getElementById('notifUsuarioId');
+  if (!select) return;
+  const previous = select.value;
+  select.innerHTML = '<option value="">Selecione um utilizador...</option>' + allUsers
+    .filter(user => user.tipo !== 'admin')
+    .map(user => `<option value="${Number(user.id)}">${escapeHtml(user.nome || 'Utilizador')} — ${escapeHtml(user.telefone || '')} (#${Number(user.id)})</option>`)
+    .join('');
+  if (previous) select.value = previous;
+}
+
+async function descarregarAnexoRelato(id) {
+  if (!Number.isInteger(id) || id <= 0) return;
+  try {
+    const response = await fetch(`${API_BASE}/suporte/admin/relatos/${id}/anexo`, {
+      headers: { Authorization: 'Bearer ' + getToken() }
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `relato-${id}`;
+    link.click();
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('[SUPORTE] Erro ao descarregar anexo:', error);
+    showToast('error', 'Erro', 'Não foi possível descarregar o anexo.');
+  }
 }
 
 // ========================
@@ -579,7 +648,7 @@ function renderPagamentosTable() {
     html += "<tr><td>#" + p.id + "</td>";
     html += "<td>" + (p.nome || ('User #' + p.usuario_id)) + "</td>";
     html += "<td>" + (p.plano || "-") + "</td>";
-    html += "<td>" + (p.referencia || "-") + "</td>";
+    html += "<td>" + escapeHtml(p.referencia_pagamento || "—") + "<br><small>Pedido EZNY: " + escapeHtml(p.referencia || "-") + "</small></td>";
     html += "<td class=\"price-tag\">" + formatPrice(p.valor) + "</td>";
     html += "<td><span class=\"status-badge " + statusClass + "\">" + statusText + "</span></td>";
     html += "<td style=\"text-align:right\"><div class=\"row-actions\">";
@@ -850,7 +919,8 @@ if (deleteType === 'ad') endpoint = '/anuncios/admin/' + deleteTarget;
   else if (deleteType === 'user') endpoint = '/auth/usuarios/' + deleteTarget;
   else if (deleteType === 'denuncia') endpoint = '/denuncias/' + deleteTarget;
   else if (deleteType === 'comunicado') endpoint = '/comunicados/' + deleteTarget;
-  else if (deleteType === 'popup') endpoint = '/comunicados/popups/' + deleteTarget;
+  else if (deleteType === 'popup-comunicado') endpoint = '/comunicados/' + deleteTarget;
+  else if (deleteType === 'popup-legado') endpoint = '/comunicados/popups/' + deleteTarget;
   else if (deleteType === 'pagamento') endpoint = '/pagamentos/' + deleteTarget;
 
   console.log('A apagar:', deleteType, 'ID:', deleteTarget, 'Endpoint:', endpoint);
@@ -1103,10 +1173,34 @@ async function criarComunicado() {
   }catch(e){showToast('error','Erro',e.message||'Não foi possível publicar.');}finally{hideLoading();}
 }
 
-function saveSettings() {
-  const endpoint = document.getElementById('apiEndpoint').value;
+function aplicarConfiguracoes(settings) {
+  document.getElementById('settingEmailNotifications')?.classList.toggle('active', settings.email_notifications === true);
+  document.getElementById('settingMaintenance')?.classList.toggle('active', settings.maintenance_mode === true);
+  document.getElementById('settingAutoApproval')?.classList.toggle('active', settings.auto_approve_ads === true);
+}
+
+async function saveSettings() {
+  const endpoint = document.getElementById('apiEndpoint').value.trim();
+  if (!endpoint.startsWith('/')) {
+    showToast('error', 'Configuração inválida', 'O endpoint deve começar por /.');
+    return;
+  }
+  const settings = {
+    email_notifications: document.getElementById('settingEmailNotifications').classList.contains('active'),
+    maintenance_mode: document.getElementById('settingMaintenance').classList.contains('active'),
+    auto_approve_ads: document.getElementById('settingAutoApproval').classList.contains('active')
+  };
+  const saved = await apiPost('/admin/settings', settings);
+  if (!saved || !saved.sucesso) {
+    showToast('error', 'Erro', saved?.erro || 'Não foi possível guardar as definições.');
+    return;
+  }
   localStorage.setItem('apiEndpoint', endpoint);
-  showToast('success', 'Guardado', 'Configurações atualizadas');
+  if (endpoint !== API_BASE) {
+    window.location.reload();
+    return;
+  }
+  showToast('success', 'Guardado', 'Configurações atualizadas.');
 }
 
 
@@ -1167,6 +1261,26 @@ async function enviarNotificacaoAntigos() {
   } else {
     showToast('error', 'Erro', res?.erro || 'Não foi possível enviar');
   }
+}
+
+async function enviarNotificacaoUtilizador() {
+  const usuario_id = Number(document.getElementById('notifUsuarioId').value);
+  const titulo = document.getElementById('notifUsuarioTitulo').value.trim();
+  const mensagem = document.getElementById('notifUsuarioMensagem').value.trim();
+  if (!Number.isInteger(usuario_id) || usuario_id <= 0 || !titulo || !mensagem) {
+    showToast('warning', 'Atenção', 'Selecione o destinatário e preencha o título e a mensagem.');
+    return;
+  }
+  showLoading();
+  const result = await apiPost('/notificacoes/admin/enviar', { usuario_id, titulo, mensagem });
+  hideLoading();
+  if (!result || !result.sucesso) {
+    showToast('error', 'Erro', result?.erro || 'Não foi possível enviar a notificação.');
+    return;
+  }
+  showToast('success', 'Enviada', `Notificação enviada para ${result.destinatario}.`);
+  document.getElementById('notifUsuarioTitulo').value = '';
+  document.getElementById('notifUsuarioMensagem').value = '';
 }
 
 /* =========================
@@ -1238,11 +1352,12 @@ function renderPopupsTable() {
   allPopups.forEach(function(p) {
     const statusClass = p.ativo ? "active" : "inactive";
     const statusText = p.ativo ? "Activo" : "Inactivo";
-    html += '<tr><td>#' + p.id + "</td><td>" + (p.titulo || "-") + "</td><td>" + (p.conteudo || "-").substring(0, 60) + "...</td>";
+    const origem = p.origem === 'popup' ? 'popup' : 'comunicado';
+    html += '<tr><td>#' + Number(p.id) + "</td><td>" + escapeHtml(p.titulo || "-") + "</td><td>" + escapeHtml((p.conteudo || "-").substring(0, 60)) + "...</td>";
     html += '<td><span class="status-badge ' + statusClass + '">' + statusText + "</span></td>";
     html += "<td>" + formatDate(p.createdAt) + "</td>";
     html += '<td style="text-align:right"><div class="row-actions">';
-    html += '<button class="btn btn-icon btn-danger" onclick="askDeletePopup(' + p.id + ')" title="Apagar"><i class="ph ph-trash" style="font-size:16px"></i></button>';
+    html += '<button class="btn btn-icon btn-danger" data-csp-handler="48e21d07e153d6f1" data-id="' + Number(p.id) + '" data-origem="' + origem + '" title="Apagar"><i class="ph ph-trash" style="font-size:16px"></i></button>';
     html += "</div></td></tr>";
   });
   tbody.innerHTML = html;
@@ -1277,9 +1392,9 @@ async function criarPopup() {
   }
 }
 
-function askDeletePopup(id) {
+function askDeletePopup(id, origem) {
   deleteTarget = id;
-  deleteType = 'popup';
+  deleteType = origem === 'popup' ? 'popup-legado' : 'popup-comunicado';
   document.getElementById('confirmOverlay').classList.add('active');
 }
 
@@ -1355,10 +1470,17 @@ function startAutoRefresh() {
         }
       }
       else if (currentPage === 'denuncias') {
-        const den = await apiGet('/denuncias');
+        const den = await apiGet('/denuncias/admin/todas');
         if (den && Array.isArray(den)) {
           allDenuncias = den;
           renderDenunciasTable();
+        }
+        else if (currentPage === 'relatos') {
+          const relatos = await apiGet('/suporte/admin/relatos');
+          if (relatos && Array.isArray(relatos)) {
+            allRelatos = relatos;
+            renderRelatosTable();
+          }
         }
       }
       else if (currentPage === 'comunicados') {

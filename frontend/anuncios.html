@@ -22,10 +22,10 @@
     <h3>Terminar Sessão</h3>
     <p>Tem a certeza que deseja terminar a sua sessão?</p>
     <div class="modal-acoes">
-      <button class="modal-btn modal-btn-cancel" onclick="fecharModalLogout()">
+      <button class="modal-btn modal-btn-cancel" data-csp-handler="01b9fc41df0d0f9d">
         <i class="ph ph-x"></i> Cancelar
       </button>
-      <button class="modal-btn modal-btn-ok" onclick="confirmarLogout()">
+      <button class="modal-btn modal-btn-ok" data-csp-handler="81cb59a095249187">
         <i class="ph ph-sign-out"></i> Sim, terminar
       </button>
     </div>
@@ -39,39 +39,39 @@
     <span id="userSidebar">Menu</span>
   </div>
   <nav class="sidebar-nav">
-    <a href="criar-anuncio.html" onclick="event.stopPropagation()"><i class="ph ph-plus-square"></i> Vender</a>
-    <a href="meus-anuncios.html" onclick="event.stopPropagation()"><i class="ph ph-package"></i> Meus anúncios</a>
-    <a href="favoritos.html" onclick="event.stopPropagation()"><i class="ph ph-heart"></i> Favoritos</a>
-    <a href="settings.html" onclick="event.stopPropagation()"><i class="ph ph-gear"></i> Definições</a>
+    <a href="criar-anuncio.html" data-csp-handler="2f54fba43f865c05"><i class="ph ph-plus-square"></i> Vender</a>
+    <a href="meus-anuncios.html" data-csp-handler="2f54fba43f865c05"><i class="ph ph-package"></i> Meus anúncios</a>
+    <a href="favoritos.html" data-csp-handler="2f54fba43f865c05"><i class="ph ph-heart"></i> Favoritos</a>
+    <a href="settings.html" data-csp-handler="2f54fba43f865c05"><i class="ph ph-gear"></i> Definições</a>
     <div class="sidebar-div"></div>
-    <a href="politica.html" onclick="event.stopPropagation()"><i class="ph ph-shield-check"></i> Política</a>
-    <a href="sobre.html" onclick="event.stopPropagation()"><i class="ph ph-info"></i> Sobre Nós</a>
+    <a href="politica.html" data-csp-handler="2f54fba43f865c05"><i class="ph ph-shield-check"></i> Política</a>
+    <a href="sobre.html" data-csp-handler="2f54fba43f865c05"><i class="ph ph-info"></i> Sobre Nós</a>
     <div class="sidebar-div"></div>
-    <a href="upgrade.html" id="sidebarPremiumBtn" class="sidebar-premium-btn" onclick="event.stopPropagation()" style="display:none;">
+    <a href="upgrade.html" id="sidebarPremiumBtn" class="sidebar-premium-btn" data-csp-handler="2f54fba43f865c05" style="display:none;">
       <i class="ph ph-crown"></i> Tornar Premium
     </a>
-    <a href="perfil-profissional.html?id=123" id="sidebarProfBtn" class="sidebar-prof-btn" onclick="event.stopPropagation()" style="display:none;">
+    <a href="perfil-profissional.html?id=123" id="sidebarProfBtn" class="sidebar-prof-btn" data-csp-handler="2f54fba43f865c05" style="display:none;">
       <i class="ph ph-user-gear"></i> Perfil Profissional
     </a>
   </nav>
   <div class="sidebar-foot">
-    <button onclick="event.stopPropagation(); logout()">
+    <button data-csp-handler="ffbb45df8ad301ca">
       <i class="ph ph-sign-out"></i> Terminar sessão
     </button>
   </div>
 </div>
 
 <!-- Overlay -->
-<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="overlay" class="overlay" data-csp-handler="1cb3b1a04f778431"></div>
 
 <!-- TOP BAR -->
 <div class="top-bar">
-  <button class="menu-btn" onclick="toggleSidebar()">
+  <button class="menu-btn" data-csp-handler="1cb3b1a04f778431">
     <i class="ph ph-list"></i>
   </button>
   <div class="search-box">
     <i class="ph ph-magnifying-glass"></i>
-    <input type="text" placeholder="Pesquisar anúncios..." id="searchInput" oninput="filtrarAnuncios()">
+    <input type="text" placeholder="Pesquisar anúncios..." id="searchInput" data-csp-handler="a8b686ba575bf685">
   </div>
 </div>
 
@@ -84,13 +84,13 @@
 <!-- FILTROS -->
 <div class="filtros-wrap">
   <div class="filtros">
-    <select id="ordenar" onchange="filtrarAnuncios()">
+    <select id="ordenar" data-csp-handler="f20a38d3b4c4d589">
       <option value="recentes">Mais recentes</option>
       <option value="preco_asc">Preço: menor para maior</option>
       <option value="preco_desc">Preço: maior para menor</option>
     </select>
-    <input type="number" id="precoMin" placeholder="Preço mín" oninput="filtrarAnuncios()">
-    <input type="number" id="precoMax" placeholder="Preço máx" oninput="filtrarAnuncios()">
+    <input type="number" id="precoMin" placeholder="Preço mín" data-csp-handler="a8b686ba575bf685">
+    <input type="number" id="precoMax" placeholder="Preço máx" data-csp-handler="a8b686ba575bf685">
   </div>
 </div>
 
@@ -178,22 +178,22 @@
      MODAL DETALHE DO ANÚNCIO — Unificado (igual ao index.html)
      ═══════════════════════════════════════════════════════════════ -->
 
-<div id="modalAnuncioOverlay" class="modal-overlay-full" onclick="fecharModalAnuncio(event)">
-  <div class="modal-anuncio-sheet" onclick="event.stopPropagation()">
+<div id="modalAnuncioOverlay" class="modal-overlay-full" data-csp-handler="d43d3b52447309aa">
+  <div class="modal-anuncio-sheet" data-csp-handler="2f54fba43f865c05">
 
     <!-- Header -->
     <div class="modal-anuncio-header">
-      <button class="modal-anuncio-btn" onclick="fecharModalAnuncio()" title="Voltar">
+      <button class="modal-anuncio-btn" data-csp-handler="a6d2a51e28080e3a" title="Voltar">
         <i class="ph ph-caret-left"></i>
       </button>
       <div class="modal-anuncio-acoes">
-        <button class="modal-anuncio-btn" onclick="partilharAnuncioModal()" title="Partilhar">
+        <button class="modal-anuncio-btn" data-csp-handler="8bd9cb7447e8f3fe" title="Partilhar">
           <i class="ph ph-share-network"></i>
         </button>
-        <button class="modal-anuncio-btn" id="modalAnuncioBtnFav" onclick="toggleFavModal()" title="Favorito">
+        <button class="modal-anuncio-btn" id="modalAnuncioBtnFav" data-csp-handler="737bebffe6fb1d67" title="Favorito">
           <i class="ph ph-heart" id="modalAnuncioIconFav"></i>
         </button>
-        <button class="modal-anuncio-btn" onclick="fecharModalAnuncio()" title="Fechar">
+        <button class="modal-anuncio-btn" data-csp-handler="a6d2a51e28080e3a" title="Fechar">
           <i class="ph ph-x"></i>
         </button>
       </div>
@@ -211,7 +211,7 @@
       <!-- Coluna Esquerda: Imagens -->
       <div class="modal-anuncio-col-img">
         <div class="modal-anuncio-galeria" id="modalImgWrap">
-          <img src="" id="modalImgPrincipal" alt="" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3QgZmlsbD0iIzFhMWQyNCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiLz48dGV4dCBmaWxsPSIjNGI1NTYzIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZHk9IjEwIiB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtyBTZW0gaW1hZ2VtPC90ZXh0PjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJkMzEzOSIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNMTIwLDE4MCBMMTYwLDE0MCBMMjAwLDE4MCBMMjQwLDEyMCBMMjgwLDE4MCIvPjxjaXJjbGUgZmlsbD0iIzJkMzEzOSIgY3g9IjE2MCIgY3k9IjExMCIgcj0iMTUiLz48L3N2Zz4='">
+          <img src="" id="modalImgPrincipal" alt="" data-csp-handler="74a99898f0bc5461">
           <div class="modal-anuncio-galeria-badge">
             <i class="ph ph-camera"></i>
             <span id="modalImgCounter">1 / 1</span>
@@ -272,7 +272,7 @@
                 </div>
               </div>
             </div>
-            <button class="modal-vendedor-seta" onclick="irPerfilVendedor()">
+            <button class="modal-vendedor-seta" data-csp-handler="ce460715cbf92490">
               <i class="ph ph-caret-right"></i>
             </button>
           </div>
@@ -280,14 +280,14 @@
 
         <!-- Botões -->
         <div class="modal-acoes-btns">
-          <button class="modal-btn-msg" onclick="enviarMensagemModal()">
+          <button class="modal-btn-msg" data-csp-handler="1cd089efd200b583">
             <i class="ph ph-chat-circle-dots"></i> Enviar mensagem
           </button>
           <div class="modal-acoes-row">
-            <button class="modal-btn-ligar" onclick="ligarVendedorModal()">
+            <button class="modal-btn-ligar" data-csp-handler="88422f893be01993">
               <i class="ph ph-phone"></i> Ligar
             </button>
-            <button class="modal-btn-wa" onclick="whatsappVendedorModal()">
+            <button class="modal-btn-wa" data-csp-handler="f0a0670f963a71a5">
               <i class="ph ph-whatsapp-logo"></i> WhatsApp
             </button>
           </div>
@@ -305,7 +305,7 @@
         <div id="modalEquipamentosSection">
           <div class="modal-equip-titulo">Principais equipamentos</div>
           <div class="modal-equip-wrap" id="modalEquipamentos"></div>
-          <button class="modal-btn-ver-mais" id="modalBtnVerMaisEquip" onclick="toggleEquipamentosModal()" style="display:none;">
+          <button class="modal-btn-ver-mais" id="modalBtnVerMaisEquip" data-csp-handler="dd75ff69b7260654" style="display:none;">
             Ver mais
           </button>
         </div>
@@ -332,7 +332,7 @@
             <div id="modalComentariosLista"></div>
             <div class="modal-comentario-input-wrap">
               <input type="text" id="modalComentarioInput" class="modal-comentario-input" placeholder="Escreva um comentário...">
-              <button class="modal-comentario-btn-enviar" onclick="enviarComentarioModal()">
+              <button class="modal-comentario-btn-enviar" data-csp-handler="37a094231e26df4d">
                 <i class="ph ph-paper-plane-right"></i>
               </button>
             </div>
@@ -355,5 +355,6 @@
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/media.js"></script>
 <script src="2g5EVYGubuyFBjbv8N8T78BBXSG674R0JS4Fbd7f8u45ubff3h634gedbg f4h3tfg7f83ecue87/anuncios.js"></script>
 
+<script src="csp-handlers.js"></script>
 </body>
 </html>
