@@ -309,13 +309,18 @@
       <div class="table-card">
         <div class="table-header">
           <div class="table-title">Todos os Comunicados</div>
-          <button class="btn btn-primary btn-sm" data-csp-handler="8d26863d48c0cb41">
-            <i class="ph ph-plus" style="font-size:16px"></i>Novo
-          </button>
+          <div style="display:flex;align-items:center;gap:10px">
+            <select class="form-select" id="comunicadosFilter" data-csp-handler="19a974cd4d9b8d61" aria-label="Filtrar comunicados">
+              <option value="ativos">Activos</option><option value="inativos">Inactivos</option><option value="todos">Todos</option>
+            </select>
+            <button class="btn btn-primary btn-sm" data-csp-handler="8d26863d48c0cb41">
+              <i class="ph ph-plus" style="font-size:16px"></i>Novo
+            </button>
+          </div>
         </div>
         <div style="overflow-x:auto">
           <table class="data-table" id="comunicadosTable">
-            <thead><tr><th>ID</th><th>Comunicado</th><th>Conteúdo</th><th>Público</th><th>Data</th><th style="text-align:right">Ações</th></tr></thead>
+            <thead><tr><th>ID</th><th>Comunicado</th><th>Conteúdo</th><th>Público</th><th>Estado</th><th>Data</th><th style="text-align:right">Ações</th></tr></thead>
             <tbody id="comunicadosTableBody"><tr><td colspan="5"><div class="empty-state"><i class="ph ph-hourglass"></i><h4>A carregar...</h4></div></td></tr></tbody>
           </table>
         </div>
@@ -366,10 +371,15 @@
       <p class="section-subtitle">Comunicados que aparecem directamente na tela dos utilizadores</p>
       <div class="table-card">
         <div class="table-header">
-          <div class="table-title">Popups Activos</div>
-          <button class="btn btn-primary btn-sm" data-csp-handler="8d26863d48c0cb41">
-            <i class="ph ph-plus" style="font-size:16px"></i>Novo comunicado visual
-          </button>
+          <div class="table-title">Popups</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <select class="form-select" id="popupsFilter" data-csp-handler="b3fb51df634305d2" aria-label="Filtrar popups">
+              <option value="ativos">Activos</option><option value="inativos">Inactivos</option><option value="todos">Todos</option>
+            </select>
+            <button class="btn btn-primary btn-sm" data-csp-handler="8d26863d48c0cb41">
+              <i class="ph ph-plus" style="font-size:16px"></i>Novo comunicado visual
+            </button>
+          </div>
         </div>
         <div style="overflow-x:auto">
           <table class="data-table" id="popupsTable">
