@@ -85,15 +85,22 @@ function toggleSidebar() { document.getElementById('sidebar').classList.toggle('
 // ========================
 // API HELPERS (com logs de erro)
 // ========================
+
 async function apiGet(endpoint) {
   try {
-    const res = await fetch(API_BASE + endpoint, { headers: { 'Authorization': 'Bearer ' + getToken() } });
+    const res = await fetch(API_BASE + endpoint, {
+      headers: {
+        'Authorization': 'Bearer ' + getToken()
+      }
+    });
+
     if (!res.ok) {
       console.error('GET ' + endpoint + ' ERRO HTTP:', res.status);
       const txt = await res.text();
       console.error('Resposta:', txt.substring(0, 200));
       throw new Error('HTTP ' + res.status);
     }
+
     return await res.json();
   } catch (e) {
     console.error('GET ' + endpoint + ' FALHOU:', e);
@@ -103,13 +110,26 @@ async function apiGet(endpoint) {
 
 async function apiPost(endpoint, body, isFormData = false) {
   try {
-    const opts = { method: 'POST', headers: { 'Authorization': 'Bearer ' + getToken() }, body: body };
-    if (!isFormData) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+    const opts = {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + getToken()
+      },
+      body: body
+    };
+
+    if (!isFormData) {
+      opts.headers['Content-Type'] = 'application/json';
+      opts.body = JSON.stringify(body);
+    }
+
     const res = await fetch(API_BASE + endpoint, opts);
+
     if (!res.ok) {
       console.error('POST ' + endpoint + ' ERRO HTTP:', res.status);
       throw new Error('HTTP ' + res.status);
     }
+
     return await res.json();
   } catch (e) {
     console.error('POST ' + endpoint + ' FALHOU:', e);
@@ -117,31 +137,43 @@ async function apiPost(endpoint, body, isFormData = false) {
   }
 }
 
+async function apiPatch(endpoint, body) {
+  try {
+    const res = await fetch(API_BASE + endpoint, {
+      method: 'PATCH',
+      headers: {
+        ...getAuthHeaders(),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+      console.error('PATCH ' + endpoint + ' ERRO HTTP:', res.status);
+      throw new Error('HTTP ' + res.status);
+    }
+
+    return await res.json();
+  } catch (e) {
+    console.error('PATCH ' + endpoint + ' FALHOU:', e);
+    return null;
+  }
+}
+
 async function apiDelete(endpoint) {
   try {
-    const res = await fetch(API_BASE + endpoint, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + getToken() } });
+    const res = await fetch(API_BASE + endpoint, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + getToken()
+      }
+    });
+
     if (!res.ok) {
       console.error('DELETE ' + endpoint + ' ERRO HTTP:', res.status);
       throw new Error('HTTP ' + res.status);
     }
 
-    async function apiPatch(endpoint, body) {
-      try {
-        const res = await fetch(API_BASE + endpoint, {
-          method: 'PATCH',
-          headers: getAuthHeaders(),
-          body: JSON.stringify(body)
-        });
-        if (!res.ok) {
-          console.error('PATCH ' + endpoint + ' ERRO HTTP:', res.status);
-          throw new Error('HTTP ' + res.status);
-        }
-        return await res.json();
-      } catch (e) {
-        console.error('PATCH ' + endpoint + ' FALHOU:', e);
-        return null;
-      }
-    }
     return await res.json();
   } catch (e) {
     console.error('DELETE ' + endpoint + ' FALHOU:', e);
