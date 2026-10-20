@@ -156,6 +156,27 @@ function gerarReferencia() {
   document.getElementById('refPedido').textContent = '—';
 }
 
+async function carregarDadosMulticaixa() {
+  const token=getToken();
+  if(!token) return;
+  const refNumero=document.getElementById('refNumero');
+  if(refNumero) refNumero.textContent='A carregar dados de pagamento…';
+  try {
+    const res=await fetch(`${API_URL}/pagamentos/dados`,{headers:{Authorization:'Bearer '+token}});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.erro||`Falha ao carregar dados de pagamento (HTTP ${res.status}).`);
+    document.getElementById('refEntidade').textContent=data.entidade;
+    document.getElementById('refBanco').textContent=data.referencia_pagamento;
+    document.getElementById('refPedido').textContent='Será gerado ao criar o pedido';
+    document.getElementById('refNumero').textContent=`Entidade ${data.entidade} · Referência ${data.referencia_pagamento}`;
+    const plano=PLANOS[planoSelecionado]||PLANOS.premium_30d;
+    document.getElementById('refValor').textContent=`${plano.valor.toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})} Kz`;
+  } catch(error) {
+    console.error('[PREMIUM] Não foi possível carregar os dados Multicaixa:',error);
+    if(refNumero) refNumero.textContent=error.message||'Dados de pagamento indisponíveis.';
+  }
+}
+
 function mostrarDadosPagamento(pagamento) {
   pagamentoPendente = pagamento.status === 'pendente';
   if (PLANOS[pagamento.plano]) {
@@ -190,13 +211,13 @@ function selecionarPagamento(btn, metodo) {
   btn.querySelector('.pag-opcao-check').innerHTML = '<i class="ph ph-check"></i>';
 
   // Atualizar referência conforme método
-  const refNum = document.getElementById('refNumero');
-  refNum.textContent = 'Dados de pagamento serão apresentados após criar o pedido';
+  carregarDadosMulticaixa();
 }
 
 function abrirPagamento() {
   document.getElementById('modalPagamento').classList.add('visivel');
   document.body.style.overflow = 'hidden';
+  if(!pagamentoPendente) carregarDadosMulticaixa();
 }
 
 function fecharModal(e) {

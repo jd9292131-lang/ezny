@@ -491,6 +491,15 @@ const handlers = Object.freeze({
   '48e21d07e153d6f1': { event: 'click', callback: function(event) {
     askDeletePopup(Number(this.dataset.id), this.dataset.origem)
   } },
+  '19a974cd4d9b8d61': { event: 'change', callback: function(event) {
+    alterarFiltroComunicados(this)
+  } },
+  'b3fb51df634305d2': { event: 'change', callback: function(event) {
+    alterarFiltroPopups(this)
+  } },
+  'a325b03aace45612': { event: 'click', callback: function(event) {
+    alterarEstadoComunicado(this.dataset.id, this.dataset.origem, this.dataset.ativo)
+  } },
   '3866e99c117e4521': { event: 'click', callback: function(event) {
     descarregarAnexoRelato(Number(this.dataset.id))
   } },

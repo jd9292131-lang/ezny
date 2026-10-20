@@ -7,6 +7,75 @@ window.eznyImage = function (value) {
   return '/uploads/' + encodeURIComponent(src);
 };
 
+window.eznyAddSellerReportButton = function (ad, sellerNameElement) {
+  if (!ad || !sellerNameElement) return;
+  const card = sellerNameElement.closest('.modal-vendedor-card') || sellerNameElement.closest('#modalAnuncio');
+  if (!card) return;
+
+  let button = card.querySelector('.ezny-report-seller');
+  if (!button) {
+    button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'ezny-report-seller';
+    button.innerHTML = '<i class="ph ph-flag"></i> Denunciar vendedor';
+    button.addEventListener('click', async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Inicie sessão para denunciar este vendedor.');
+        window.location.href = 'auth.html';
+        return;
+      }
+      const sellerId = Number(button.dataset.sellerId);
+      const adId = Number(button.dataset.adId);
+      if (!Number.isInteger(sellerId) || sellerId <= 0) {
+        alert('Não foi possível identificar o vendedor deste anúncio.');
+        return;
+      }
+      const descricao = prompt('Descreva o motivo da denúncia deste vendedor:');
+      if (descricao === null) return;
+      if (!descricao.trim()) {
+        alert('Escreva o motivo da denúncia antes de enviar.');
+        return;
+      }
+
+      button.disabled = true;
+      try {
+        const response = await fetch('/api/denuncias/criar', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tipo_denuncia: 'vendedor',
+            descricao: descricao.trim(),
+            usuario_reportado_id: sellerId,
+            anuncio_id: Number.isInteger(adId) && adId > 0 ? adId : null
+          })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.erro || `Não foi possível enviar a denúncia (HTTP ${response.status}).`);
+        alert(result.message || 'Denúncia enviada. A equipa EZNY irá analisá-la.');
+      } catch (error) {
+        console.error('[DENUNCIAS] Falha ao denunciar vendedor:', error);
+        alert(error.message || 'Não foi possível enviar a denúncia. Tente novamente.');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+
+  const currentUser = (() => {
+    try { return JSON.parse(localStorage.getItem('userData') || 'null'); } catch { return null; }
+  })();
+  button.dataset.sellerId = String(ad.usuario_id || '');
+  button.dataset.adId = String(ad.id || '');
+  button.hidden = !ad.usuario_id || Number(currentUser?.id) === Number(ad.usuario_id);
+  const body = sellerNameElement.closest('.modal-vendedor-card')?.querySelector('.modal-vendedor-body');
+  if (body && button.parentElement !== card) card.appendChild(button);
+  if (!body && card.id === 'modalAnuncio') {
+    const seller = sellerNameElement.parentElement?.parentElement?.parentElement;
+    if (seller && button.parentElement !== seller) seller.appendChild(button);
+  }
+};
+
 /* EZNY presença global — funciona em Vercel/Neon e não depende de estado em memória do servidor. */
 (function(){
   try {

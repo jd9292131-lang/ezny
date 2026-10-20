@@ -106,11 +106,29 @@ router.post('/:id/visto', verificarToken, (req,res) => {
   db.run('UPDATE comunicados SET visualizacoes=COALESCE(visualizacoes,0)+1 WHERE id=?',[id]);
 });
 router.post('/:id/clique', verificarToken, (req,res) => { db.run('UPDATE comunicados SET cliques=COALESCE(cliques,0)+1 WHERE id=?',[req.params.id]); res.json({sucesso:true}); });
-router.delete('/:id', ...admin, (req,res) => db.run('UPDATE comunicados SET ativo=0 WHERE id=?',[req.params.id],function(e){
-  if(e)return res.status(500).json({erro:'Erro ao desativar'});
-  db.run('INSERT INTO admin_logs (admin_id,acao,entidade,entidade_id) VALUES (?,?,?,?)',[req.user.id,'DESATIVAR_COMUNICADO','comunicado',req.params.id]);
-  res.json({sucesso:true,alterados:this.changes});
-}));
+router.patch('/:id/estado', ...admin, (req,res) => {
+  const id=Number(req.params.id);
+  const ativo=req.body?.ativo;
+  if(!Number.isInteger(id)||id<=0) return res.status(400).json({erro:'ID de comunicado inválido'});
+  if(ativo!==0&&ativo!==1&&ativo!==false&&ativo!==true) return res.status(400).json({erro:'Estado inválido'});
+  const valor=ativo===true||ativo===1?1:0;
+  db.run('UPDATE comunicados SET ativo=? WHERE id=?',[valor,id],function(e){
+    if(e)return res.status(500).json({erro:'Erro ao atualizar estado do comunicado'});
+    if(!this.changes)return res.status(404).json({erro:'Comunicado não encontrado'});
+    db.run('INSERT INTO admin_logs (admin_id,acao,entidade,entidade_id,detalhes) VALUES (?,?,?,?,?)',[req.user.id,valor?'REATIVAR_COMUNICADO':'DESATIVAR_COMUNICADO','comunicado',id,valor?'Comunicado reativado':'Comunicado desativado']);
+    res.json({sucesso:true,ativo:valor});
+  });
+});
+router.delete('/:id', ...admin, (req,res) => {
+  const id=Number(req.params.id);
+  if(!Number.isInteger(id)||id<=0) return res.status(400).json({erro:'ID de comunicado inválido'});
+  db.run('DELETE FROM comunicados WHERE id=?',[id],function(e){
+    if(e)return res.status(500).json({erro:'Erro ao eliminar comunicado'});
+    if(!this.changes)return res.status(404).json({erro:'Comunicado não encontrado'});
+    db.run('INSERT INTO admin_logs (admin_id,acao,entidade,entidade_id,detalhes) VALUES (?,?,?,?,?)',[req.user.id,'ELIMINAR_COMUNICADO','comunicado',id,'Comunicado eliminado permanentemente']);
+    res.json({sucesso:true,eliminado:true});
+  });
+});
 
 /* Mantém criação simples de popup legado para compatibilidade, mas o novo painel usa comunicados. */
 router.post('/popups', ...admin, upload.single('imagem'), tratarErroUpload, (req,res)=>{
@@ -120,6 +138,28 @@ router.post('/popups', ...admin, upload.single('imagem'), tratarErroUpload, (req
     [titulo,conteudo,req.file?.filename||null,req.body.link||null,req.body.texto_botao||null,req.body.publico||'todos',req.body.inicio||null,req.body.fim||null,req.body.frequencia||'uma_vez'],
     function(e){if(e)return res.status(500).json({erro:'Erro ao criar popup'});res.status(201).json({sucesso:true,id:this.lastID});});
 });
-router.delete('/popups/:id', ...admin, (req,res)=>db.run('UPDATE popups SET ativo=0 WHERE id=?',[req.params.id],function(e){if(e)return res.status(500).json({erro:'Erro ao desativar popup'});res.json({sucesso:true,alterados:this.changes});}));
+router.patch('/popups/:id/estado', ...admin, (req,res)=>{
+  const id=Number(req.params.id);
+  const ativo=req.body?.ativo;
+  if(!Number.isInteger(id)||id<=0) return res.status(400).json({erro:'ID de popup inválido'});
+  if(ativo!==0&&ativo!==1&&ativo!==false&&ativo!==true) return res.status(400).json({erro:'Estado inválido'});
+  const valor=ativo===true||ativo===1?1:0;
+  db.run('UPDATE popups SET ativo=? WHERE id=?',[valor,id],function(e){
+    if(e)return res.status(500).json({erro:'Erro ao atualizar estado do popup'});
+    if(!this.changes)return res.status(404).json({erro:'Popup não encontrado'});
+    db.run('INSERT INTO admin_logs (admin_id,acao,entidade,entidade_id,detalhes) VALUES (?,?,?,?,?)',[req.user.id,valor?'REATIVAR_POPUP':'DESATIVAR_POPUP','popup',id,valor?'Popup reativado':'Popup desativado']);
+    res.json({sucesso:true,ativo:valor});
+  });
+});
+router.delete('/popups/:id', ...admin, (req,res)=>{
+  const id=Number(req.params.id);
+  if(!Number.isInteger(id)||id<=0) return res.status(400).json({erro:'ID de popup inválido'});
+  db.run('DELETE FROM popups WHERE id=?',[id],function(e){
+    if(e)return res.status(500).json({erro:'Erro ao eliminar popup'});
+    if(!this.changes)return res.status(404).json({erro:'Popup não encontrado'});
+    db.run('INSERT INTO admin_logs (admin_id,acao,entidade,entidade_id,detalhes) VALUES (?,?,?,?,?)',[req.user.id,'ELIMINAR_POPUP','popup',id,'Popup eliminado permanentemente']);
+    res.json({sucesso:true,eliminado:true});
+  });
+});
 
 module.exports=router;

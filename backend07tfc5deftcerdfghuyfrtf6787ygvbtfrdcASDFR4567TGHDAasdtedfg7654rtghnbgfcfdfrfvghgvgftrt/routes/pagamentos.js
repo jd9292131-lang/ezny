@@ -98,6 +98,13 @@ router.post("/criar", verificarToken, async (req, res) => {
   }
 });
 
+router.get("/dados", verificarToken, (req,res)=>{
+  const entidade=String(process.env.PAYMENT_ENTITY||"").trim();
+  const referenciaPagamento=String(process.env.PAYMENT_REFERENCE||"").trim();
+  if(!entidade||!referenciaPagamento) return res.status(503).json({erro:"Os dados Multicaixa do EZNY ainda não estão configurados."});
+  res.json({entidade,referencia_pagamento:referenciaPagamento,metodo:"multicaixa"});
+});
+
 router.get("/me", verificarToken, (req,res)=>{
   db.all("SELECT id,plano,metodo,entidade,referencia_pagamento,referencia,valor,moeda,status,criado_em,confirmado_em,observacao FROM pagamentos WHERE usuario_id=? ORDER BY id DESC LIMIT 20",[req.user.id],(err,rows)=>{
     if(err) return res.status(500).json({erro:"Erro ao consultar pagamentos"});
@@ -133,15 +140,30 @@ router.post("/:id/confirmar", verificarToken, requireAdmin, (req,res)=>{
   });
 });
 
-router.post("/:id/cancelar", verificarToken, requireAdmin, (req,res)=>{
-  const id=Number(req.params.id); if(!Number.isInteger(id)) return res.status(400).json({erro:"ID inválido"});
-  const obs=String(req.body?.observacao||"").slice(0,500);
-  db.run("UPDATE pagamentos SET status='cancelado', cancelado_em=CURRENT_TIMESTAMP, cancelado_por=?, observacao=? WHERE id=? AND status='pendente'",[req.user.id,obs,id],function(err){
-    if(err) return res.status(500).json({erro:"Erro ao cancelar pagamento"});
-    if(!this.changes) return res.status(404).json({erro:"Pagamento pendente não encontrado"});
-    db.run("UPDATE premium_historico SET estado='cancelado' WHERE pagamento_ref=(SELECT referencia FROM pagamentos WHERE id=?)",[id]);
-    res.json({sucesso:true,mensagem:"Pagamento cancelado"});
-  });
+router.post("/:id/cancelar", verificarToken, requireAdmin, async (req,res)=>{
+  const id=Number(req.params.id);
+  if(!Number.isInteger(id)||id<=0) return res.status(400).json({erro:"ID inválido"});
+  const obs=String(req.body?.observacao||"").trim().slice(0,500);
+  if(!obs) return res.status(400).json({erro:"Indique o motivo da rejeição ou cancelamento para notificar o utilizador."});
+  try {
+    const result=await db.transaction(async tx=>{
+      const pagamento=await tx.get("SELECT usuario_id,referencia,premium_historico_id FROM pagamentos WHERE id=? AND status='pendente'",[id]);
+      if(!pagamento) throw Object.assign(new Error("Pagamento pendente não encontrado"),{code:"NOT_FOUND"});
+      const atualizado=await tx.run("UPDATE pagamentos SET status='cancelado', cancelado_em=CURRENT_TIMESTAMP, cancelado_por=?, observacao=? WHERE id=? AND status='pendente'",[req.user.id,obs,id]);
+      if(atualizado.changes!==1) throw Object.assign(new Error("Pagamento pendente não encontrado"),{code:"NOT_FOUND"});
+      await tx.run("UPDATE premium_historico SET estado='cancelado' WHERE id=?",[pagamento.premium_historico_id]);
+      await tx.run(
+        "INSERT INTO notificacoes (usuario_id,tipo,titulo,mensagem,lida) VALUES (?,?,?,?,0)",
+        [pagamento.usuario_id,"error","Pagamento não aprovado",`O seu pedido Premium ${pagamento.referencia} foi rejeitado/cancelado. Motivo: ${obs}`]
+      );
+      return {usuario_id:pagamento.usuario_id};
+    });
+    res.json({sucesso:true,mensagem:"Pagamento cancelado e utilizador notificado",...result});
+  } catch(err) {
+    if(err.code==="NOT_FOUND") return res.status(404).json({erro:err.message});
+    console.error("[PAGAMENTOS] Erro ao cancelar pagamento:",err.message);
+    res.status(500).json({erro:"Erro ao cancelar e notificar sobre o pagamento"});
+  }
 });
 
 module.exports=router;

@@ -21,6 +21,8 @@ let allComunicados = [];
 let allPopups = [];
 let allPagamentos = [];
 let allNotificacoes = [];
+let comunicadosFilter = 'ativos';
+let popupsFilter = 'ativos';
 let deleteTarget = null;
 let deleteType = null;
 let banTarget = null;
@@ -121,6 +123,24 @@ async function apiDelete(endpoint) {
     if (!res.ok) {
       console.error('DELETE ' + endpoint + ' ERRO HTTP:', res.status);
       throw new Error('HTTP ' + res.status);
+    }
+
+    async function apiPatch(endpoint, body) {
+      try {
+        const res = await fetch(API_BASE + endpoint, {
+          method: 'PATCH',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          console.error('PATCH ' + endpoint + ' ERRO HTTP:', res.status);
+          throw new Error('HTTP ' + res.status);
+        }
+        return await res.json();
+      } catch (e) {
+        console.error('PATCH ' + endpoint + ' FALHOU:', e);
+        return null;
+      }
     }
     return await res.json();
   } catch (e) {
@@ -623,13 +643,37 @@ async function descarregarAnexoRelato(id) {
 // ========================
 function renderComunicadosTable() {
   const tbody=document.getElementById('comunicadosTableBody');
-  if(!allComunicados.length){tbody.innerHTML='<tr><td colspan="6"><div class="empty-state"><i class="ph ph-tray"></i><h4>Sem comunicados</h4></div></td></tr>';return;}
-  tbody.innerHTML=allComunicados.map(c=>{
+  const rows=allComunicados.filter(c=>comunicadosFilter==='todos'||(Number(c.ativo)===1)===(comunicadosFilter==='ativos'));
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="7"><div class="empty-state"><i class="ph ph-tray"></i><h4>Sem comunicados nesta lista</h4></div></td></tr>';return;}
+  tbody.innerHTML=rows.map(c=>{
     const img=c.imagem?`<img src="${escapeHtml(eznyImage(c.imagem))}" class="table-thumb" alt="">`:'<img src="assets/logo.jpg" class="table-thumb" alt="EZNY">';
     const tipo=c.tipo==='popup'?'Visual':'Notificação';
     const publico=c.publico||'todos';
-    return `<tr><td>#${c.id}</td><td><div class="cell-info"><div style="display:flex;align-items:center;gap:9px">${img}<div><div class="title">${escapeHtml(c.titulo||'-')}</div><div class="subtitle">${tipo}</div></div></div></div></td><td>${escapeHtml((c.conteudo||'-').substring(0,80))}${(c.conteudo||'').length>80?'…':''}</td><td><span class="status-badge ${publico==='premium'?'warning':publico==='todos'?'active':'info'}">${escapeHtml(publico)}</span></td><td>${formatDate(c.createdAt)}</td><td style="text-align:right"><div class="row-actions"><button class="btn btn-icon btn-danger" onclick="askDelete(${c.id},'comunicado')" title="Desativar"><i class="ph ph-trash" style="font-size:16px"></i></button></div></td></tr>`;
+    const ativo=Number(c.ativo)===1;
+    return `<tr><td>#${c.id}</td><td><div class="cell-info"><div style="display:flex;align-items:center;gap:9px">${img}<div><div class="title">${escapeHtml(c.titulo||'-')}</div><div class="subtitle">${tipo}</div></div></div></div></td><td>${escapeHtml((c.conteudo||'-').substring(0,80))}${(c.conteudo||'').length>80?'…':''}</td><td><span class="status-badge ${publico==='premium'?'warning':publico==='todos'?'active':'info'}">${escapeHtml(publico)}</span></td><td><span class="status-badge ${ativo?'active':'inactive'}">${ativo?'Activo':'Inactivo'}</span></td><td>${formatDate(c.createdAt)}</td><td style="text-align:right"><div class="row-actions"><button class="btn btn-sm ${ativo?'btn-secondary':'btn-success'}" data-csp-handler="a325b03aace45612" data-id="${Number(c.id)}" data-origem="comunicado" data-ativo="${ativo?0:1}" title="${ativo?'Desativar':'Reativar'}">${ativo?'Desativar':'Reativar'}</button><button class="btn btn-icon btn-danger" data-csp-handler="48e21d07e153d6f1" data-id="${Number(c.id)}" data-origem="comunicado" title="Eliminar permanentemente"><i class="ph ph-trash" style="font-size:16px"></i></button></div></td></tr>`;
   }).join('');
+}
+
+function alterarFiltroComunicados(select) {
+  comunicadosFilter=select.value;
+  renderComunicadosTable();
+}
+
+function alterarFiltroPopups(select) {
+  popupsFilter=select.value;
+  renderPopupsTable();
+}
+
+async function alterarEstadoComunicado(id, origem, ativo) {
+  const idNumerico=Number(id);
+  const ativoNumerico=Number(ativo);
+  if(!Number.isInteger(idNumerico)||idNumerico<=0||![0,1].includes(ativoNumerico)) return;
+  const endpoint=origem==='popup'?`/comunicados/popups/${idNumerico}/estado`:`/comunicados/${idNumerico}/estado`;
+  const result=await apiPatch(endpoint,{ativo:ativoNumerico});
+  if(result?.sucesso){
+    showToast('success','Sucesso',ativoNumerico?'Item reativado.':'Item desativado.');
+    await loadAllData();
+  }else showToast('error','Erro','Não foi possível alterar o estado do item.');
 }
 
 // ========================
@@ -708,7 +752,12 @@ async function confirmarPagamentoAdmin(id) {
   if (r && r.sucesso) { toast('Pagamento confirmado e Premium ativado.', 'ok'); allPagamentos = await apiGet('/pagamentos/admin/lista') || []; renderPagamentosTable(); }
 }
 async function cancelarPagamentoAdmin(id) {
-  const observacao = prompt('Motivo do cancelamento (opcional):') || '';
+  const observacao = prompt('Indique o motivo da rejeição/cancelamento. Este motivo será enviado ao utilizador:');
+  if (observacao === null) return;
+  if (!observacao.trim()) {
+    showToast('warning', 'Motivo obrigatório', 'Escreva o motivo para que o utilizador seja notificado.');
+    return;
+  }
   const r = await apiPost('/pagamentos/' + id + '/cancelar', { observacao });
   if (r && r.sucesso) { toast('Pagamento cancelado.', 'ok'); allPagamentos = await apiGet('/pagamentos/admin/lista') || []; renderPagamentosTable(); }
 }
@@ -898,11 +947,19 @@ async function desbanirUser(id) {
 function askDelete(id, type) {
   deleteTarget = id;
   deleteType = type;
+  const title=document.querySelector('#confirmOverlay h3');
+  const message=document.querySelector('#confirmOverlay .confirm-dialog p');
+  if(title) title.textContent='Eliminar permanentemente?';
+  if(message) message.textContent='Este item será removido da lista e não poderá ser recuperado.';
   document.getElementById('confirmOverlay').classList.add('active');
 }
 function closeConfirm() {
   document.getElementById('confirmOverlay').classList.remove('active');
   deleteTarget = null; deleteType = null;
+  const title=document.querySelector('#confirmOverlay h3');
+  const message=document.querySelector('#confirmOverlay .confirm-dialog p');
+  if(title) title.textContent='Confirmar Exclusão';
+  if(message) message.textContent='Tem certeza que deseja eliminar este item? Esta ação não pode ser desfeita.';
 }
 function askDeleteAdmin(id) {
   deleteTarget = id;
@@ -927,7 +984,7 @@ if (deleteType === 'ad') endpoint = '/anuncios/admin/' + deleteTarget;
   const res = await apiDelete(endpoint);
   hideLoading();
   closeConfirm();
-  if (res && (res.sucesso || res.message)) { showToast('success', 'Sucesso', 'Item eliminado'); await loadAllData(); }
+  if (res && (res.sucesso || res.message)) { showToast('success', 'Sucesso', 'Item eliminado permanentemente'); await loadAllData(); }
   else showToast('error', 'Erro', 'Não foi possível eliminar. Verifica consola (F12).');
 }
 
@@ -1344,12 +1401,13 @@ function getInitials(name) {
 // ========================
 function renderPopupsTable() {
   const tbody = document.getElementById("popupsTableBody");
-  if (!allPopups.length) {
+  const rows=allPopups.filter(p=>popupsFilter==='todos'||(Number(p.ativo)===1)===(popupsFilter==='ativos'));
+  if (!rows.length) {
     tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="ph ph-tray"></i><h4>Sem popups</h4></div></td></tr>';
     return;
   }
   let html = "";
-  allPopups.forEach(function(p) {
+  rows.forEach(function(p) {
     const statusClass = p.ativo ? "active" : "inactive";
     const statusText = p.ativo ? "Activo" : "Inactivo";
     const origem = p.origem === 'popup' ? 'popup' : 'comunicado';
@@ -1357,7 +1415,8 @@ function renderPopupsTable() {
     html += '<td><span class="status-badge ' + statusClass + '">' + statusText + "</span></td>";
     html += "<td>" + formatDate(p.createdAt) + "</td>";
     html += '<td style="text-align:right"><div class="row-actions">';
-    html += '<button class="btn btn-icon btn-danger" data-csp-handler="48e21d07e153d6f1" data-id="' + Number(p.id) + '" data-origem="' + origem + '" title="Apagar"><i class="ph ph-trash" style="font-size:16px"></i></button>';
+    html += '<button class="btn btn-sm ' + (p.ativo?'btn-secondary':'btn-success') + '" data-csp-handler="a325b03aace45612" data-id="' + Number(p.id) + '" data-origem="' + origem + '" data-ativo="' + (p.ativo?0:1) + '" title="' + (p.ativo?'Desativar':'Reativar') + '">' + (p.ativo?'Desativar':'Reativar') + '</button>';
+    html += '<button class="btn btn-icon btn-danger" data-csp-handler="48e21d07e153d6f1" data-id="' + Number(p.id) + '" data-origem="' + origem + '" title="Eliminar permanentemente"><i class="ph ph-trash" style="font-size:16px"></i></button>';
     html += "</div></td></tr>";
   });
   tbody.innerHTML = html;
@@ -1395,6 +1454,10 @@ async function criarPopup() {
 function askDeletePopup(id, origem) {
   deleteTarget = id;
   deleteType = origem === 'popup' ? 'popup-legado' : 'popup-comunicado';
+  const title=document.querySelector('#confirmOverlay h3');
+  const message=document.querySelector('#confirmOverlay .confirm-dialog p');
+  if(title) title.textContent='Eliminar permanentemente?';
+  if(message) message.textContent='Este popup será removido da lista e não poderá ser recuperado.';
   document.getElementById('confirmOverlay').classList.add('active');
 }
 
