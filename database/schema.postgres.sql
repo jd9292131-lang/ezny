@@ -210,3 +210,16 @@ CREATE TABLE IF NOT EXISTS relatos_suporte (
   estado VARCHAR(20) NOT NULL DEFAULT 'novo', created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_relatos_suporte_created ON relatos_suporte(created_at DESC);
+
+-- Registo da aceitação dos Termos de Uso e da Política de Privacidade
+ALTER TABLE usuarios
+  ADD COLUMN IF NOT EXISTS aceitou_termos BOOLEAN NOT NULL DEFAULT FALSE;
+
+ALTER TABLE usuarios
+  ADD COLUMN IF NOT EXISTS aceitou_termos_em TIMESTAMPTZ;
+
+ALTER TABLE usuarios
+  ADD COLUMN IF NOT EXISTS versao_termos TEXT;
+
+ALTER TABLE usuarios
+  ADD COLUMN IF NOT EXISTS versao_politica TEXT;

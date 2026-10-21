@@ -222,7 +222,20 @@ function verificarDuplicado(err, telefone, email, callback) {
    REGISTAR (sem opção premium — sempre normal)
 ========================= */
 router.post("/register", authLimiter, async (req, res) => {
-  const { nome, telefone, senha, data_nascimento, email } = req.body; 
+  const {
+  nome,
+  telefone,
+  senha,
+  data_nascimento,
+  email,
+  aceitou_termos
+} = req.body;
+// A aceitação dos documentos é obrigatória para criar uma conta
+if (aceitou_termos !== true) {
+  return res.status(400).json({
+    erro: 'Deve aceitar os Termos de Uso e a Política de Privacidade para criar uma conta.'
+  });
+}
   if (!nome || !telefone || !senha || !data_nascimento) {
     return res.status(400).json({ erro: "Preencha todos os campos" });
   }
@@ -264,8 +277,35 @@ router.post("/register", authLimiter, async (req, res) => {
 
   try {
     const senhaHash = await bcrypt.hash(senha, 10);
-    const sql = `INSERT INTO usuarios (nome, telefone, senha, email, tipo, tipo_conta, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-  db.run(sql, [nome, telefone, senhaHash, email || null, "user", "normal", data_nascimento], function (err) {
+const sql = `
+  INSERT INTO usuarios (
+    nome,
+    telefone,
+    senha,
+    email,
+    tipo,
+    tipo_conta,
+    data_nascimento,
+    aceitou_termos,
+    aceitou_termos_em,
+    versao_termos,
+    versao_politica
+  )
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)
+`;
+
+db.run(sql, [
+  nome,
+  telefone,
+  senhaHash,
+  email || null,
+  "user",
+  "normal",
+  data_nascimento,
+  true,
+  "v1",
+  "v1"
+], function (err) {
     if (err) {
         verificarDuplicado(err, telefone, email, (checkErr, campoDuplicado) => {
           if (campoDuplicado === 'telefone') {

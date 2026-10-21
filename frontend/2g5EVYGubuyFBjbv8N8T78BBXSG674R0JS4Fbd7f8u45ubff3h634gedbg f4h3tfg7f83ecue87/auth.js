@@ -217,7 +217,7 @@ async function cadastrar() {
   const senhaConfirmar = document.getElementById('senhaConfirmar').value;
   const data_nascimento = document.getElementById('data_nascimento').value;
   const btn = document.getElementById('btnCadastro');
-
+const aceitarTermos = document.getElementById('aceitarTermos');
   esconderMsgs();
 
   // Campos obrigatórios — email NÃO é obrigatório
@@ -225,7 +225,16 @@ async function cadastrar() {
     mostrarErro('msgErroCadastro', 'Preencha todos os campos obrigatórios!');
     return;
   }
+// Aceitação obrigatória dos Termos de Uso e da Política de Privacidade
+if (!aceitarTermos || !aceitarTermos.checked) {
+  mostrarErro(
+    'msgErroCadastro',
+    'Para criar a conta, deve aceitar os Termos de Uso e a Política de Privacidade.'
+  );
 
+  aceitarTermos?.focus();
+  return;
+}
   // Email só é validado se tiver sido preenchido
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     mostrarErro('msgErroCadastro', 'Introduza um email válido.');
@@ -252,12 +261,13 @@ async function cadastrar() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nome,
-        telefone,
-        senha,
-        data_nascimento,
-        email: email || null
-      })
+  nome,
+  telefone,
+  senha,
+  data_nascimento,
+  email: email || null,
+  aceitou_termos: aceitarTermos.checked
+})
     });
 
     const data = await res.json();

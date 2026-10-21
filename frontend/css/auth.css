@@ -683,3 +683,51 @@ button.submit .spinner {
 .ezny-brand-lockup:hover {
   transform: scale(1.04);
 }
+
+/* ACEITAÇÃO OBRIGATÓRIA DOS TERMOS */
+.aceitacao-termos {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.aceitacao-termos input[type="checkbox"] {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  padding: 0;
+  accent-color: var(--primary-light);
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.aceitacao-termos label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.aceitacao-termos a {
+  color: var(--primary-light);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.aceitacao-termos a:hover {
+  text-decoration: underline;
+}

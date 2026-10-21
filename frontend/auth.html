@@ -169,10 +169,25 @@
         <span>Criar Conta</span>
       </button>
 
-      <p class="termos-link">
-        Ao criar conta, aceita os <a href="termos-auth.html">Termos de Uso</a> e <a href="politica-auth.html">Política de Privacidade</a>.
-      </p>
-    </div>
+
+<div class="aceitacao-termos">
+  <input
+    type="checkbox"
+    id="aceitarTermos"
+    name="aceitarTermos"
+    required
+    aria-describedby="textoAceitacaoTermos"
+  >
+
+  <label for="aceitarTermos" id="textoAceitacaoTermos">
+    Li e aceito os
+    <a href="termos-auth.html" target="_blank" rel="noopener noreferrer">Termos de Uso</a>
+    e a
+    <a href="politica-auth.html" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+  </label>
+</div>
+
+</div>
 
   </div>
 </div>

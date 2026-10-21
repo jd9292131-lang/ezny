@@ -11,7 +11,7 @@
     },
     {
       "source": "/",
-      "destination": "/frontend/termos.html"
+      "destination": "/frontend/index.html"
     },
     {
       "source": "/:path*",
